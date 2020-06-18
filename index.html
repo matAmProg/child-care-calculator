@@ -17,7 +17,7 @@
 
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.waypoints.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 
@@ -32,7 +32,7 @@
 		<!-- dropdown options-->
 		<div class="row">
 			<div class="input-field col s4">
-				<select class="browser-default">
+				<select class="browser-default" onblur="getState()" id="stateSelect">
 					<option value="" disabled selected>Select your state</option>
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
@@ -111,23 +111,23 @@
 					<hr>
 				</div>
 
-				<form action="#">
+				<form action="" id="childCareForm" >
 
 					<div class="row radio-row">
 
 						<div class="col s2"><p>Ratios</p></div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="ratios" id="covid" type="radio" checked />
+								  <input name="ratios" id="covid" value="covid" type="radio" checked onclick="getRatio()"/>
 								  <span>COVID ratios</span>
 								</label>
 							</p>
 						</div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="ratios" id="current" type="radio" />
+								  <input name="ratios" id="current" value="current" type="radio" onclick="getRatio()"/>
 								  <span>Current ratios</span>
 								</label>
 							</p>
@@ -149,38 +149,45 @@
 						<tbody>
 							<tr>
 								<th>Infant</th>
-								<td><div class="input-field"><input  id="infantRatio" type="text"></div></td>
-								<td><div class="input-field"><input  id="infantGroupSize" type="text"></div></td>
-								<td><div class="input-field"><input  id="infantClassrooms" type="text"></div></td>
-								<td><div class="input-field"><input  id="infantChildren" type="text"></div></td>
+								<td><div class="input-field"><input  name="infantRatio" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="infantGroupSize" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="infantClassrooms" type="text"
+								onblur="calculateTotal()"></div></td>
+								<td><div class="input-field"><input  name="infantChildren" type="text"
+									disabled></div></td>
 							</tr>
 							<tr>
 								<th>Toddler</th>
-								<td><div class="input-field"><input  id="toddlerRatio" type="text"></div></td>
-								<td><div class="input-field"><input  id="toddlerGroupSize" type="text"></div></td>
-								<td><div class="input-field"><input  id="toddlerClassrooms" type="text"></div></td>
-								<td><div class="input-field"><input  id="toddlerChildren" type="text"></div></td>
+								<td><div class="input-field"><input  name="toddlerRatio" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="toddlerGroupSize" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="toddlerClassrooms" type="text"
+								onblur="calculateTotal()"></div></td>
+								<td><div class="input-field"><input  name="toddlerChildren" type="text"
+									disabled></div></td>
 							</tr>
 							<tr>
 								<th>Pre-school 3</th>
-								<td><div class="input-field"><input  id="pre3Ratio" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre3GroupSize" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre3Classrooms" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre3Children" type="text"></div></td>
+								<td><div class="input-field"><input  name="pre3Ratio" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="pre3GroupSize" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="pre3Classrooms" type="text"
+								onblur="calculateTotal()"></div></td>
+								<td><div class="input-field"><input  name="pre3Children" type="text"
+									disabled></div></td>
 							</tr>
 							<tr>
 								<th>Pre-school 4</th>
-								<td><div class="input-field"><input  id="pre4Ratio" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre4GroupSize" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre4Classrooms" type="text"></div></td>
-								<td><div class="input-field"><input  id="pre4Children" type="text"></div></td>
+								<td><div class="input-field"><input  name="pre4Ratio" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="pre4GroupSize" type="text" disabled></div></td>
+								<td><div class="input-field"><input  name="pre4Classrooms" type="text"
+								onblur="calculateTotal()"></div></td>
+								<td><div class="input-field"><input  name="pre4Children" type="text" disabled></div></td>
 							</tr>
 							<tr>
 								<th class="total">Total</th>
 								<td></td>
 								<td></td>
 								<td><div id="classTotal"></div></td>
-								<td><div class="childTotal"></div></td>
+								<td><div id="childTotal"></div></td>
 							</tr>
 						</tbody>
 
@@ -196,26 +203,26 @@
 					<div class="row radio-row">
 
 						<div class="col s2"><p>Salary level</p></div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="salary" id="BLS" type="radio" checked />
+								  <input name="salary" value="BLS" type="radio" checked onclick="getSalaryLevel()"/>
 								  <span>BLS</span>
 								</label>
 							</p>
 						</div>
-						<div class="col s2">
+						<div class="col s4">
 							<p>
 								<label>
-								  <input name="salary" id="Kindergarten" type="radio" />
+								  <input name="salary" value="Kindergarten" type="radio" onclick="getSalaryLevel()"/>
 								  <span>Kindergarten Party</span>
 								</label>
 							</p>
 						</div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="salary" id="userAdded" type="radio" />
+								  <input name="salary" value="userAdded" type="radio" onclick="getSalaryLevel()"/>
 								  <span>User added</span>
 								</label>
 							</p>
@@ -236,44 +243,62 @@
 								<th>Wage</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="dynamicInput">
 							<tr>
 								<td>Program Director</td>
-								<td><div class="input-field"><input type="text" id="noOfProgramDirectors"></div></td>
-								<td><div class="input-field"><input type="text" id="wageProgramDirectors"></div></td>
+								<td><div class="input-field"><input type="text" name="noOfProgramDirectors" id="noOfProgramDirectors" onblur="calculateSalary()"></div></td>
+								<td><div class="input-field"><input type="text" id="wageProgramDirectors" name="wageProgramDirectors"></div></td>
 							</tr>
 							<tr>
 								<td>Assistant Director</td>
-								<td><div class="input-field"><input type="text" id="noOfAssistantDirectors"></div></td>
-								<td><div class="input-field"><input type="text" id="wageAssistantDirectors"></div></td>
+								<td><div class="input-field"><input type="text" name="noOfAssistantDirectors" id="noOfAssistantDirectors" onblur="calculateSalary()"></div></td>
+								<td><div class="input-field"><input type="text" name="wageAssistantDirectors" id="wageAssistantDirectors"></div></td>
 							</tr>
 							<tr>
 								<td>Administrative Assistant</td>
-								<td><div class="input-field"><input type="text" id="noOAdministrativeAssistants"></div></td>
-								<td><div class="input-field"><input type="text" id="wageAdministrativeAssistants"></div></td>
+								<td><div class="input-field"><input type="text" name="noOAdministrativeAssistants" id="noOAdministrativeAssistants" onblur="calculateSalary()"></div></td>
+								<td><div class="input-field"><input type="text" name="wageAdministrativeAssistants" id="wageAdministrativeAssistants"></div></td>
 							</tr>
 							<tr>
 								<td>Lead Teacher</td>
-								<td><div class="input-field"><input type="text" id="noOfLeadTeachers"></div></td>
-								<td><div class="input-field"><input type="text" id="wageLeadTeachers"></div></td>
+								<td><div class="input-field"><input type="text" name="noOfLeadTeachers" id="noOfLeadTeachers" onblur="calculateSalary()"></div></td>
+								<td><div class="input-field"><input type="text" name="wageLeadTeachers" id="wageLeadTeachers"></div></td>
 							</tr>
 							<tr>
 								<td>Assistant Teacher</td>
-								<td><div class="input-field"><input type="text" id="noOfAssistantTeachers"></div></td>
-								<td><div class="input-field"><input type="text" id="wageAssistantTeachers"></div></td>
+								<td><div class="input-field"><input type="text" name="noOfAssistantTeachers" id="noOfAssistantTeachers" onblur="calculateSalary()"></div></td>
+								<td><div class="input-field"><input type="text" name="wageAssistantTeachers" id="wageAssistantTeachers"></div></td>
 							</tr>
-							<tr>
-								<td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>Add Custom Staff Member</td>
-								<td><div class="input-field"><input type="text" disabled></div></td>
-								<td><div class="input-field"><input type="text" disabled></div></td>
-							</tr>
-							<tr>
-								<td><strong class="total">Total no of full time employees</strong></td>
-								<td><div class="totalFTEmployee"></div></td>
+
+							<tr >
+
 							</tr>
 						</tbody>
-
 					</table>
+
+					<div class="row">
+						<div class="col s6">
+							<a class="btn-floating btn-small waves-effect waves-light red" onclick="addInput('dynamicInput')"><i class="material-icons">add</i></a>Add Custom Staff Member
+						</div>
+					</div>		
+
+					
+					<div class="row">
+						<div class="col s4">
+							<strong class="total">Total no of full time employees</strong>
+						</div>
+						<div class="col s4" id="totalStaff">
+
+						</div>
+						<div class="col s4" id="totalStaffWage"></div>
+					</div>
+
+							
+							
+							
+						
+
+				
 
 					<div class="row">
 						<div class="col s12">
@@ -294,7 +319,7 @@
 						</div>
 						<div class="col s6">
 							Cost per full time employee
-							<div class="input-field inline"><input type="text" id="costOfFTEmployee"></div>
+							<div class="input-field inline"><input type="text" name="costOfFTEmployee"></div>
 						</div>
 						
 							
@@ -438,7 +463,7 @@
 			<div id="familyHomes" class="col s12">
 				
 				
-				<form action="">
+				<form action="" id="familyCareForm">
 
 					<div class="row">
 						<div class="col s12">
@@ -496,26 +521,27 @@
 					<div class="row radio-row">
 
 						<div class="col s2"><p>Salary level</p></div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="salary" id="BLS" type="radio" checked />
+								  <input name="salary" value="BLS" type="radio" checked onclick="getSalaryLevel()"/>
 								  <span>BLS</span>
 								</label>
 							</p>
 						</div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="salary" id="Kindergarten" type="radio" />
+								  <input name="salary" value="Kindergarten" type="radio" onclick="getSalaryLevel()" />
 								  <span>Kindergarten Party</span>
 								</label>
 							</p>
 						</div>
-						<div class="col s2">
+						<div class="col s3">
 							<p>
 								<label>
-								  <input name="salary" id="userAdded" type="radio" />
+								  <input name="salary" value="userAdded" type="radio" 
+								  onclick="getSalaryLevel()" />
 								  <span>User added</span>
 								</label>
 							</p>
@@ -540,13 +566,14 @@
 						<tbody>
 							<tr>
 								<td>Provider/Owner</td>
-								<td><div class="input-field"><input type="text" id="noOfProvider" name="noOfProvider"></div></td>
+								<td><div class="input-field"><input type="text" id="noOfProvider" name="noOfProvider" onblur="calculateSalary()"></div></td>
 								<td><div class="input-field"><input type="text" id="salaryOfProvider" name="salaryOfProvider"></div></td>
 								<td>-</td>
 							</tr>
 							<tr>
 								<td>Assistant teacher</td>
-								<td><div class="input-field"><input type="text" id="noOfAssistantTeachers" name="noOfAssistantTeachers"></div></td>
+								<td><div class="input-field"><input type="text" id="noOfAssistantTeachers" name="noOfAssistantTeachers"
+								onblur="calculateSalary()"></div></td>
 								<td><div class="input-field"><input type="text" id="salaryOfAssistantTeachers" name="salaryOfAssistantTeachers"></div></td>
 								<td>-</td>
 							</tr>
