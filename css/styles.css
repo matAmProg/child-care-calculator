@@ -9,6 +9,10 @@ body {
 /******HEADERS******/
 
 
+.container{
+max-width: 740px !important;
+}
+
 h2{
 
   color:#333333;
