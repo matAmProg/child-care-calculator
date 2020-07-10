@@ -44,7 +44,7 @@
       <!-- dropdown options-->
       <div class="row">
         <div class="input-field col s4">
-          <select class="browser-default" onblur="getState()" id="stateSelect">
+          <select class="browser-default" onchange="getState();getRatio();getSalaryLevel();populateFCC();" id="stateSelect">
             <option value="" disabled selected>Select your state</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -179,12 +179,12 @@
                   <th>Infant</th>
                   <td>
                     <div class="input-field">
-                      <input name="infantRatio" type="text" disabled />
+                      <input name="infantRatio" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="infantGroupSize" type="text" disabled />
+                      <input name="infantGroupSize" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
@@ -206,12 +206,12 @@
                   <th>Toddler</th>
                   <td>
                     <div class="input-field">
-                      <input name="toddlerRatio" type="text" disabled />
+                      <input name="toddlerRatio" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="toddlerGroupSize" type="text" disabled />
+                      <input name="toddlerGroupSize" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
@@ -233,12 +233,12 @@
                   <th>Pre-school 3</th>
                   <td>
                     <div class="input-field">
-                      <input name="pre3Ratio" type="text" disabled />
+                      <input name="pre3Ratio" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="pre3GroupSize" type="text" disabled />
+                      <input name="pre3GroupSize" type="text" onchange="calculateTotal()" />
                     </div>
                   </td>
                   <td>
@@ -260,12 +260,12 @@
                   <th>Pre-school 4</th>
                   <td>
                     <div class="input-field">
-                      <input name="pre4Ratio" type="text" disabled />
+                      <input name="pre4Ratio" type="text" onchange="calculateTotal()"  />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="pre4GroupSize" type="text" disabled />
+                      <input name="pre4GroupSize" type="text" onchange="calculateTotal()"  />
                     </div>
                   </td>
                   <td>
@@ -392,7 +392,7 @@
                         type="text"
                         id="wageProgramDirectors"
                         name="wageProgramDirectors"
-						disabled
+                        onchange="wageConverter('ProgramDirectors');setToUserAdded();"
 						
                       />
                     </div>
@@ -426,7 +426,7 @@
                         type="text"
                         name="wageAssistantDirectors"
                         id="wageAssistantDirectors"
-                        disabled
+                        onchange="wageConverter('AssistantDirectors');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -459,7 +459,7 @@
                         type="text"
                         name="wageAdministrativeAssistants"
                         id="wageAdministrativeAssistants"
-                        disabled
+                        onchange="wageConverter('AdministrativeAssistants');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -689,7 +689,7 @@
               <div class="col s12">
                 Miscellaneous
                 <div class="input-field inline">
-                  <input type="text" name="miscCost" id="miscCost" onchange="calcTotalNonPersonnelCost()"/>
+                  <input type="text" name="miscCost" id="miscCost" onchange="calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"/>
                 </div>
               </div>
             </div>
@@ -846,7 +846,7 @@
                       value="BLS"
                       type="radio"
                       checked
-                      onclick="getSalaryLevel()"
+                      onclick="getSalaryLevel();populateFCC();"
                     />
                     <span>BLS</span>
                   </label>
@@ -859,7 +859,7 @@
                       name="salary"
                       value="Kindergarten"
                       type="radio"
-                      onclick="getSalaryLevel()"
+                      onclick="getSalaryLevel();populateFCC();"
                     />
                     <span>Kindergarten Party</span>
                   </label>
@@ -916,7 +916,13 @@
                       />
                     </div>
                   </td>
-                  <td>-</td>
+                  <td><div class="input-field">
+                    <input
+                      type="text"
+                      id="wageOfProvider"
+                      name="wageOfProvider"
+                    />
+                  </div></td>
                 </tr>
                 <tr>
                   <td>Assistant teacher</td>
@@ -924,8 +930,8 @@
                     <div class="input-field">
                       <input
                         type="text"
-                        id="noOfAssistantTeachers"
-                        name="noOfAssistantTeachers"
+                        id="noOfAssistantTeachersFCC"
+                        name="noOfAssistantTeachersFCC"
                         onblur="calculateSalary()"
                       />
                     </div>
@@ -934,12 +940,18 @@
                     <div class="input-field">
                       <input
                         type="text"
-                        id="salaryOfAssistantTeachers"
-                        name="salaryOfAssistantTeachers"
+                        id="salaryOfAssistantTeachersFCC"
+                        name="salaryOfAssistantTeachersFCC"
                       />
                     </div>
                   </td>
-                  <td>-</td>
+                  <td><div class="input-field">
+                    <input
+                      type="text"
+                      id="wageOfAssistantTeachersFCC"
+                      name="wageOfAssistantTeachersFCC"
+                    />
+                  </div></td>
                 </tr>
                 <tr>
                   <td>
