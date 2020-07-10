@@ -482,8 +482,14 @@ function calcTotalPersonnelCost(){
 function calcTotalNonPersonnelCost(){
 
   //Additional expenses
-  $("input[name='deepCleaningCost']").val(4);
-  $("#costPerCleaning").val(500);
+  if($("input[name='deepCleaningCost']").val() == ""){
+    $("input[name='deepCleaningCost']").val(4);
+  }
+  
+  if($("#costPerCleaning").val() == ""){
+    $("#costPerCleaning").val(500);
+  }
+  
 
   //CONST cost per classroom
   costPerClassroom = 720;
@@ -500,6 +506,8 @@ function calcTotalNonPersonnelCost(){
   else{
     $("#miscCost").val(0);
   }
+
+  miscCost = miscCost
   //Total additional cleaning
   totalAdditionalCleaning =
     (parseInt($("input[name='deepCleaningCost']").val()) *
@@ -644,7 +652,17 @@ function calcInfantsCost(){
 
   infant_cleaning = totalAdditionalCleaning / classTotal / infantChildren;
   console.log(infant_cleaning.toFixed(2));
+  
+  miscCost = $("#miscCost").val();
 
+  if(miscCost != 0){
+    miscCost = miscCost/childTotal;
+    console.log(miscCost + "This is misc");
+  }
+
+  
+  
+  
   op_reserve = Math.round(reserveFund / childTotal);
   console.log(op_reserve);
 
@@ -658,6 +676,7 @@ function calcInfantsCost(){
     parseInt(infant_NP_occupancy) +
     parseInt(NP_admin) +
     parseInt(infant_cleaning) +
+    parseInt(miscCost) +
     parseInt(op_reserve);
   console.log(infant_cost.toFixed(0));
 
@@ -707,6 +726,13 @@ function calcToddlersCost(){
   toddler_cleaning = Math.round(totalAdditionalCleaning / classTotal / toddlerChildren);
   console.log(toddler_cleaning);
 
+  miscCost = $("#miscCost").val();
+
+  if(miscCost != 0){
+    miscCost = miscCost/childTotal;
+    console.log(miscCost + "This is misc");
+  }
+ 
   op_reserve = Math.round(reserveFund / childTotal);
   console.log(op_reserve);
 
@@ -720,6 +746,7 @@ function calcToddlersCost(){
     parseInt(toddler_NP_occupancy) +
     parseInt(NP_admin) +
     parseInt(toddler_cleaning) +
+    parseInt(miscCost) +
     parseInt(op_reserve);
   console.log(toddler_cost.toFixed(0));
 
@@ -770,6 +797,13 @@ function calcPre3Cost(){
   pre3_cleaning = Math.round(totalAdditionalCleaning / classTotal / pre3Children);
   console.log(pre3_cleaning);
 
+  miscCost = $("#miscCost").val();
+
+  if(miscCost != 0){
+    miscCost = miscCost/childTotal;
+    console.log(miscCost + "This is misc");
+  }
+
   op_reserve = Math.round(reserveFund / childTotal);
   console.log(op_reserve);
 
@@ -783,6 +817,7 @@ function calcPre3Cost(){
     parseInt(pre3_NP_occupancy) +
     parseInt(NP_admin) +
     parseInt(pre3_cleaning) +
+    parseInt(miscCost) +
     parseInt(op_reserve);
   console.log(pre3_cost.toFixed(0));
 
@@ -832,6 +867,14 @@ function calcPre4Cost(){
   pre4_cleaning = Math.round(totalAdditionalCleaning / classTotal / pre4Children);
   console.log(toddler_cleaning);
 
+  miscCost = $("#miscCost").val();
+
+  if(miscCost != 0){
+    miscCost = miscCost/childTotal;
+    console.log(miscCost + "This is misc");
+  }
+
+
   op_reserve = Math.round(reserveFund / childTotal);
   console.log(op_reserve);
 
@@ -845,6 +888,7 @@ function calcPre4Cost(){
     parseInt(pre4_NP_occupancy) +
     parseInt(NP_admin) +
     parseInt(pre4_cleaning) +
+    parseInt(miscCost) +
     parseInt(op_reserve);
   console.log(pre4_cost.toFixed(0));
 
@@ -887,4 +931,49 @@ function addInput(divName) {
     "<td><div class='input-field'><input type='text' placeholder='Staff Name' name='customStaffName'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff'></div></td><td><div class='input-field'><input type='text' id='wageCustomStaff'></div></td>";
 
   document.getElementById(divName).appendChild(newRow);
+}
+
+
+/**********FAMILY CHILD CARE HOMES**********/
+
+function populateFCC(){
+
+
+  if($("#noOfInfant").val() == ""){
+    $("#noOfInfant").val(2);
+  }
+
+  if($("#noOfToddler").val() == ""){
+    $("#noOfToddler").val(1);
+  }
+
+  if($("#noOfPre3").val() == ""){
+    $("#noOfPre3").val(1);
+  }
+
+  if($("#noOfPre4").val() == ""){
+    $("#noOfPre4").val(2);
+  }
+
+  console.log(salaryLevelFamilyCare);
+
+  if(salaryLevelFamilyCare == "Kindergarten"){
+    if($("#noOfProvider").val() == ""){
+      $("#noOfProvider").val(1);
+    }
+
+    if($("#noOfAssistantTeachersFCC").val() == ""){
+      $("#noOfAssistantTeachersFCC").val(1);
+    }
+
+   
+
+  }
+
+
+
+
+
+
+
 }
