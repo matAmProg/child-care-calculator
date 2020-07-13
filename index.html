@@ -44,7 +44,7 @@
       <!-- dropdown options-->
       <div class="row">
         <div class="input-field col s4">
-          <select class="browser-default" onchange="getState();getRatio();getSalaryLevel();populateFCC();" id="stateSelect">
+          <select class="browser-default" onchange="getState();getRatio();getSalaryLevel();populateFCC();checkHealth();populateSC();" id="stateSelect">
             <option value="" disabled selected>Select your state</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -822,7 +822,7 @@
                 <tr>
                   <td class="total">Total</td>
                   <td>
-                    <div class="childTotal"></div>
+                    <div class="childTotalFCC"></div>
                   </td>
                 </tr>
               </tbody>
@@ -845,7 +845,7 @@
                       name="salary"
                       value="BLS"
                       type="radio"
-                      checked
+                      
                       onclick="getSalaryLevel();populateFCC();"
                     />
                     <span>BLS</span>
@@ -859,6 +859,7 @@
                       name="salary"
                       value="Kindergarten"
                       type="radio"
+                      checked
                       onclick="getSalaryLevel();populateFCC();"
                     />
                     <span>Kindergarten Party</span>
@@ -894,7 +895,7 @@
                   <th>Hourly</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="dynamicInput2">
                 <tr>
                   <td>Provider/Owner</td>
                   <td>
@@ -903,7 +904,7 @@
                         type="text"
                         id="noOfProvider"
                         name="noOfProvider"
-                        onblur="calculateSalary()"
+                        onchange="populateFCC();setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -913,6 +914,7 @@
                         type="text"
                         id="salaryOfProvider"
                         name="salaryOfProvider"
+                        onchange="salaryConverter('OfProvider');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -921,6 +923,7 @@
                       type="text"
                       id="wageOfProvider"
                       name="wageOfProvider"
+                      onchange="wageConverter('OfProvider');setToUserAdded();"
                     />
                   </div></td>
                 </tr>
@@ -932,7 +935,7 @@
                         type="text"
                         id="noOfAssistantTeachersFCC"
                         name="noOfAssistantTeachersFCC"
-                        onblur="calculateSalary()"
+                        onchange="populateFCC();setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -942,6 +945,7 @@
                         type="text"
                         id="salaryOfAssistantTeachersFCC"
                         name="salaryOfAssistantTeachersFCC"
+                        onchange="salaryConverter('OfAssistantTeachersFCC');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -950,44 +954,31 @@
                       type="text"
                       id="wageOfAssistantTeachersFCC"
                       name="wageOfAssistantTeachersFCC"
+                      onchange="wageConverter('OfAssistantTeachersFCC');setToUserAdded();"
                     />
                   </div></td>
                 </tr>
-                <tr>
-                  <td>
-                    <a
-                      class="btn-floating btn-small waves-effect waves-light red"
-                      ><i class="material-icons">add</i></a
-                    >Add Custom Staff Member
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" disabled />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" disabled />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" disabled />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong class="total"
-                      >Total no of full time employees</strong
-                    >
-                  </td>
-                  <td>
-                    <div class="totalFTEmployee"></div>
-                  </td>
-                </tr>
+                
               </tbody>
             </table>
+
+            <div class="row">
+              <div class="col s6">
+                <a
+                  class="btn-floating btn-small waves-effect waves-light red"
+                  onclick="addInput('dynamicInput2');setToUserAdded();"
+                  ><i class="material-icons">add</i></a
+                >Add Custom Staff Member
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s4">
+                <strong class="total">Total no of full time employees</strong>
+              </div>
+              <div class="col s4 totalFTEmployee"></div>
+              <div class="col s4" id="totalStaffWage"></div>
+            </div>
 
             <div class="row">
               <div class="col s12">
@@ -1004,6 +995,8 @@
                       type="checkbox"
                       class="filled-in"
                       checked="checked"
+                      onchange="checkHealth()"
+                      id="checkboxFCC"
                     />
                     <span>Health Insurance</span>
                   </label>
@@ -1012,7 +1005,7 @@
               <div class="col s6">
                 Cost per full time employee
                 <div class="input-field inline">
-                  <input type="text" id="costOfFTEmployee" />
+                  <input type="text" id="costOfFTEmployeeFCC" />
                 </div>
               </div>
             </div>
@@ -1021,7 +1014,7 @@
               <div class="col s12">
                 Sick Days
                 <div class="input-field inline">
-                  <input type="text" name="sickdays" />
+                  <input type="text" name="sickdaysFCC" />
                 </div>
               </div>
             </div>
@@ -1030,7 +1023,7 @@
               <div class="col s12">
                 Paid Leave
                 <div class="input-field inline">
-                  <input type="text" name="paidLeave" />
+                  <input type="text" name="paidLeaveFCC" />
                 </div>
               </div>
             </div>
@@ -1046,7 +1039,7 @@
               <div class="col s6">
                 Deep Cleaning
                 <div class="input-field inline">
-                  <input type="text" name="deepCleaningCost" />
+                  <input type="text" name="deepCleaningCostFCC" />
                   <span
                     class="helper-text"
                     data-error="wrong"
@@ -1061,8 +1054,8 @@
                 <div class="input-field inline">
                   <input
                     type="text"
-                    name="costPerCleaning"
-                    id="costPerCleaning"
+                    name="costPerCleaningFCC"
+                    id="costPerCleaningFCC"
                   />
                 </div>
               </div>
@@ -1074,8 +1067,8 @@
                 <div class="input-field inline">
                   <input
                     type="text"
-                    name="sanitationCost"
-                    id="sanitationCost"
+                    name="sanitationCostFCC"
+                    id="sanitationCostFCC"
                   />
                   <span
                     class="helper-text"
@@ -1091,7 +1084,7 @@
               <div class="col s12">
                 Miscellaneous
                 <div class="input-field inline">
-                  <input type="text" name="miscCost" id="miscCost" />
+                  <input type="text" name="miscCostFCC" id="miscCostFCC" onchange="populateFCC()"/>
                 </div>
               </div>
             </div>
@@ -1115,49 +1108,49 @@
                   <tr>
                     <td>Infants</td>
                     <td>
-                      <div id="infantAnnualCost"></div>
+                      <div id="infantAnnualCostFCC"></div>
                     </td>
                     <td>
-                      <div id="infantMonthlyCost"></div>
+                      <div id="infantMonthlyCostFCC"></div>
                     </td>
                     <td>
-                      <div id="infantWeeklyCost"></div>
+                      <div id="infantWeeklyCostFCC"></div>
                     </td>
                   </tr>
                   <tr>
                     <td>Toddlers</td>
                     <td>
-                      <div id="toddlerAnnualCost"></div>
+                      <div id="toddlerAnnualCostFCC"></div>
                     </td>
                     <td>
-                      <div id="toddlerMonthlyCost"></div>
+                      <div id="toddlerMonthlyCostFCC"></div>
                     </td>
                     <td>
-                      <div id="toddlerWeeklyCost"></div>
+                      <div id="toddlerWeeklyCostFCC"></div>
                     </td>
                   </tr>
                   <tr>
                     <td>Pre-school 3</td>
                     <td>
-                      <div id="pre3AnnualCost"></div>
+                      <div id="pre3AnnualCostFCC"></div>
                     </td>
                     <td>
-                      <div id="pre3MonthlyCost"></div>
+                      <div id="pre3MonthlyCostFCC"></div>
                     </td>
                     <td>
-                      <div id="pre3WeeklyCost"></div>
+                      <div id="pre3WeeklyCostFCC"></div>
                     </td>
                   </tr>
                   <tr>
                     <td>Pre-school 4</td>
                     <td>
-                      <div id="pre4AnnualCost"></div>
+                      <div id="pre4AnnualCostFCC"></div>
                     </td>
                     <td>
-                      <div id="pre4MonthlyCost"></div>
+                      <div id="pre4MonthlyCostFCC"></div>
                     </td>
                     <td>
-                      <div id="pre4WeeklyCost"></div>
+                      <div id="pre4WeeklyCostFCC"></div>
                     </td>
                   </tr>
                 </tbody>
