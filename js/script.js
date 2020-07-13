@@ -9,6 +9,7 @@ $(document).ready(function () {
 
 //GLOBAL VARIABLES
 var classTotal = (childTotal = 0);
+var totalFTEmployeeFCC;
 
 
 //SIZE OF CENTER GLOBAL VARIABLES
@@ -77,7 +78,7 @@ var statesVarArray = [
     wages_kg_assistantdirector: 66968.0,
     wages_kg_adminassistant: 25540.0,
     wages_kg_leadteacher: 46190.0,
-    wages_kg_assistantteacher: 21800.0,
+    wages_kg_assistantteacher: 39206.0,
     wages_kg_floater: 31200.0,
     wages_kg_mentalhealthprof: 41090.0,
     health_insurance: 4636.0,
@@ -85,6 +86,10 @@ var statesVarArray = [
     sub_sick_leave: 4176.0,
     sanitation_supplies: 2880.0,
     cost_per_child: 20340.0,
+    ctc_facilities:1643,
+    ctc_slots:98597,
+    fcc_facilities:866,
+    fcc_slots:6928
   },
 ];
 
@@ -313,14 +318,23 @@ function checkHealth(){
   if($("input[type='checkbox']").prop("checked") == false){
 
     $("input[name='costOfFTEmployee']").val(0);
+    
 
   }
 
   else{
 
     $("input[name='costOfFTEmployee']").val(statesVarArray[0].health_insurance);
+    
 
 
+  }
+
+  if($("#checkboxFCC").prop("checked") == false){
+    $("#costOfFTEmployeeFCC").val(0);
+  }
+  else{
+    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
   }
 
 
@@ -507,7 +521,7 @@ function calcTotalNonPersonnelCost(){
     $("#miscCost").val(0);
   }
 
-  miscCost = miscCost
+  miscCost = miscCost;
   //Total additional cleaning
   totalAdditionalCleaning =
     (parseInt($("input[name='deepCleaningCost']").val()) *
@@ -908,19 +922,7 @@ function setToUserAdded() {
   $("input[value='userAdded']").prop("checked", true);
 }
 
-function calculateSalary() {
-  //code for child care form
 
-  if (salaryLevelFamilyCare == "BLS") {
-    var noOfProvider = $("#noOfProvider").val();
-    if (!isNaN(noOfProvider)) {
-      var totalWageProvider =
-        noOfProvider * statesVarArray[0].wages_bls_leadteacher;
-
-      $("#salaryOfProvider").val(totalWageProvider);
-    }
-  }
-}
 
 /**function to add custom field */
 
@@ -935,6 +937,10 @@ function addInput(divName) {
 
 
 /**********FAMILY CHILD CARE HOMES**********/
+
+
+//GLOBAL VARIABLES
+
 
 function populateFCC(){
 
@@ -966,14 +972,262 @@ function populateFCC(){
       $("#noOfAssistantTeachersFCC").val(1);
     }
 
+    
+      $("#salaryOfProvider").val($("#noOfProvider").val() * statesVarArray[0].wages_kg_leadteacher);
+    
+
+   
+      $("#salaryOfAssistantTeachersFCC").val($("#noOfAssistantTeachersFCC").val() * statesVarArray[0].wages_kg_assistantteacher);
+    
+
+    
+      $("#wageOfProvider").val((($("#noOfProvider").val() * statesVarArray[0].wages_kg_leadteacher)/2080).toFixed(2));
+    
+
+  
+      $("#wageOfAssistantTeachersFCC").val((($("#noOfAssistantTeachersFCC").val() * statesVarArray[0].wages_kg_assistantteacher)/2080).toFixed(2));
+
+
+      totalFTEmployeeFCC = parseInt($("#noOfProvider").val()) + parseInt($("#noOfAssistantTeachersFCC").val());
+
+     
+
    
 
   }
 
+  $(".totalFTEmployee").html(totalFTEmployeeFCC);
+
+  if($("input[name='sickdaysFCC']").val() == ""){
+    $("input[name='sickdaysFCC']").val(10);
+  }
+
+  if($("input[name='paidLeaveFCC']").val() == ""){
+    $("input[name='paidLeaveFCC']").val(10);
+  }
+
+  if($("#checkboxFCC").prop("checked") == true){
+    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
+  }
+
+  if($("input[name='deepCleaningCostFCC']").val() == ""){
+    $("input[name='deepCleaningCostFCC']").val(4);
+  }
+
+  if($("input[name='costPerCleaningFCC']").val() == ""){
+    $("input[name='costPerCleaningFCC']").val(250);
+  }
+
+  if($("input[name='sanitationCostFCC']").val() == ""){
+    $("input[name='sanitationCostFCC']").val(720);
+  }
+
+  if($("input[name='miscCostFCC']").val() == ""){
+    $("input[name='miscCostFCC']").val(0);
+  }
+
+  childTotalFCC = parseInt($("#noOfInfant").val()) + parseInt($("#noOfToddler").val()) + parseInt($("#noOfPre3").val()) + parseInt($("#noOfPre4").val());
+  
+  calcTotalWagesAndBenefitsFCC();
+  calcInfantFCC();
+  calcToddlerFCC();
+  calcPre3FCC();
+  calcPre4FCC();
 
 
 
 
 
+
+}
+
+function calcTotalWagesAndBenefitsFCC(){
+
+  totalWagesFCC = parseInt($("#salaryOfProvider").val()) + parseInt($("#salaryOfAssistantTeachersFCC").val());
+
+  mandatoryBenefitsFCC = (mandatoryBenefitsVal * (totalWagesFCC - parseInt($("#salaryOfProvider").val()))).toFixed(0);
+
+  assistantTeacherUnitCostFCC = (parseInt($("#salaryOfAssistantTeachersFCC").val()) / parseInt($("#noOfAssistantTeachersFCC").val())).toFixed(0);
+
+  sickDaysCostFCC = Math.round($("input[name='sickdaysFCC']").val() *  (assistantTeacherUnitCostFCC/2080) * 10);
+
+  paidLeaveCostFCC = Math.round($("input[name='paidLeaveFCC']").val() *  (statesVarArray[0].wages_kg_floater/2080) * 10);
+
+  totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
+  totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
+  totalHealthFCC = statesVarArray[0].health_insurance * totalFTEmployeeFCC;
+
+  discretionaryBenefits = totalSickDaysCostFCC + totalPaidLeaveCostFCC + totalHealthFCC;
+  
+
+  totalWagesAndBenefitsFCC = parseInt(totalWagesFCC) + parseInt(mandatoryBenefitsFCC) + parseInt(discretionaryBenefits);
+  console.log(totalWagesAndBenefitsFCC);
+
+
+  //CONST VALUES
+  np_adminFCC = 3725;
+  np_programFCC = 7250;
+  np_occupancyFCC = 3731;
+
+  
+ 
+
+  //Additional Cleaning Cost
+  totalCleaningCostFCC = parseInt(costPerClassroom) + (parseInt($("input[name='deepCleaningCostFCC']").val()) * parseInt($("input[name='costPerCleaningFCC']").val()) );
+
+  totalOtherExpensesFCC = parseInt(np_adminFCC) + parseInt(np_programFCC) + parseInt(np_occupancyFCC) + parseInt(totalCleaningCostFCC);
+
+  totalExpensesFCC = parseInt(totalWagesAndBenefitsFCC) + parseInt(totalOtherExpensesFCC);
+
+  costPerChildFCC = parseInt(totalExpensesFCC)/parseInt(childTotalFCC);
+
+  console.log(costPerChildFCC);
+
+
+
+}
+
+function calcInfantFCC(){
+
+
+  totalInfantCostFCC = costPerChildFCC * $("#noOfInfant").val();
+  
+  $("#infantAnnualCostFCC").html("$" + totalInfantCostFCC.toFixed(0));
+  $("#infantMonthlyCostFCC").html("$" + (totalInfantCostFCC/12).toFixed(0));
+  $("#infantWeeklyCostFCC").html("$" + (totalInfantCostFCC/52).toFixed(0));
+
+
+}
+
+function calcToddlerFCC(){
+
+  totalToddlerCostFCC = costPerChildFCC * $("#noOfToddler").val();
+  
+  $("#toddlerAnnualCostFCC").html("$" + totalToddlerCostFCC.toFixed(0));
+  $("#toddlerMonthlyCostFCC").html("$" + (totalToddlerCostFCC/12).toFixed(0));
+  $("#toddlerWeeklyCostFCC").html("$" + (totalToddlerCostFCC/52).toFixed(0));
+
+
+}
+
+function calcPre3FCC(){
+
+  totalPre3CostFCC = costPerChildFCC * $("#noOfPre3").val();
+  
+  $("#pre3AnnualCostFCC").html("$" + totalPre3CostFCC.toFixed(0));
+  $("#pre3MonthlyCostFCC").html("$" + (totalPre3CostFCC/12).toFixed(0));
+  $("#pre3WeeklyCostFCC").html("$" + (totalPre3CostFCC/52).toFixed(0));
+
+
+
+}
+
+function calcPre4FCC(){
+
+  totalPre4CostFCC = costPerChildFCC * $("#noOfPre4").val();
+  
+  $("#pre4AnnualCostFCC").html("$" + totalPre4CostFCC.toFixed(0));
+  $("#pre4MonthlyCostFCC").html("$" + (totalPre4CostFCC/12).toFixed(0));
+  $("#pre4WeeklyCostFCC").html("$" + (totalPre4CostFCC/52).toFixed(0));
+
+
+
+}
+
+/**********SYSTEM COSTS**********/
+
+function populateSC(){
+
+
+  if(stateSelected == "AL"){
+
+    if($("#childCareFacilities").val()==""){
+
+      $("#childCareFacilities").val(statesVarArray[0].ctc_facilities);
+
+    }
+
+    if($("#childCareSlots").val()==""){
+
+      $("#childCareSlots").val(statesVarArray[0].ctc_slots);
+
+    }
+
+    if($("#familyHomeFacilities").val()==""){
+
+      $("#familyHomeFacilities").val(statesVarArray[0].fcc_facilities);
+
+    }
+
+    if($("#familyHomeSlots").val()==""){
+
+      $("#familyHomeSlots").val(statesVarArray[0].fcc_slots);
+
+    }
+    
+  }
+
+  if($("input[name='fixedCost']").val()==""){
+    $("input[name='fixedCost']").val(40);
+  }
+
+  if($("input[name='operatingCost']").val()==""){
+    $("input[name='operatingCost']").val(60);
+  }
+
+  calcFixedCost();
+  calcOpCost();
+
+
+
+}
+
+
+function calcFixedCost(){
+
+  //CONST VAL
+
+  fixedCostCTC = 48474;
+  fixedCostFCC = 6772;
+
+  fixedCostPercentage = ($("input[name='fixedCost']").val()/100).toFixed(2);
+  
+  total_ctc_fixedCost = fixedCostPercentage * parseInt($("#childCareFacilities").val()) * fixedCostCTC;
+
+
+
+  total_fcc_fixedCost = fixedCostPercentage * parseInt($("#familyHomeFacilities").val()) * fixedCostFCC;
+
+  totalFixedCost = parseInt(total_ctc_fixedCost) + parseInt(total_fcc_fixedCost);
+  console.log(totalFixedCost);
+
+  $("#totalFixedCosts").html("$" + Math.round(totalFixedCost/12));
+  $("#totalChildCareFixedCost").html("$" + Math.round(total_ctc_fixedCost/12));
+  $("#totalFamilyHomeFixedCost").html("$" + Math.round(total_fcc_fixedCost/12));
+
+
+}
+
+function calcOpCost(){
+
+  infantMonthly = $("#infantMonthlyCost").html().substring(1);
+  toddlerMonthly = $("#toddlerMonthlyCost").html().substring(1);
+  preMonthly = $("#pre3MonthlyCost").html().substring(1);
+  
+  avgCostPerChild = Math.round((parseInt(infantMonthly) + parseInt(toddlerMonthly) + parseInt(preMonthly))/3);
+
+  console.log(avgCostPerChild);
+
+  opCostPercentage = ($("input[name='operatingCost']").val()/100).toFixed(2);
+
+  total_ctc_opCost = parseInt($("#childCareSlots").val()) * opCostPercentage * avgCostPerChild;
+  total_fcc_opCost = parseInt($("#familyHomeSlots").val()) * opCostPercentage * (costPerChildFCC/12).toFixed(2);
+
+  
+  totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
+  
+  $("#totalOperatingCosts").html("$" + Math.round(totalOpCost/12));
+  $("#totalChildCareOperatingCost").html("$" + Math.round(total_ctc_opCost/12));
+  $("#totalFamilyHomeOperatingCost").html("$" + Math.round(total_fcc_opCost/12));
 
 }
