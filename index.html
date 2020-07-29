@@ -29,15 +29,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/jquery.waypoints.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/accounting.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <h2>COVID Child Care Cost Model</h2>
+          <h2>Cost of Child Care During the Coronavirus Pandemic</h2>
         </div>
         <div class="col s12">
-          <h6>Intro explainer text with a link to download data</h6>
+          <p>Select your state from the drop-down menu below to populate the calculator with default data.</p>
+          <p>Next, select if you want to estimate the cost of child care pre-pandemic (Current Scenario), or the cost of child care meeting emergency child care regulations (COVID-19 Scenario).</p> 
+          <p>For details of the data assumptions and calculations, please see the methodological appendix.</p> 
         </div>
       </div>
 
@@ -100,6 +103,41 @@
         </div>
       </div>
 
+      <div class="row radio-row">
+        <div class="col s2">
+          <p>Ratios</p>
+        </div>
+        <div class="col s4">
+          <p>
+            <label>
+              <input
+                name="ratios"
+                id="covid"
+                value="covid"
+                type="radio"
+                checked
+                onclick="getRatio()"
+              />
+              <span>COVID Scenario</span>
+            </label>
+          </p>
+        </div>
+        <div class="col s4">
+          <p>
+            <label>
+              <input
+                name="ratios"
+                id="current"
+                value="current"
+                type="radio"
+                onclick="getRatio()"
+              />
+              <span>Pre-COVID Scenario</span>
+            </label>
+          </p>
+        </div>
+      </div>
+
       <!--Tabs Header-->
       <div class="row">
         <div class="col s12">
@@ -108,9 +146,9 @@
               <a class="active" href="#childCareCenter">Child Care Center</a>
             </li>
             <li class="tab col s4">
-              <a href="#familyHomes">Family Child Care Homes</a>
+              <a href="#familyHomes">Family Child Care Home</a>
             </li>
-            <li class="tab col s4"><a href="#systems">Systems</a></li>
+            <li class="tab col s4"><a href="#systems">Statewide Costs</a></li>
           </ul>
         </div>
       </div>
@@ -121,6 +159,7 @@
         <div id="childCareCenter" class="col s12">
           <div class="col s12">
             <h5 class="left-align">Size of Center</h5>
+            <p>The ratio and group size data below are pre-populated based on the selected state and scenario but can also edit the data in each cell. Users should then enter the number of classrooms in their model program. The number of children will be automatically calculated. </p>
             <hr />
           </div>
 
@@ -129,40 +168,7 @@
               <span style="color: red;">Please select a state above.</span>
             </div>
 
-            <div class="row radio-row">
-              <div class="col s2">
-                <p>Ratios</p>
-              </div>
-              <div class="col s3">
-                <p>
-                  <label>
-                    <input
-                      name="ratios"
-                      id="covid"
-                      value="covid"
-                      type="radio"
-                      checked
-                      onclick="getRatio()"
-                    />
-                    <span>COVID ratios</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s3">
-                <p>
-                  <label>
-                    <input
-                      name="ratios"
-                      id="current"
-                      value="current"
-                      type="radio"
-                      onclick="getRatio()"
-                    />
-                    <span>Current ratios</span>
-                  </label>
-                </p>
-              </div>
-            </div>
+            
 
             <table class="centered">
               <thead>
@@ -230,7 +236,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>Pre-school 3</th>
+                  <th>3 year olds</th>
                   <td>
                     <div class="input-field">
                       <input name="pre3Ratio" type="text" onchange="calculateTotal()" />
@@ -257,7 +263,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>Pre-school 4</th>
+                  <th>4 year olds</th>
                   <td>
                     <div class="input-field">
                       <input name="pre4Ratio" type="text" onchange="calculateTotal()"  />
@@ -300,7 +306,7 @@
             <div class="col s12">
               <h5 class="left-align">Salaries and Staffing</h5>
               <hr />
-              <p>Explainer text here for using the additional staff feature</p>
+              <p>Select one of two default salary levels. Selecting “Current Salaries” will use salary data that reflects the current wages paid to the early childhood workforce. Selecting “Higher salaries” will use salary data that aligns more closely with public school salaries. See the methodology for full details of salary data used in the calculator. Users can also edit the salary data and enter new values in either the Annual Salary column or the Hourly Wage column.</p>
             </div>
 
             <div class="row radio-row">
@@ -317,7 +323,7 @@
                       checked
                       onclick="getSalaryLevel()"
                     />
-                    <span>BLS</span>
+                    <span>Current Salaries</span>
                   </label>
                 </p>
               </div>
@@ -330,11 +336,11 @@
                       type="radio"
                       onclick="getSalaryLevel()"
                     />
-                    <span>Kindergarten Party</span>
+                    <span>Higher Salaries</span>
                   </label>
                 </p>
               </div>
-              <div class="col s3">
+              <!-- <div class="col s3">
                 <p>
                   <label>
                     <input
@@ -346,12 +352,12 @@
                     <span>User added</span>
                   </label>
                 </p>
-              </div>
+              </div> -->
             </div>
 
             <div class="col s12">
-              <h5 class="left-align">Staff</h5>
-              <p>Explainer text here for using the additional staff feature</p>
+              <h5 class="left-align">Staffing</h5>
+              <p>The table below shows the staff positions and number of staff in each position in the model child care center. See the methodology for full details of these assumptions. Users can override the number of staff at each position, as well as the annual salary or hourly wage. Additional staff can be added by clicking the plus icon and entering the required details.</p>
             </div>
 
             <table>
@@ -360,7 +366,7 @@
                   <th></th>
                   <th>#</th>
                   <th>Salary</th>
-                  <th>Wage</th>
+                  <th>Hourly Wage</th>
                 </tr>
               </thead>
               <tbody id="dynamicInput">
@@ -531,7 +537,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Substitute Teacher</td>
+                  <td>Floater</td>
                   <td>
                     <div class="input-field">
                       <input
@@ -590,6 +596,7 @@
               <div class="col s12">
                 <h5 class="left-align">Benefits</h5>
                 <hr />
+                <p>If your model program provides health insurance to employees, select the check box below. The calculator will use the annual expense in the “cost per full time employee” box, which is pre-populated with state data but can be overridden by the user. In addition, 10 paid sick days and 10 days paid leave are included by default for all staff. These values can be updated by the user. </p>
               </div>
             </div>
 
@@ -610,26 +617,26 @@
               <div class="col s6">
                 Cost per full time employee
                 <div class="input-field inline">
-                  <input type="text" name="costOfFTEmployee" disabled/>
+                  <input type="text" name="costOfFTEmployee"/>
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col s12">
-                Sick Days
-                <div class="input-field inline">
-                  <input type="text" name="sickdays" id="sickdays" />
-                </div>
+              <div class="col s2">Sick Days</div>
+              <div class="col s4">
+                <input type="text" name="sickdays" id="sickdays" />
+                
               </div>
             </div>
 
             <div class="row">
-              <div class="col s12">
-                Paid Leave
-                <div class="input-field inline">
+              <div class="col s2">Paid Leave</div>
+              <div class="col s4">
+                
+                
                   <input type="text" name="paidLeave" id="paidLeave" />
-                </div>
+                
               </div>
             </div>
 
@@ -771,6 +778,7 @@
               <div class="col s12">
                 <h5 class="left-align">Enrollment</h5>
                 <hr />
+                <p>Users can override the default data for ratios and group size.</p>
               </div>
             </div>
 
@@ -802,7 +810,7 @@
                 </tr>
 
                 <tr>
-                  <td>Pre-school 3</td>
+                  <td>3 year olds</td>
                   <td>
                     <div class="input-field">
                       <input type="text" name="noOfPre3" id="noOfPre3" />
@@ -811,7 +819,7 @@
                 </tr>
 
                 <tr>
-                  <td>Pre-school 4</td>
+                  <td>4 year olds</td>
                   <td>
                     <div class="input-field">
                       <input type="text" name="noOfPre4" id="noOfPre4" />
@@ -831,7 +839,7 @@
             <div class="col s12">
               <h5 class="left-align">Salaries and Staffing</h5>
               <hr />
-              <p>Explainer text here for using the additional staff feature</p>
+              <p>In this calculator, an annual salary is included for family child care providers/owners. Selecting “Current Salaries” will use salary data that reflects the current wages paid to the early childhood workforce. Selecting “Higher salaries” will use salary data that aligns more closely with public school salaries. See the methodology for full details of salary data used in the calculator. Users can also edit the salary data and enter new values in either the Annual Salary column or the Hourly Wage column. </p>
             </div>
 
             <div class="row radio-row">
@@ -848,7 +856,7 @@
                       
                       onclick="getSalaryLevel();populateFCC();"
                     />
-                    <span>BLS</span>
+                    <span>Current Salaries</span>
                   </label>
                 </p>
               </div>
@@ -862,11 +870,11 @@
                       checked
                       onclick="getSalaryLevel();populateFCC();"
                     />
-                    <span>Kindergarten Party</span>
+                    <span>Higher Salaries</span>
                   </label>
                 </p>
               </div>
-              <div class="col s3">
+              <!-- <div class="col s3">
                 <p>
                   <label>
                     <input
@@ -878,12 +886,12 @@
                     <span>User added</span>
                   </label>
                 </p>
-              </div>
+              </div> -->
             </div>
 
             <div class="col s12">
-              <h5 class="left-align">Staff</h5>
-              <p>Explainer text here for using the additional staff feature</p>
+              <h5 class="left-align">Staffing</h5>
+              <p>The table below shows the staff positions and number of staff in each position in the model family child care home. See the methodology for full details of these assumptions. Users can override the number of staff at each position, as well as the annual salary or hourly wage. Additional staff can be added by clicking the plus icon and entering the required details. </p>
             </div>
 
             <table>
@@ -892,7 +900,7 @@
                   <th></th>
                   <th>#</th>
                   <th>Salary</th>
-                  <th>Hourly</th>
+                  <th>Hourly Wage</th>
                 </tr>
               </thead>
               <tbody id="dynamicInput2">
@@ -984,6 +992,7 @@
               <div class="col s12">
                 <h5 class="left-align">Benefits</h5>
                 <hr />
+                <p>If your model program provides health insurance to employees, select the check box below. The calculator will use the annual expense in the “cost per full time employee” box, which is pre-populated with state data but can be overridden by the user. In addition, 10 paid sick days and 10 days paid leave are included by default for all staff. These values can be updated by the user.</p>
               </div>
             </div>
 
@@ -1162,7 +1171,7 @@
         <div id="systems" class="col s12">
           <form action="">
             <div class="row">
-              <p>Explainer text here for using the systems tab</p>
+              <p>On this tab the cost per child results generated on the Child Care Center and Family Child Care Home tabs are used to estimate the cost to fund (1) the monthly fixed costs of a specified percentage of the providers in the state and (2) the full monthly operating cost of a specified percentage of child care slots in the state. Data on the number of child care centers and family child care homes in the selected state, and the capacity of those programs, is drawn from CAP’s child care deserts database but can also be updated by the user.  </p>
             </div>
 
             <div class="row">
@@ -1176,8 +1185,8 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th>Facilities</th>
-                  <th>Slots</th>
+                  <th>Providers</th>
+                  <th>Capacity</th>
                 </tr>
               </thead>
 
@@ -1236,30 +1245,20 @@
 
             <div class="row">
               <div class="col s6">
-                Fixed Cost
+                Percent of providers fixed costs covered:
                 <div class="input-field inline">
                   <input type="text" name="fixedCost" />
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Enter percentage of providers
-                  </span>
+                  
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="col s6">
-                Operating Cost
+                Percent of capacity operating costs covered:
                 <div class="input-field inline">
                   <input type="text" name="operatingCost" />
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Enter percentage of providers
-                  </span>
+                  
                 </div>
               </div>
             </div>
@@ -1267,7 +1266,7 @@
 
           <div class="row resultsBox">
             <div class="col s12">
-              <h5><strong>RESULTS - Monthly system cost</strong></h5>
+              <h5><strong>RESULTS -- Statewide monthly costs</strong></h5>
 
               <div class="row">
                 <div class="col s6">
@@ -1276,14 +1275,14 @@
                 <div class="col s6" id="totalFixedCosts"></div>
               </div>
 
-              <div class="row">
-                <div class="col s6">Child care centers</div>
-                <div class="col s6" id="totalChildCareFixedCost"></div>
+              <div class="row" style="margin-left: 70px;">
+                <div class="col s5">Child care centers</div>
+                <div class="col s4" id="totalChildCareFixedCost"></div>
               </div>
 
-              <div class="row">
-                <div class="col s6">Family child care home</div>
-                <div class="col s6" id="totalFamilyHomeFixedCost"></div>
+              <div class="row" style="margin-left: 70px;">
+                <div class="col s5">Family child care home</div>
+                <div class="col s4" id="totalFamilyHomeFixedCost"></div>
               </div>
 
               <div class="row">
@@ -1293,14 +1292,14 @@
                 <div class="col s6" id="totalOperatingCosts"></div>
               </div>
 
-              <div class="row">
-                <div class="col s6">Child care centers</div>
-                <div class="col s6" id="totalChildCareOperatingCost"></div>
+              <div class="row" style="margin-left: 70px;">
+                <div class="col s5">Child care centers</div>
+                <div class="col s4" id="totalChildCareOperatingCost"></div>
               </div>
 
-              <div class="row">
-                <div class="col s6">Family child care home</div>
-                <div class="col s6" id="totalFamilyHomeOperatingCost"></div>
+              <div class="row" style="margin-left: 70px;">
+                <div class="col s5">Family child care home</div>
+                <div class="col s4" id="totalFamilyHomeOperatingCost"></div>
               </div>
             </div>
           </div>
