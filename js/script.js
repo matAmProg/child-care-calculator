@@ -355,14 +355,14 @@ function populateStaff(salaryLevel){
       totalsalaryDirectors =
         noOfProgramDirectors * statesVarArray[0].wages_bls_director;
 
-      $("#salaryProgramDirectors").val(totalsalaryDirectors);
+      $("#salaryProgramDirectors").val(accounting.formatMoney(totalsalaryDirectors));
       $("#wageProgramDirectors").val((totalsalaryDirectors / 2080).toFixed(2));
     }
 
     if (!isNaN(noOfAssistantDirectors)) {
       salaryAssistantDirectors =
         noOfAssistantDirectors * statesVarArray[0].wages_bls_assistantdirector;
-      $("#salaryAssistantDirectors").val(salaryAssistantDirectors);
+      $("#salaryAssistantDirectors").val(accounting.formatMoney(salaryAssistantDirectors));
       $("#wageAssistantDirectors").val(
         (salaryAssistantDirectors / 2080).toFixed(2)
       );
@@ -372,7 +372,7 @@ function populateStaff(salaryLevel){
       salaryAdministrativeAssistants =
         noOfAdministrativeAssistants *
         statesVarArray[0].wages_bls_adminassistant;
-      $("#salaryAdministrativeAssistants").val(salaryAdministrativeAssistants);
+      $("#salaryAdministrativeAssistants").val(accounting.formatMoney(salaryAdministrativeAssistants));
       $("#wageAdministrativeAssistants").val(
         (salaryAdministrativeAssistants / 2080).toFixed(2)
       );
@@ -381,14 +381,14 @@ function populateStaff(salaryLevel){
     if (!isNaN(noOfLeadTeachers)) {
       salaryLeadTeachers =
         noOfLeadTeachers * statesVarArray[0].wages_bls_leadteacher;
-      $("#salaryLeadTeachers").val(salaryLeadTeachers);
+      $("#salaryLeadTeachers").val(accounting.formatMoney(salaryLeadTeachers));
       $("#wageLeadTeachers").val((salaryLeadTeachers / 2080).toFixed(2));
     }
 
     if (!isNaN(noOfAssistantTeachers)) {
       salaryAssistantTeachers =
         noOfAssistantTeachers * statesVarArray[0].wages_bls_assistantteacher;
-      $("#salaryAssistantTeachers").val(salaryAssistantTeachers);
+      $("#salaryAssistantTeachers").val(accounting.formatMoney(salaryAssistantTeachers));
       $("#wageAssistantTeachers").val(
         (salaryAssistantTeachers / 2080).toFixed(2)
       );
@@ -403,7 +403,7 @@ function populateStaff(salaryLevel){
     if (!isNaN(noOfSubstituteTeachers)) {
       salarySubsTeachers =
         noOfSubstituteTeachers * statesVarArray[0].wages_bls_floater;
-      $("#salarySubsTeachers").val(salarySubsTeachers.toFixed(0));
+      $("#salarySubsTeachers").val(accounting.formatMoney(salarySubsTeachers));
       $("#wageSubsTeachers").val((salarySubsTeachers / 2080).toFixed(2));
     }
   }
@@ -694,9 +694,9 @@ function calcInfantsCost(){
     parseInt(op_reserve);
   console.log(infant_cost.toFixed(0));
 
-  $("#infantAnnualCost").html("$" + parseInt(infant_cost));
-  $("#infantMonthlyCost").html("$" + parseInt(infant_cost / 12));
-  $("#infantWeeklyCost").html("$" + parseInt(infant_cost / 52));
+  $("#infantAnnualCost").html(accounting.formatMoney(infant_cost));
+  $("#infantMonthlyCost").html(accounting.formatMoney(infant_cost / 12));
+  $("#infantWeeklyCost").html(accounting.formatMoney(infant_cost / 52));
 
 
 
@@ -764,9 +764,9 @@ function calcToddlersCost(){
     parseInt(op_reserve);
   console.log(toddler_cost.toFixed(0));
 
-  $("#toddlerAnnualCost").html("$" + parseInt(toddler_cost));
-  $("#toddlerMonthlyCost").html("$" + parseInt(toddler_cost / 12));
-  $("#toddlerWeeklyCost").html("$" + parseInt(toddler_cost / 52));
+  $("#toddlerAnnualCost").html(accounting.formatMoney(toddler_cost));
+  $("#toddlerMonthlyCost").html(accounting.formatMoney(toddler_cost / 12));
+  $("#toddlerWeeklyCost").html(accounting.formatMoney(toddler_cost / 52));
 
 
 
@@ -835,9 +835,9 @@ function calcPre3Cost(){
     parseInt(op_reserve);
   console.log(pre3_cost.toFixed(0));
 
-  $("#pre3AnnualCost").html("$" + parseInt(pre3_cost));
-  $("#pre3MonthlyCost").html("$" + parseInt(pre3_cost / 12));
-  $("#pre3WeeklyCost").html("$" + parseInt(pre3_cost / 52));
+  $("#pre3AnnualCost").html(accounting.formatMoney(pre3_cost));
+  $("#pre3MonthlyCost").html(accounting.formatMoney(pre3_cost / 12));
+  $("#pre3WeeklyCost").html(accounting.formatMoney(pre3_cost / 52));
 
 
 
@@ -906,9 +906,9 @@ function calcPre4Cost(){
     parseInt(op_reserve);
   console.log(pre4_cost.toFixed(0));
 
-  $("#pre4AnnualCost").html("$" + parseInt(pre4_cost));
-  $("#pre4MonthlyCost").html("$" + parseInt(pre4_cost / 12));
-  $("#pre4WeeklyCost").html("$" + parseInt(pre4_cost / 52));
+  $("#pre4AnnualCost").html(accounting.formatMoney(pre4_cost));
+  $("#pre4MonthlyCost").html(accounting.formatMoney(pre4_cost / 12));
+  $("#pre4WeeklyCost").html(accounting.formatMoney(pre4_cost / 52));
 
 
 
@@ -930,7 +930,7 @@ function addInput(divName) {
   var newRow = document.createElement("tr");
 
   newRow.innerHTML =
-    "<td><div class='input-field'><input type='text' placeholder='Staff Name' name='customStaffName'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff'></div></td><td><div class='input-field'><input type='text' id='wageCustomStaff'></div></td>";
+    "<td><div class='input-field'><input type='text' placeholder='Staff Name' name='customStaffName'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff'></div></td><td><div class='input-field'><input type='text' id='salaryCustomStaff'></div></td><td><div class='input-field'><input type='text' id='wageCustomStaff'></div></td>";
 
   document.getElementById(divName).appendChild(newRow);
 }
@@ -1092,9 +1092,9 @@ function calcInfantFCC(){
 
   totalInfantCostFCC = costPerChildFCC * $("#noOfInfant").val();
   
-  $("#infantAnnualCostFCC").html("$" + totalInfantCostFCC.toFixed(0));
-  $("#infantMonthlyCostFCC").html("$" + (totalInfantCostFCC/12).toFixed(0));
-  $("#infantWeeklyCostFCC").html("$" + (totalInfantCostFCC/52).toFixed(0));
+  $("#infantAnnualCostFCC").html(accounting.formatMoney(totalInfantCostFCC));
+  $("#infantMonthlyCostFCC").html(accounting.formatMoney(totalInfantCostFCC/12));
+  $("#infantWeeklyCostFCC").html(accounting.formatMoney(totalInfantCostFCC/52));
 
 
 }
@@ -1103,9 +1103,9 @@ function calcToddlerFCC(){
 
   totalToddlerCostFCC = costPerChildFCC * $("#noOfToddler").val();
   
-  $("#toddlerAnnualCostFCC").html("$" + totalToddlerCostFCC.toFixed(0));
-  $("#toddlerMonthlyCostFCC").html("$" + (totalToddlerCostFCC/12).toFixed(0));
-  $("#toddlerWeeklyCostFCC").html("$" + (totalToddlerCostFCC/52).toFixed(0));
+  $("#toddlerAnnualCostFCC").html(accounting.formatMoney(totalToddlerCostFCC));
+  $("#toddlerMonthlyCostFCC").html(accounting.formatMoney(totalToddlerCostFCC/12));
+  $("#toddlerWeeklyCostFCC").html(accounting.formatMoney(totalToddlerCostFCC/52));
 
 
 }
@@ -1114,9 +1114,9 @@ function calcPre3FCC(){
 
   totalPre3CostFCC = costPerChildFCC * $("#noOfPre3").val();
   
-  $("#pre3AnnualCostFCC").html("$" + totalPre3CostFCC.toFixed(0));
-  $("#pre3MonthlyCostFCC").html("$" + (totalPre3CostFCC/12).toFixed(0));
-  $("#pre3WeeklyCostFCC").html("$" + (totalPre3CostFCC/52).toFixed(0));
+  $("#pre3AnnualCostFCC").html(accounting.formatMoney(totalPre3CostFCC));
+  $("#pre3MonthlyCostFCC").html(accounting.formatMoney(totalPre3CostFCC/12));
+  $("#pre3WeeklyCostFCC").html(accounting.formatMoney(totalPre3CostFCC/52));
 
 
 
@@ -1126,9 +1126,9 @@ function calcPre4FCC(){
 
   totalPre4CostFCC = costPerChildFCC * $("#noOfPre4").val();
   
-  $("#pre4AnnualCostFCC").html("$" + totalPre4CostFCC.toFixed(0));
-  $("#pre4MonthlyCostFCC").html("$" + (totalPre4CostFCC/12).toFixed(0));
-  $("#pre4WeeklyCostFCC").html("$" + (totalPre4CostFCC/52).toFixed(0));
+  $("#pre4AnnualCostFCC").html(accounting.formatMoney(totalPre4CostFCC));
+  $("#pre4MonthlyCostFCC").html(accounting.formatMoney(totalPre4CostFCC/12));
+  $("#pre4WeeklyCostFCC").html(accounting.formatMoney(totalPre4CostFCC/52));
 
 
 
@@ -1201,9 +1201,9 @@ function calcFixedCost(){
   totalFixedCost = parseInt(total_ctc_fixedCost) + parseInt(total_fcc_fixedCost);
   console.log(totalFixedCost);
 
-  $("#totalFixedCosts").html("$" + Math.round(totalFixedCost/12));
-  $("#totalChildCareFixedCost").html("$" + Math.round(total_ctc_fixedCost/12));
-  $("#totalFamilyHomeFixedCost").html("$" + Math.round(total_fcc_fixedCost/12));
+  $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost/12));
+  $("#totalChildCareFixedCost").html(accounting.formatMoney(total_ctc_fixedCost/12));
+  $("#totalFamilyHomeFixedCost").html(accounting.formatMoney(total_fcc_fixedCost/12));
 
 
 }
@@ -1226,8 +1226,8 @@ function calcOpCost(){
   
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
   
-  $("#totalOperatingCosts").html("$" + Math.round(totalOpCost/12));
-  $("#totalChildCareOperatingCost").html("$" + Math.round(total_ctc_opCost/12));
-  $("#totalFamilyHomeOperatingCost").html("$" + Math.round(total_fcc_opCost/12));
+  $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost/12));
+  $("#totalChildCareOperatingCost").html(accounting.formatMoney(total_ctc_opCost/12));
+  $("#totalFamilyHomeOperatingCost").html(accounting.formatMoney(total_fcc_opCost/12));
 
 }
