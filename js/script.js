@@ -41,7 +41,9 @@ var salaryLevelFamilyCare,
   noOfLeadTeachers,
   noOfAssistantTeachers,
   noOfSubstituteTeachers,
-  totalTeachers;
+  totalTeachers  ;
+
+  var eduProgram = occupancy = progAndAdmin = 0;
 
 /**STATE VARIABLES ARRAY**/
 
@@ -113,7 +115,7 @@ function getRatio() {
   }
   selectedRatio = $("input[name='ratios']:checked").val();
 
-  //populating base values for classrooms
+  //POPULATING BASE VALUES FOR CLASSROOMS
   if ($("input[name='infantClassrooms']").val() == "") {
     $("input[name='infantClassrooms']").val(1);
   }
@@ -130,2930 +132,65 @@ function getRatio() {
     $("input[name='pre4Classrooms']").val(1);
   }
 
-  populateSizeOfCenter();
+  populateSizeOfCenter(stateSelected);
   calculateTotal();
+  getSalaryLevel();
+  
 }
 
-/**FUNCTION TO POPULATE SIZE OF CENTER FIELDS**/
-
-function populateSizeOfCenter() {
+/**FUNCTION TO POPULATE SIZE OF CENTER RATIO AND GROUPSIZE FIELDS**/
+function populateSizeOfCenter(state) {
   if (selectedRatio == "current") {
-    switch (stateSelected) {
-      case "AL":
-        console.log("this is alabama!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Alabama.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Alabama.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Alabama.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Alabama.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Alabama.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Alabama.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Alabama.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Alabama.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AK":
-        console.log("this is AK!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Alaska.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Alaska.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Alaska.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Alaska.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Alaska.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Alaska.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Alaska.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Alaska.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AZ":
-        console.log("this is AZ!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Arizona.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Arizona.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Arizona.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Arizona.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Arizona.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Arizona.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Arizona.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Arizona.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AR":
-        console.log("this is AR!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Arkansas.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Arkansas.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Arkansas.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Arkansas.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Arkansas.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Arkansas.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Arkansas.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Arkansas.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CA":
-        console.log("this is CA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.California.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.California.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.California.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.California.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.California.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.California.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.California.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.California.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CO":
-        console.log("this is CO!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Colorado.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Colorado.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Colorado.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Colorado.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Colorado.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Colorado.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Colorado.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Colorado.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CT":
-        console.log("this is CT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Connecticut.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Connecticut.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Connecticut.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Connecticut.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Connecticut.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Connecticut.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Connecticut.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Connecticut.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "DE":
-        console.log("this is DE!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Delaware.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Delaware.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Delaware.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Delaware.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Delaware.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Delaware.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Delaware.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Delaware.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "FL":
-        console.log("this is FL!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Florida.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Florida.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Florida.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Florida.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Florida.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Florida.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Florida.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Florida.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "GA":
-        console.log("this is GA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Georgia.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Georgia.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Georgia.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Georgia.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Georgia.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Georgia.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Georgia.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Georgia.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "HI":
-        console.log("this is HI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Hawaii.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Hawaii.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Hawaii.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Hawaii.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Hawaii.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Hawaii.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Hawaii.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Hawaii.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ID":
-        console.log("this is ID!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Idaho.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Idaho.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Idaho.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Idaho.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Idaho.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Idaho.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Idaho.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Idaho.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "IL":
-        console.log("this is IL!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Illinois.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Illinois.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Illinois.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Illinois.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Illinois.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Illinois.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Illinois.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Illinois.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "IN":
-        console.log("this is IN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Indiana.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Indiana.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Indiana.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Indiana.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Indiana.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Indiana.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Indiana.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Indiana.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "IA":
-        console.log("this is IA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Iowa.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Iowa.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Iowa.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Iowa.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Iowa.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Iowa.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Iowa.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Iowa.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "KS":
-        console.log("this is KS!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Kansas.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Kansas.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Kansas.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Kansas.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Kansas.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Kansas.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Kansas.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Kansas.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "KN":
-        console.log("this is KN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Kentucky.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Kentucky.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Kentucky.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Kentucky.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Kentucky.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Kentucky.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Kentucky.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Kentucky.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "LA":
-        console.log("this is LA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Louisiana.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Louisiana.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Louisiana.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Louisiana.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Louisiana.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Louisiana.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Louisiana.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Louisiana.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ME":
-        console.log("this is ME!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Maine.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Maine.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Maine.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Maine.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Maine.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Maine.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Maine.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Maine.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MD":
-        console.log("this is MD!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Maryland.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Maryland.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Maryland.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Maryland.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Maryland.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Maryland.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Maryland.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Maryland.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MI":
-        console.log("this is MI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Michigan.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Michigan.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Michigan.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Michigan.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Michigan.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Michigan.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Michigan.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Michigan.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MN":
-        console.log("this is MN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Minnesota.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Minnesota.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Minnesota.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Minnesota.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Minnesota.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Minnesota.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Minnesota.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Minnesota.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MS":
-        console.log("this is MS!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Mississippi.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Mississippi.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Mississippi.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Mississippi.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Mississippi.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Mississippi.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Mississippi.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Mississippi.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MO":
-        console.log("this is MO!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Missouri.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Missouri.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Missouri.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Missouri.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Missouri.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Missouri.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Missouri.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Missouri.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MT":
-        console.log("this is MT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Montana.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Montana.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Montana.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Montana.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Montana.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Montana.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Montana.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Montana.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NE":
-        console.log("this is NE!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Nebraska.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Nebraska.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Nebraska.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Nebraska.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Nebraska.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Nebraska.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Nebraska.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Nebraska.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NV":
-        console.log("this is NV!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Nevada.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Nevada.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Nevada.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Nevada.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Nevada.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Nevada.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Nevada.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Nevada.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NH":
-        console.log("this is NH!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Hampshire.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Hampshire.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.New_Hampshire.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.New_Hampshire.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Hampshire.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Hampshire.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Hampshire.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Hampshire.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NJ":
-        console.log("this is NJ!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Jersey.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Jersey.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.New_Jersey.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.New_Jersey.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Jersey.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Jersey.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Jersey.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Jersey.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NW":
-        console.log("this is NW!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Mexico.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Mexico.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.New_Mexico.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.New_Mexico.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Mexico.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Mexico.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Mexico.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Mexico.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NY":
-        console.log("this is NY!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_York.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_York.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.New_York.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.New_York.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_York.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_York.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_York.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_York.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NC":
-        console.log("this is NC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.North_Carolina.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.North_Carolina.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.North_Carolina.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.North_Carolina.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.North_Carolina.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.North_Carolina.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.North_Carolina.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.North_Carolina.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ND":
-        console.log("this is ND!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.North_Dakota.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.North_Dakota.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.North_Dakota.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.North_Dakota.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.North_Dakota.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.North_Dakota.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.North_Dakota.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.North_Dakota.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "OH":
-        console.log("this is OH!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Ohio.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Ohio.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Ohio.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Ohio.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Ohio.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Ohio.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Ohio.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Ohio.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "OK":
-        console.log("this is OK!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Oklahoma.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Oklahoma.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Oklahoma.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Oklahoma.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Oklahoma.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Oklahoma.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Oklahoma.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Oklahoma.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "PA":
-        console.log("this is PA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Pennsylvania.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Pennsylvania.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Pennsylvania.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Pennsylvania.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Pennsylvania.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Pennsylvania.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Pennsylvania.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Pennsylvania.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "RI":
-        console.log("this is RI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Rhode_Island.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Rhode_Island.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Rhode_Island.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Rhode_Island.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Rhode_Island.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Rhode_Island.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Rhode_Island.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Rhode_Island.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "SC":
-        console.log("this is SC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.South_Carolina.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.South_Carolina.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.South_Carolina.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.South_Carolina.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.South_Carolina.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.South_Carolina.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.South_Carolina.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.South_Carolina.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "SD":
-        console.log("this is SD!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.South_Dakota.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.South_Dakota.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.South_Dakota.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.South_Dakota.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.South_Dakota.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.South_Dakota.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.South_Dakota.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.South_Dakota.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "TN":
-        console.log("this is TN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Tennessee.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Tennessee.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Tennessee.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Tennessee.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Tennessee.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Tennessee.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Tennessee.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Tennessee.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "TX":
-        console.log("this is TX!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Texas.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Texas.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Texas.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Texas.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Texas.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Texas.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Texas.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Texas.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "UT":
-        console.log("this is UT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Utah.pre_covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Utah.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Utah.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Utah.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Utah.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Utah.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Utah.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Utah.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "VT":
-        console.log("this is VT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Vermont.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Vermont.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Vermont.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Vermont.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Vermont.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Vermont.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Vermont.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Vermont.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "VA":
-        console.log("this is VA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Virginia.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Virginia.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Virginia.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Virginia.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Virginia.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Virginia.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Virginia.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Virginia.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WA":
-        console.log("this is WA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Washington.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Washington.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Washington.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Washington.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Washington.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Washington.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Washington.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Washington.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WV":
-        console.log("this is WV!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.West_Virginia.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.West_Virginia.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.West_Virginia.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.West_Virginia.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.West_Virginia.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.West_Virginia.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.West_Virginia.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.West_Virginia.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WI":
-        console.log("this is WI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Wisconsin.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Wisconsin.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Wisconsin.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Wisconsin.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Wisconsin.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Wisconsin.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Wisconsin.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Wisconsin.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WY":
-        console.log("this is WY!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Wyoming.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Wyoming.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Wyoming.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Wyoming.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Wyoming.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Wyoming.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Wyoming.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Wyoming.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MA":
-        console.log("this is MA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Massachusetts.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Massachusetts.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.Massachusetts.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.Massachusetts.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Massachusetts.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Massachusetts.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Massachusetts.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Massachusetts.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "OR":
-        console.log("this is OR!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Oregon.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Oregon.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Oregon.pre_covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Oregon.pre_covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Oregon.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Oregon.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Oregon.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Oregon.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "DC":
-        console.log("this is DC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.District_of_Columbia.pre_covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.District_of_Columbia.pre_covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.District_of_Columbia.pre_covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.District_of_Columbia.pre_covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.District_of_Columbia.pre_covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.District_of_Columbia.pre_covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.District_of_Columbia.pre_covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.District_of_Columbia.pre_covid_pre4_groupsize
-          );
-        });
-        break;
-
-      default:
-        break;
-    }
+    $.getJSON("json/child_care_center.json", function (data) {
+      //POPULATING RATIOS COLUMN
+      $("input[name='infantRatio']").val(data[state].pre_covid_infant_ratio);
+      $("input[name='toddlerRatio']").val(data[state].pre_covid_toddler_ratio);
+      $("input[name='pre3Ratio']").val(data[state].pre_covid_pre3_ratio);
+      $("input[name='pre4Ratio']").val(data[state].pre_covid_pre4_ratio);
+
+      //POPULATING GROUPSIZE COLUMN
+      $("input[name='infantGroupSize']").val(
+        data[state].pre_covid_infant_groupsize
+      );
+      $("input[name='toddlerGroupSize']").val(
+        data[state].pre_covid_toddler_groupsize
+      );
+      $("input[name='pre3GroupSize']").val(
+        data[state].pre_covid_pre3_groupsize
+      );
+      $("input[name='pre4GroupSize']").val(
+        data[state].pre_covid_pre4_groupsize
+      );
+    });
   }
 
-  /*******COVID SCENARIO*******/
-
   if (selectedRatio == "covid") {
-    switch (stateSelected) {
-      case "AL":
-        console.log("this is alabama!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Alabama.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Alabama.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Alabama.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Alabama.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Alabama.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Alabama.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Alabama.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Alabama.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AK":
-        console.log("this is AK!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Alaska.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Alaska.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Alaska.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Alaska.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Alaska.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Alaska.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Alaska.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Alaska.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AZ":
-        console.log("this is AZ!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Arizona.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Arizona.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Arizona.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Arizona.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Arizona.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Arizona.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Arizona.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Arizona.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "AR":
-        console.log("this is AR!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Arkansas.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Arkansas.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Arkansas.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Arkansas.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Arkansas.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Arkansas.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Arkansas.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Arkansas.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CA":
-        console.log("this is CA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.California.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.California.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.California.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.California.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.California.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.California.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.California.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.California.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CO":
-        console.log("this is CO!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Colorado.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Colorado.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Colorado.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Colorado.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Colorado.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Colorado.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Colorado.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Colorado.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "CT":
-        console.log("this is CT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Connecticut.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Connecticut.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Connecticut.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Connecticut.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Connecticut.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Connecticut.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Connecticut.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Connecticut.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "DE":
-        console.log("this is DE!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Delaware.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Delaware.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Delaware.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Delaware.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Delaware.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Delaware.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Delaware.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Delaware.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "FL":
-        console.log("this is FL!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Florida.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Florida.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Florida.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Florida.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Florida.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Florida.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Florida.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Florida.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "GA":
-        console.log("this is GA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Georgia.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Georgia.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Georgia.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Georgia.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Georgia.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Georgia.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Georgia.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Georgia.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "HI":
-        console.log("this is HI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Hawaii.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Hawaii.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Hawaii.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Hawaii.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Hawaii.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Hawaii.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Hawaii.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Hawaii.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ID":
-        console.log("this is ID!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Idaho.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Idaho.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Idaho.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Idaho.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Idaho.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Idaho.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Idaho.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Idaho.covid_pre4_groupsize);
-        });
-        break;
-
-      case "IL":
-        console.log("this is IL!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Illinois.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Illinois.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Illinois.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Illinois.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Illinois.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Illinois.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Illinois.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Illinois.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "IN":
-        console.log("this is IN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Indiana.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Indiana.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Indiana.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Indiana.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Indiana.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Indiana.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Indiana.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Indiana.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "IA":
-        console.log("this is IA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Iowa.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Iowa.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Iowa.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Iowa.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Iowa.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Iowa.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Iowa.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Iowa.covid_pre4_groupsize);
-        });
-        break;
-
-      case "KS":
-        console.log("this is KS!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Kansas.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Kansas.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Kansas.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Kansas.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Kansas.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Kansas.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Kansas.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Kansas.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "KN":
-        console.log("this is KN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Kentucky.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Kentucky.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Kentucky.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Kentucky.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Kentucky.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Kentucky.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Kentucky.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Kentucky.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "LA":
-        console.log("this is LA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Louisiana.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Louisiana.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Louisiana.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Louisiana.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Louisiana.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Louisiana.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Louisiana.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Louisiana.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ME":
-        console.log("this is ME!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Maine.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Maine.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Maine.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Maine.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Maine.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Maine.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Maine.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Maine.covid_pre4_groupsize);
-        });
-        break;
-
-      case "MD":
-        console.log("this is MD!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Maryland.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Maryland.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Maryland.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Maryland.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Maryland.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Maryland.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Maryland.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Maryland.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MI":
-        console.log("this is MI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Michigan.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Michigan.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Michigan.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Michigan.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Michigan.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Michigan.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Michigan.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Michigan.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MN":
-        console.log("this is MN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Minnesota.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Minnesota.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Minnesota.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Minnesota.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Minnesota.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Minnesota.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Minnesota.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Minnesota.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MS":
-        console.log("this is MS!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Mississippi.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Mississippi.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Mississippi.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Mississippi.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Mississippi.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Mississippi.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Mississippi.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Mississippi.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MO":
-        console.log("this is MO!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Missouri.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Missouri.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Missouri.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Missouri.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Missouri.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Missouri.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Missouri.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Missouri.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MT":
-        console.log("this is MT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Montana.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Montana.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Montana.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Montana.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Montana.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Montana.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Montana.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Montana.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NE":
-        console.log("this is NE!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Nebraska.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Nebraska.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Nebraska.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Nebraska.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Nebraska.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Nebraska.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Nebraska.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Nebraska.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NV":
-        console.log("this is NV!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Nevada.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Nevada.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Nevada.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Nevada.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Nevada.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Nevada.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Nevada.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Nevada.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NH":
-        console.log("this is NH!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Hampshire.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Hampshire.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.New_Hampshire.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.New_Hampshire.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Hampshire.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Hampshire.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Hampshire.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Hampshire.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NJ":
-        console.log("this is NJ!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Jersey.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Jersey.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.New_Jersey.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.New_Jersey.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Jersey.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Jersey.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Jersey.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Jersey.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NW":
-        console.log("this is NW!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.New_Mexico.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.New_Mexico.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.New_Mexico.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.New_Mexico.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_Mexico.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_Mexico.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_Mexico.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_Mexico.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NY":
-        console.log("this is NY!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.New_York.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.New_York.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.New_York.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.New_York.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.New_York.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.New_York.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.New_York.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.New_York.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "NC":
-        console.log("this is NC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.North_Carolina.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.North_Carolina.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.North_Carolina.covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.North_Carolina.covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.North_Carolina.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.North_Carolina.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.North_Carolina.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.North_Carolina.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "ND":
-        console.log("this is ND!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.North_Dakota.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.North_Dakota.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.North_Dakota.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.North_Dakota.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.North_Dakota.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.North_Dakota.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.North_Dakota.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.North_Dakota.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "OH":
-        console.log("this is OH!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Ohio.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Ohio.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Ohio.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Ohio.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Ohio.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Ohio.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Ohio.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Ohio.covid_pre4_groupsize);
-        });
-        break;
-
-      case "OK":
-        console.log("this is OK!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Oklahoma.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Oklahoma.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Oklahoma.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Oklahoma.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Oklahoma.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Oklahoma.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Oklahoma.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Oklahoma.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "PA":
-        console.log("this is PA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Pennsylvania.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Pennsylvania.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Pennsylvania.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Pennsylvania.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Pennsylvania.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Pennsylvania.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Pennsylvania.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Pennsylvania.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "RI":
-        console.log("this is RI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Rhode_Island.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Rhode_Island.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Rhode_Island.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Rhode_Island.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Rhode_Island.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Rhode_Island.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Rhode_Island.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Rhode_Island.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "SC":
-        console.log("this is SC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.South_Carolina.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.South_Carolina.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.South_Carolina.covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.South_Carolina.covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.South_Carolina.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.South_Carolina.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.South_Carolina.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.South_Carolina.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "SD":
-        console.log("this is SD!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.South_Dakota.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.South_Dakota.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.South_Dakota.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.South_Dakota.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.South_Dakota.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.South_Dakota.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.South_Dakota.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.South_Dakota.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "TN":
-        console.log("this is TN!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Tennessee.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Tennessee.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Tennessee.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Tennessee.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Tennessee.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Tennessee.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Tennessee.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Tennessee.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "TX":
-        console.log("this is TX!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Texas.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Texas.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Texas.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Texas.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Texas.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Texas.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Texas.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Texas.covid_pre4_groupsize);
-        });
-        break;
-
-      case "UT":
-        console.log("this is UT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Utah.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Utah.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Utah.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Utah.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Utah.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Utah.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(data.Utah.covid_pre3_groupsize);
-          $("input[name='pre4GroupSize']").val(data.Utah.covid_pre4_groupsize);
-        });
-        break;
-
-      case "VT":
-        console.log("this is VT!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Vermont.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Vermont.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Vermont.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Vermont.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Vermont.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Vermont.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Vermont.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Vermont.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "VA":
-        console.log("this is VA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Virginia.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Virginia.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Virginia.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Virginia.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Virginia.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Virginia.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Virginia.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Virginia.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WA":
-        console.log("this is WA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Washington.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Washington.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Washington.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Washington.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Washington.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Washington.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Washington.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Washington.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WV":
-        console.log("this is WV!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.West_Virginia.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.West_Virginia.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.West_Virginia.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.West_Virginia.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.West_Virginia.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.West_Virginia.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.West_Virginia.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.West_Virginia.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WI":
-        console.log("this is WI!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Wisconsin.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(
-            data.Wisconsin.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Wisconsin.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Wisconsin.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Wisconsin.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Wisconsin.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Wisconsin.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Wisconsin.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "WY":
-        console.log("this is WY!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Wyoming.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Wyoming.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Wyoming.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Wyoming.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Wyoming.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Wyoming.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Wyoming.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Wyoming.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "MA":
-        console.log("this is MA!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.Massachusetts.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.Massachusetts.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(data.Massachusetts.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Massachusetts.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Massachusetts.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Massachusetts.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Massachusetts.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Massachusetts.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "OR":
-        console.log("this is OR!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(data.Oregon.covid_infant_ratio);
-          $("input[name='toddlerRatio']").val(data.Oregon.covid_toddler_ratio);
-          $("input[name='pre3Ratio']").val(data.Oregon.covid_pre3_ratio);
-          $("input[name='pre4Ratio']").val(data.Oregon.covid_pre4_ratio);
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.Oregon.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.Oregon.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.Oregon.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.Oregon.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      case "DC":
-        console.log("this is DC!!");
-        $.getJSON("json/child_care_center.json", function (data) {
-          //populating ratios column
-          $("input[name='infantRatio']").val(
-            data.District_of_Columbia.covid_infant_ratio
-          );
-          $("input[name='toddlerRatio']").val(
-            data.District_of_Columbia.covid_toddler_ratio
-          );
-          $("input[name='pre3Ratio']").val(
-            data.District_of_Columbia.covid_pre3_ratio
-          );
-          $("input[name='pre4Ratio']").val(
-            data.District_of_Columbia.covid_pre4_ratio
-          );
-
-          //populating groupsize column
-          $("input[name='infantGroupSize']").val(
-            data.District_of_Columbia.covid_infant_groupsize
-          );
-          $("input[name='toddlerGroupSize']").val(
-            data.District_of_Columbia.covid_toddler_groupsize
-          );
-          $("input[name='pre3GroupSize']").val(
-            data.District_of_Columbia.covid_pre3_groupsize
-          );
-          $("input[name='pre4GroupSize']").val(
-            data.District_of_Columbia.covid_pre4_groupsize
-          );
-        });
-        break;
-
-      default:
-        break;
-    }
+    $.getJSON("json/child_care_center.json", function (data) {
+      //POPULATING RATIOS COLUMN
+      $("input[name='infantRatio']").val(data[state].covid_infant_ratio);
+      $("input[name='toddlerRatio']").val(data[state].covid_toddler_ratio);
+      $("input[name='pre3Ratio']").val(data[state].covid_pre3_ratio);
+      $("input[name='pre4Ratio']").val(data[state].covid_pre4_ratio);
+
+      //POPULATING GROUPSIZE COLUMN
+      $("input[name='infantGroupSize']").val(
+        data[state].covid_infant_groupsize
+      );
+      $("input[name='toddlerGroupSize']").val(
+        data[state].covid_toddler_groupsize
+      );
+      $("input[name='pre3GroupSize']").val(data[state].covid_pre3_groupsize);
+      $("input[name='pre4GroupSize']").val(data[state].covid_pre4_groupsize);
+    });
   }
 }
 
 //FUNCTION TO CALCULATE TOTAL CLASSROOMS AND CHILDREN
 function calculateTotal() {
-  var childCareForm = document.forms["childCareForm"];
-
-  infantClassrooms = parseInt(childCareForm.elements["infantClassrooms"].value);
-  toddlerClassrooms = parseInt(
-    childCareForm.elements["toddlerClassrooms"].value
-  );
-  pre3Classrooms = parseInt(childCareForm.elements["pre3Classrooms"].value);
-  pre4Classrooms = parseInt(childCareForm.elements["pre4Classrooms"].value);
+  infantClassrooms = parseInt($("input[name='infantClassrooms']").val());
+  toddlerClassrooms = parseInt($("input[name='toddlerClassrooms']").val());
+  pre3Classrooms = parseInt($("input[name='pre3Classrooms']").val());
+  pre4Classrooms = parseInt($("input[name='pre4Classrooms']").val());
 
   classTotal =
     infantClassrooms + toddlerClassrooms + pre3Classrooms + pre4Classrooms;
@@ -3064,281 +201,68 @@ function calculateTotal() {
   }
 
   if (selectedRatio == "covid") {
-    if (!isNaN(infantClassrooms)) {
-      infantChildren =
-        infantClassrooms * statesVarArray[0].groupsize_covid_infant;
-      $("input[name='infantChildren']").val(infantChildren);
-    }
+    $.getJSON("json/child_care_center.json", function (data) {
+      if (!isNaN(infantClassrooms)) {
+        infantChildren =
+          infantClassrooms * data[stateSelected].covid_infant_groupsize;
+        $("input[name='infantChildren']").val(infantChildren);
+      }
 
-    if (!isNaN(toddlerClassrooms)) {
-      toddlerChildren =
-        toddlerClassrooms * statesVarArray[0].groupsize_covid_toddler;
-      $("input[name='toddlerChildren']").val(toddlerChildren);
-    }
+      if (!isNaN(toddlerClassrooms)) {
+        toddlerChildren =
+          toddlerClassrooms * data[stateSelected].covid_toddler_groupsize;
+        $("input[name='toddlerChildren']").val(toddlerChildren);
+      }
 
-    if (!isNaN(pre3Classrooms)) {
-      pre3Children = pre3Classrooms * statesVarArray[0].groupsize_covid_pre3;
-      $("input[name='pre3Children']").val(pre3Children);
-    }
+      if (!isNaN(pre3Classrooms)) {
+        pre3Children =
+          pre3Classrooms * data[stateSelected].covid_pre3_groupsize;
+        $("input[name='pre3Children']").val(pre3Children);
+      }
 
-    if (!isNaN(pre4Classrooms)) {
-      pre4Children = pre4Classrooms * statesVarArray[0].groupsize_covid_pre4;
-      $("input[name='pre4Children']").val(pre4Children);
-    }
+      if (!isNaN(pre4Classrooms)) {
+        pre4Children =
+          pre4Classrooms * data[stateSelected].covid_pre4_groupsize;
+        $("input[name='pre4Children']").val(pre4Children);
+      }
 
-    childTotal = infantChildren + toddlerChildren + pre3Children + pre4Children;
-    $("#childTotal").html(childTotal);
-    console.log(childTotal);
+      childTotal =
+        infantChildren + toddlerChildren + pre3Children + pre4Children;
+      $("#childTotal").html(childTotal);
+    });
   }
 
   if (selectedRatio == "current") {
-    if (!isNaN(infantClassrooms)) {
-      infantChildren =
-        infantClassrooms * statesVarArray[0].groupsize_current_infant;
-      $("input[name='infantChildren']").val(infantChildren);
-    }
+    $.getJSON("json/child_care_center.json", function (data) {
+      if (!isNaN(infantClassrooms)) {
+        infantChildren =
+          infantClassrooms * data[stateSelected].pre_covid_infant_groupsize;
+        $("input[name='infantChildren']").val(infantChildren);
+      }
 
-    if (!isNaN(toddlerClassrooms)) {
-      toddlerChildren =
-        toddlerClassrooms * statesVarArray[0].groupsize_current_toddler;
-      $("input[name='toddlerChildren']").val(toddlerChildren);
-    }
+      if (!isNaN(toddlerClassrooms)) {
+        toddlerChildren =
+          toddlerClassrooms * data[stateSelected].pre_covid_toddler_groupsize;
+        $("input[name='toddlerChildren']").val(toddlerChildren);
+      }
 
-    if (!isNaN(pre3Classrooms)) {
-      pre3Children = pre3Classrooms * statesVarArray[0].groupsize_current_pre3;
-      $("input[name='pre3Children']").val(pre3Children);
-    }
+      if (!isNaN(pre3Classrooms)) {
+        pre3Children =
+          pre3Classrooms * data[stateSelected].pre_covid_pre3_groupsize;
+        $("input[name='pre3Children']").val(pre3Children);
+      }
 
-    if (!isNaN(pre4Classrooms)) {
-      pre4Children = pre4Classrooms * statesVarArray[0].groupsize_current_pre4;
-      $("input[name='pre4Children']").val(pre4Children);
-    }
+      if (!isNaN(pre4Classrooms)) {
+        pre4Children =
+          pre4Classrooms * data[stateSelected].pre_covid_pre4_groupsize;
+        $("input[name='pre4Children']").val(pre4Children);
+      }
 
-    childTotal = infantChildren + toddlerChildren + pre3Children + pre4Children;
-    $("#childTotal").html(childTotal);
-    console.log(childTotal);
+      childTotal =
+        infantChildren + toddlerChildren + pre3Children + pre4Children;
+      $("#childTotal").html(childTotal);
+    });
   }
-}
-
-//FUNCTION TO CONVERT SALARY TO WAGE
-function salaryConverter(id) {
-  if ($("#salary" + id).val() != "") {
-    $("#wage" + id).val(($("#salary" + id).val() / 2080).toFixed(2));
-  }
-}
-
-//FUNCTION TO CONVERT WAGE TO SALARY
-function wageConverter(id) {
-  if ($("#wage" + id).val() != "") {
-    $("#salary" + id).val(($("#wage" + id).val() * 2080).toFixed(0));
-  }
-}
-
-//FUNCTION TO CHECK FOR CHECKBOX
-function checkHealth() {
-  if ($("input[type='checkbox']").prop("checked") == false) {
-    $("input[name='costOfFTEmployee']").val(0);
-  } else {
-    $("input[name='costOfFTEmployee']").val(statesVarArray[0].health_insurance);
-  }
-
-  if ($("#checkboxFCC").prop("checked") == false) {
-    $("#costOfFTEmployeeFCC").val(0);
-  } else {
-    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
-  }
-}
-
-//FUNCTION TO POPULATE STAFF FIELDS
-function populateStaff(salaryLevel) {
-  noOfProgramDirectors = $("#noOfProgramDirectors").val();
-  noOfAssistantDirectors = $("#noOfAssistantDirectors").val();
-  noOfAdministrativeAssistants = $("#noOfAdministrativeAssistants").val();
-  noOfLeadTeachers = $("#noOfLeadTeachers").val();
-  noOfAssistantTeachers = $("#noOfAssistantTeachers").val();
-
-  if (salaryLevel == "bls") {
-    if (!isNaN(noOfProgramDirectors)) {
-      totalsalaryDirectors =
-        noOfProgramDirectors * statesVarArray[0].wages_bls_director;
-
-      $("#salaryProgramDirectors").val(
-        accounting.formatMoney(totalsalaryDirectors)
-      );
-      $("#wageProgramDirectors").val((totalsalaryDirectors / 2080).toFixed(2));
-    }
-
-    if (!isNaN(noOfAssistantDirectors)) {
-      salaryAssistantDirectors =
-        noOfAssistantDirectors * statesVarArray[0].wages_bls_assistantdirector;
-      $("#salaryAssistantDirectors").val(
-        accounting.formatMoney(salaryAssistantDirectors)
-      );
-      $("#wageAssistantDirectors").val(
-        (salaryAssistantDirectors / 2080).toFixed(2)
-      );
-    }
-
-    if (!isNaN(noOfAdministrativeAssistants)) {
-      salaryAdministrativeAssistants =
-        noOfAdministrativeAssistants *
-        statesVarArray[0].wages_bls_adminassistant;
-      $("#salaryAdministrativeAssistants").val(
-        accounting.formatMoney(salaryAdministrativeAssistants)
-      );
-      $("#wageAdministrativeAssistants").val(
-        (salaryAdministrativeAssistants / 2080).toFixed(2)
-      );
-    }
-
-    if (!isNaN(noOfLeadTeachers)) {
-      salaryLeadTeachers =
-        noOfLeadTeachers * statesVarArray[0].wages_bls_leadteacher;
-      $("#salaryLeadTeachers").val(accounting.formatMoney(salaryLeadTeachers));
-      $("#wageLeadTeachers").val((salaryLeadTeachers / 2080).toFixed(2));
-    }
-
-    if (!isNaN(noOfAssistantTeachers)) {
-      salaryAssistantTeachers =
-        noOfAssistantTeachers * statesVarArray[0].wages_bls_assistantteacher;
-      $("#salaryAssistantTeachers").val(
-        accounting.formatMoney(salaryAssistantTeachers)
-      );
-      $("#wageAssistantTeachers").val(
-        (salaryAssistantTeachers / 2080).toFixed(2)
-      );
-    }
-
-    totalTeachers =
-      parseInt(noOfLeadTeachers) + parseInt(noOfAssistantTeachers);
-    var dailyCoverage = 0.2;
-    console.log(totalTeachers);
-    noOfSubstituteTeachers = totalTeachers * dailyCoverage;
-    $("#noOfSubstituteTeachers").val(noOfSubstituteTeachers.toFixed(1));
-
-    if (!isNaN(noOfSubstituteTeachers)) {
-      salarySubsTeachers =
-        noOfSubstituteTeachers * statesVarArray[0].wages_bls_floater;
-      $("#salarySubsTeachers").val(accounting.formatMoney(salarySubsTeachers));
-      $("#wageSubsTeachers").val((salarySubsTeachers / 2080).toFixed(2));
-    }
-  }
-}
-
-//FUNCTION TO CALCULATE TOTAL PERSONNEL COST
-function calcTotalPersonnelCost() {
-  //total admin staff wage
-  adminStaffTotalWage =
-    totalsalaryDirectors +
-    salaryAssistantDirectors +
-    salaryAdministrativeAssistants;
-  console.log(adminStaffTotalWage);
-
-  //total teaching staff wage
-  teachingStaffTotalWage =
-    salaryLeadTeachers + salaryAssistantTeachers + salarySubsTeachers;
-  console.log(teachingStaffTotalWage);
-
-  //total staff wage
-  staffTotalWage = adminStaffTotalWage + teachingStaffTotalWage;
-  console.log(staffTotalWage);
-
-  //total no of teaching staff
-  totalTeachingStaff = totalTeachers + noOfSubstituteTeachers;
-  console.log(totalTeachingStaff);
-
-  paidLeave = $("#paidLeave").val();
-  sickdays = $("#sickdays").val();
-
-  //sub cost for paid leave
-  subsCostForPaidLeave =
-    totalTeachingStaff *
-    paidLeave *
-    8 *
-    (statesVarArray[0].wages_bls_floater / 2080);
-  console.log(subsCostForPaidLeave);
-
-  //sub cost for sick leave
-  subsCostForSickLeave =
-    totalTeachingStaff *
-    sickdays *
-    8 *
-    (statesVarArray[0].wages_bls_floater / 2080);
-  console.log(subsCostForSickLeave);
-
-  //total subs cost
-  subsCostForLeaveTotal = subsCostForSickLeave + subsCostForPaidLeave;
-  console.log(subsCostForLeaveTotal);
-
-  //total staff wage
-  subTotalWages = staffTotalWage + subsCostForLeaveTotal;
-  console.log(subTotalWages);
-
-  //CONST Mandatory benefits value
-  mandatoryBenefitsVal = 0.1065;
-  mandatoryBenefitsSalary = mandatoryBenefitsVal * subTotalWages;
-  console.log(Math.round(mandatoryBenefitsSalary));
-
-  //Total staff
-  totalStaff =
-    totalTeachingStaff +
-    parseInt($("#noOfProgramDirectors").val()) +
-    parseInt($("#noOfAssistantDirectors").val()) +
-    parseInt($("#noOfAdministrativeAssistants").val());
-  console.log(totalStaff);
-
-  //Additional Benefits
-  additionalBenefits = totalStaff * statesVarArray[0].health_insurance;
-  console.log(Math.round(additionalBenefits));
-
-  //Subtotal Personnel
-  personnelSubtotal =
-    subTotalWages + mandatoryBenefitsSalary + additionalBenefits;
-  console.log(Math.round(personnelSubtotal));
-}
-
-//FUNCTION TO CALCULATE TOTAL NONPERSONNEL COST
-function calcTotalNonPersonnelCost() {
-  //Additional expenses
-  if ($("input[name='deepCleaningCost']").val() == "") {
-    $("input[name='deepCleaningCost']").val(4);
-  }
-
-  if ($("#costPerCleaning").val() == "") {
-    $("#costPerCleaning").val(500);
-  }
-
-  //CONST cost per classroom
-  costPerClassroom = 720;
-
-  sanitationCost = costPerClassroom * classTotal;
-  console.log(sanitationCost);
-  $("#sanitationCost").val(sanitationCost);
-
-  if ($("#miscCost").val() != "") {
-    miscCost = parseInt($("#miscCost").val());
-  } else {
-    $("#miscCost").val(0);
-  }
-
-  miscCost = miscCost;
-  //Total additional cleaning
-  totalAdditionalCleaning =
-    (parseInt($("input[name='deepCleaningCost']").val()) *
-      parseInt($("#costPerCleaning").val()) +
-      sanitationCost) *
-    12;
-  console.log(totalAdditionalCleaning);
-
-  //CONST Nonpersonnel expenses
-  eduProgram = 1895;
-  occupancy = 35744;
-  progAndAdmin = 17030;
-
-  //Total Nonpersonnel Cost
-  nonpersonnelSubtotal =
-    totalAdditionalCleaning + eduProgram + occupancy + progAndAdmin;
-  console.log(nonpersonnelSubtotal);
 }
 
 //FUNCTION TO GET SALARY
@@ -3349,7 +273,10 @@ function getSalaryLevel() {
   var childCareForm = document.forms["childCareForm"];
   salaryLevelChildCare = childCareForm.elements["salary"].value;
 
-  //populating number of staff fields
+  console.log(salaryLevelChildCare + " --> salaryLevelChildcare");
+  
+
+  //POPULATING BASE VALUES FOR STAFF FIELD
   if ($("#noOfProgramDirectors").val() == "") {
     $("#noOfProgramDirectors").val(1);
   }
@@ -3371,16 +298,24 @@ function getSalaryLevel() {
 
   //populating Sick days and Paid leave fields
   if ($("#sickdays").val() == "") {
-    $("#sickdays").val(10);
+    $.getJSON("json/child_care_center.json", function (data) {
+      $("#sickdays").val(data[stateSelected].sick_days);
+    });
   }
 
   if ($("#paidLeave").val() == "") {
-    $("#paidLeave").val(10);
+    $.getJSON("json/child_care_center.json", function (data) {
+      $("#paidLeave").val(data[stateSelected].paid_leave);
+    });
   }
 
-  //cost per FT employee
+  //COST PER FT EMPLOYEE
   if ($("input[type='checkbox']").prop("checked") == true) {
-    $("input[name='costOfFTEmployee']").val(statesVarArray[0].health_insurance);
+    $.getJSON("json/child_care_center.json", function (data) {
+      $("input[name='costOfFTEmployee']").val(
+        data[stateSelected].health_insurance
+      );
+    });
   }
 
   calcTotalPersonnelCost();
@@ -3388,16 +323,16 @@ function getSalaryLevel() {
 
   //TOTAL COST OF PERSONNEL & NON PERSONNEL
   totalPersonnel = personnelSubtotal + nonpersonnelSubtotal;
-  console.log(Math.round(totalPersonnel));
+  
 
   //reserve fund
   reserveFundPercentage = 0.05;
   reserveFund = reserveFundPercentage * totalPersonnel;
-  console.log(Math.round(reserveFund));
+  
 
   //Total expense
   totalExpense = totalPersonnel + reserveFund;
-  console.log(Math.round(totalExpense));
+ 
 
   //Cost per child calculations
   calcInfantsCost();
@@ -3406,52 +341,424 @@ function getSalaryLevel() {
   calcPre4Cost();
 }
 
+//FUNCTION TO POPULATE STAFF FIELDS
+function populateStaff(salaryLevel) {
+  noOfProgramDirectors = $("#noOfProgramDirectors").val();
+  noOfAssistantDirectors = $("#noOfAssistantDirectors").val();
+  noOfAdministrativeAssistants = $("#noOfAdministrativeAssistants").val();
+  noOfLeadTeachers = $("#noOfLeadTeachers").val();
+  noOfAssistantTeachers = $("#noOfAssistantTeachers").val();
+
+  if (salaryLevel == "bls") {
+    $.getJSON("json/child_care_center.json", function (data) {
+      if (!isNaN(noOfProgramDirectors)) {
+        totalsalaryDirectors =
+          noOfProgramDirectors * data[stateSelected].bls_director_salary;
+          
+
+        $("#salaryProgramDirectors").val(
+          (accounting.formatMoney(totalsalaryDirectors)).slice(0, -3)
+        );
+
+        wageProgramDirectors = totalsalaryDirectors / 2080;
+        $("#wageProgramDirectors").val(
+          accounting.formatMoney(wageProgramDirectors)
+        );
+      }
+
+      if (!isNaN(noOfAssistantDirectors)) {
+        salaryAssistantDirectors =
+          noOfAssistantDirectors *
+          data[stateSelected].bls_assistant_director_salary;
+        $("#salaryAssistantDirectors").val(
+          (accounting.formatMoney(salaryAssistantDirectors)).slice(0,-3)
+        );
+
+        wageAssistantDirectors = salaryAssistantDirectors / 2080;
+        $("#wageAssistantDirectors").val(
+          accounting.formatMoney(wageAssistantDirectors)
+        );
+      }
+
+      if (!isNaN(noOfAdministrativeAssistants)) {
+        salaryAdministrativeAssistants =
+          noOfAdministrativeAssistants *
+          data[stateSelected].bls_administrative_assistant_salary;
+        $("#salaryAdministrativeAssistants").val(
+          (accounting.formatMoney(salaryAdministrativeAssistants)).slice(0, -3)
+        );
+        wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
+        $("#wageAdministrativeAssistants").val(
+          accounting.formatMoney(wageAdministrativeAssistants)
+        );
+      }
+
+      if (!isNaN(noOfLeadTeachers)) {
+        salaryLeadTeachers =
+          noOfLeadTeachers * data[stateSelected].bls_lead_teacher_salary;
+
+        $("#salaryLeadTeachers").val(
+          (accounting.formatMoney(salaryLeadTeachers)).slice(0, -3)
+        );
+        
+        wageLeadTeachers = salaryLeadTeachers / 2080;
+        $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
+      }
+
+      if (!isNaN(noOfAssistantTeachers)) {
+        salaryAssistantTeachers =
+          noOfAssistantTeachers * data[stateSelected].bls_assistant_teacher_salary;
+        $("#salaryAssistantTeachers").val(
+          (accounting.formatMoney(salaryAssistantTeachers)).slice(0, -3)
+        );
+
+        wageAssistantTeachers = salaryAssistantTeachers / 2080;
+        $("#wageAssistantTeachers").val(
+          accounting.formatMoney(wageAssistantTeachers)
+        );
+      }
+
+      totalTeachers =
+        parseInt(noOfLeadTeachers) + parseInt(noOfAssistantTeachers);
+
+      console.log(totalTeachers + " --> total teachers");  
+      var dailyCoverage = 0.2;
+      
+      noOfSubstituteTeachers = totalTeachers * dailyCoverage;
+
+      $("#noOfSubstituteTeachers").val(noOfSubstituteTeachers.toFixed(1));
+
+      if (!isNaN(noOfSubstituteTeachers)) {
+        salarySubsTeachers =
+          noOfSubstituteTeachers * data[stateSelected].bls_floater_salary;
+        $("#salarySubsTeachers").val(
+          (accounting.formatMoney(salarySubsTeachers)).slice(0, -3)
+        );
+
+        wageSubsTeachers = salarySubsTeachers / 2080
+        $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
+      }
+    });
+  }
+
+
+  if (salaryLevel == "kg") {
+    $.getJSON("json/child_care_center.json", function (data) {
+      if (!isNaN(noOfProgramDirectors)) {
+        totalsalaryDirectors =
+          noOfProgramDirectors * data[stateSelected].Kg_director_salary;
+          
+
+        $("#salaryProgramDirectors").val(
+          (accounting.formatMoney(totalsalaryDirectors)).slice(0, -3)
+        );
+
+        wageProgramDirectors = totalsalaryDirectors / 2080;
+        $("#wageProgramDirectors").val(
+          accounting.formatMoney(wageProgramDirectors)
+        );
+      }
+
+      if (!isNaN(noOfAssistantDirectors)) {
+        salaryAssistantDirectors =
+          noOfAssistantDirectors *
+          data[stateSelected].Kg_assistant_director_salary;
+        $("#salaryAssistantDirectors").val(
+          (accounting.formatMoney(salaryAssistantDirectors)).slice(0,-3)
+        );
+
+        wageAssistantDirectors = salaryAssistantDirectors / 2080;
+        $("#wageAssistantDirectors").val(
+          accounting.formatMoney(wageAssistantDirectors)
+        );
+      }
+
+      if (!isNaN(noOfAdministrativeAssistants)) {
+        salaryAdministrativeAssistants =
+          noOfAdministrativeAssistants *
+          data[stateSelected].Kg_administrative_assistant_salary;
+        $("#salaryAdministrativeAssistants").val(
+          (accounting.formatMoney(salaryAdministrativeAssistants)).slice(0, -3)
+        );
+        wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
+        $("#wageAdministrativeAssistants").val(
+          accounting.formatMoney(wageAdministrativeAssistants)
+        );
+      }
+
+      if (!isNaN(noOfLeadTeachers)) {
+        salaryLeadTeachers =
+          noOfLeadTeachers * data[stateSelected].Kg_lead_teacher_salary;
+
+        $("#salaryLeadTeachers").val(
+          (accounting.formatMoney(salaryLeadTeachers)).slice(0, -3)
+        );
+        
+        wageLeadTeachers = salaryLeadTeachers / 2080;
+        $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
+      }
+
+      if (!isNaN(noOfAssistantTeachers)) {
+        salaryAssistantTeachers =
+          noOfAssistantTeachers * data[stateSelected].Kg_assistant_teacher_salary;
+        $("#salaryAssistantTeachers").val(
+          (accounting.formatMoney(salaryAssistantTeachers)).slice(0, -3)
+        );
+
+        wageAssistantTeachers = salaryAssistantTeachers / 2080;
+        $("#wageAssistantTeachers").val(
+          accounting.formatMoney(wageAssistantTeachers)
+        );
+      }
+
+      totalTeachers =
+        parseInt(noOfLeadTeachers) + parseInt(noOfAssistantTeachers);
+      var dailyCoverage = 0.2;
+      
+      noOfSubstituteTeachers = totalTeachers * dailyCoverage;
+
+      $("#noOfSubstituteTeachers").val(noOfSubstituteTeachers.toFixed(1));
+
+      if (!isNaN(noOfSubstituteTeachers)) {
+        salarySubsTeachers =
+          noOfSubstituteTeachers * data[stateSelected].Kg_floater_salary;
+        $("#salarySubsTeachers").val(
+          (accounting.formatMoney(salarySubsTeachers)).slice(0, -3)
+        );
+
+        wageSubsTeachers = salarySubsTeachers / 2080;
+        $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
+      }
+    });
+  }
+}
+
+//FUNCTION TO CONVERT SALARY TO WAGE
+function salaryConverter(id) {
+  if ($("#salary" + id).val() != "") {
+
+    var salary = accounting.unformat($("#salary" + id).val());
+    var wage = salary/2080;
+    $("#wage" + id).val(accounting.formatMoney(wage));
+  }
+}
+
+//FUNCTION TO CONVERT WAGE TO SALARY
+function wageConverter(id) {
+  if ($("#wage" + id).val() != "") {
+
+    var wage = accounting.unformat($("#wage" + id).val());
+    var salary = wage * 2080;
+    $("#salary" + id).val((accounting.formatMoney(salary)).slice(0, -3));
+  }
+}
+
+//FUNCTION TO CHECK FOR CHECKBOX
+function checkHealth() {
+  if ($("input[type='checkbox']").prop("checked") == false) {
+    $("input[name='costOfFTEmployee']").val(0);
+  } else {
+    $("input[name='costOfFTEmployee']").val(statesVarArray[0].health_insurance);
+  }
+
+  if ($("#checkboxFCC").prop("checked") == false) {
+    $("#costOfFTEmployeeFCC").val(0);
+  } else {
+    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
+  }
+}
+
+//FUNCTION TO CALCULATE TOTAL PERSONNEL COST
+function calcTotalPersonnelCost() {
+  //total admin staff wage
+
+  
+  
+  adminStaffTotalWage =
+    totalsalaryDirectors +
+    salaryAssistantDirectors +
+    salaryAdministrativeAssistants;
+  
+
+  //total teaching staff wage
+  teachingStaffTotalWage =
+    salaryLeadTeachers + salaryAssistantTeachers + salarySubsTeachers;
+ 
+
+  //total staff wage
+  staffTotalWage = adminStaffTotalWage + teachingStaffTotalWage;
+  
+
+  //total no of teaching staff
+  totalTeachingStaff = totalTeachers + noOfSubstituteTeachers;
+  
+
+  paidLeave = $("#paidLeave").val();
+  sickdays = $("#sickdays").val();
+
+  //sub cost for paid leave
+
+  var floaterWage = accounting.unformat($("#salarySubsTeachers").val());
+  console.log(floaterWage + "floater wage");
+  var floaterNo = $("#noOfSubstituteTeachers").val();
+
+  var floaterSalary = floaterWage/floaterNo;
+  console.log(floaterSalary+"floater sal");
+
+  subsCostForPaidLeave =
+    totalTeachingStaff *
+    paidLeave *
+    8 *
+    (floaterSalary / 2080);
+  
+
+  //sub cost for sick leave
+  subsCostForSickLeave =
+    totalTeachingStaff *
+    sickdays *
+    8 *
+    (floaterSalary / 2080);
+  
+
+  //total subs cost
+  subsCostForLeaveTotal = subsCostForSickLeave + subsCostForPaidLeave;
+  
+
+  //total staff wage
+  subTotalWages = staffTotalWage + subsCostForLeaveTotal;
+  
+
+  //CONST Mandatory benefits value
+  mandatoryBenefitsVal = 0.1065;
+  mandatoryBenefitsSalary = mandatoryBenefitsVal * subTotalWages;
+  
+
+  //Total staff
+  totalStaff =
+    totalTeachingStaff +
+    parseInt($("#noOfProgramDirectors").val()) +
+    parseInt($("#noOfAssistantDirectors").val()) +
+    parseInt($("#noOfAdministrativeAssistants").val());
+  
+
+  //Additional Benefits
+  additionalBenefits = totalStaff * statesVarArray[0].health_insurance;
+  
+
+  //Subtotal Personnel
+  personnelSubtotal =
+    subTotalWages + mandatoryBenefitsSalary + additionalBenefits;
+  
+}
+
+//FUNCTION TO CALCULATE TOTAL NONPERSONNEL COST
+function calcTotalNonPersonnelCost() {
+  //Additional expenses
+  if ($("input[name='deepCleaningCost']").val() == "") {
+    $("input[name='deepCleaningCost']").val(4);
+  }
+
+  if ($("#costPerCleaning").val() == "") {
+    $("#costPerCleaning").val(500);
+  }
+
+  //CONST cost per classroom
+  costPerClassroom = 720;
+
+  sanitationCost = costPerClassroom * classTotal;
+  
+  $("#sanitationCost").val(sanitationCost);
+
+  if ($("#miscCost").val() != "") {
+    miscCost = parseInt($("#miscCost").val());
+  } else {
+    $("#miscCost").val(0);
+  }
+
+  miscCost = miscCost;
+  //Total additional cleaning
+  totalAdditionalCleaning =
+    (parseInt($("input[name='deepCleaningCost']").val()) *
+      parseInt($("#costPerCleaning").val()) +
+      sanitationCost) *
+    12;
+  
+
+  //CONST Nonpersonnel expenses
+  
+
+  $.getJSON("json/child_care_center.json", function(data){
+
+    eduProgram = data[stateSelected].NP_Education_program_for_children_and_staff * childTotal;
+    console.log(eduProgram + " edu");
+
+    occupancy = data[stateSelected].NP_Occupancy * classTotal;
+    console.log(occupancy);
+
+    progAndAdmin = data[stateSelected].NP_Program_management_and_administration * childTotal;
+    console.log(progAndAdmin+" prog");
+
+
+  });
+
+  console.log(eduProgram + " eduprog")
+  
+
+  //Total Nonpersonnel Cost
+  nonpersonnelSubtotal =
+    totalAdditionalCleaning + eduProgram + occupancy + progAndAdmin;
+  
+}
+
 //FUNCTION TO CALCULATE INFANT COST PER CHILD
 function calcInfantsCost() {
   //infants cost
   infant_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  console.log(infant_adminPersonnel);
-
-  infantTeachers = infantChildren / statesVarArray[0].ratios_covid_infant;
-  console.log(infantTeachers);
-
+  
+  infantRatio = parseInt($("input[name='infantRatio']").val());
+  
+  infantTeachers = infantChildren / infantRatio;
+  
+  leadSalary = salaryLeadTeachers / noOfLeadTeachers;
+  assistantTeacherSalary = salaryAssistantTeachers / noOfAssistantTeachers;
+  
   infant_classPersonnel =
-    (statesVarArray[0].wages_bls_leadteacher +
-      (infantTeachers - 1) * statesVarArray[0].wages_bls_assistantteacher) /
+    (leadSalary +
+      (infantTeachers - 1) * assistantTeacherSalary) /
     infantChildren;
-  console.log(infant_classPersonnel);
+  
 
   infant_floaters = salarySubsTeachers / classTotal / infantChildren;
-  console.log(infant_floaters.toFixed(2));
+  
 
   benefitsPerChild =
     (mandatoryBenefitsSalary + additionalBenefits) / childTotal;
-  console.log(benefitsPerChild.toFixed(2));
+  
 
   infant_subs = subsCostForLeaveTotal / classTotal / infantChildren;
-  console.log(infant_subs.toFixed(2));
+  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  console.log(NP_ed_program);
+  
 
   infant_NP_occupancy = Math.round(occupancy / classTotal / infantChildren);
-  console.log(infant_NP_occupancy);
+  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  console.log(NP_admin);
+  
 
   infant_cleaning = totalAdditionalCleaning / classTotal / infantChildren;
-  console.log(infant_cleaning.toFixed(2));
+  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    console.log(miscCost + "This is misc");
+    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  console.log(op_reserve);
+  
 
   infant_cost =
     parseFloat(infant_adminPersonnel) +
@@ -3465,7 +772,7 @@ function calcInfantsCost() {
     parseInt(infant_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  console.log(infant_cost.toFixed(0));
+  
 
   $("#infantAnnualCost").html(accounting.formatMoney(infant_cost));
   $("#infantMonthlyCost").html(accounting.formatMoney(infant_cost / 12));
@@ -3476,58 +783,58 @@ function calcInfantsCost() {
 function calcToddlersCost() {
   //toddlers cost
   toddler_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  console.log(toddler_adminPersonnel + "admin personnel");
+  
 
   toddlerTeachers = 2;
 
   toddler_classPersonnel = (
-    (statesVarArray[0].wages_bls_leadteacher +
-      (toddlerTeachers - 1) * statesVarArray[0].wages_bls_assistantteacher) /
+    (leadSalary +
+      (toddlerTeachers - 1) * assistantTeacherSalary) /
     toddlerChildren
   ).toFixed(2);
-  console.log(toddler_classPersonnel);
+  
 
   toddler_floaters = (
     salarySubsTeachers /
     classTotal /
     toddlerChildren
   ).toFixed(2);
-  console.log(toddler_floaters);
+  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  console.log(benefitsPerChild);
+  
 
   toddler_subs = (subsCostForLeaveTotal / classTotal / toddlerChildren).toFixed(
     2
   );
-  console.log(toddler_subs);
+  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  console.log(NP_ed_program);
+ 
 
   toddler_NP_occupancy = Math.round(occupancy / classTotal / toddlerChildren);
-  console.log(toddler_NP_occupancy);
+  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  console.log(NP_admin);
+  
 
   toddler_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / toddlerChildren
   );
-  console.log(toddler_cleaning);
+  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    console.log(miscCost + "This is misc");
+    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  console.log(op_reserve);
+  
 
   toddler_cost =
     parseFloat(toddler_adminPersonnel) +
@@ -3541,7 +848,7 @@ function calcToddlersCost() {
     parseInt(toddler_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  console.log(toddler_cost.toFixed(0));
+  
 
   $("#toddlerAnnualCost").html(accounting.formatMoney(toddler_cost));
   $("#toddlerMonthlyCost").html(accounting.formatMoney(toddler_cost / 12));
@@ -3552,52 +859,51 @@ function calcToddlersCost() {
 function calcPre3Cost() {
   //pre3 cost
   pre3_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  console.log(toddler_adminPersonnel + "admin personnel");
-
+  
   pre3Teachers = pre3Children / statesVarArray[0].ratios_current_pre3;
 
   pre3_classPersonnel = (
-    (statesVarArray[0].wages_bls_leadteacher +
-      (pre3Teachers - 1) * statesVarArray[0].wages_bls_assistantteacher) /
+    (leadSalary +
+      (pre3Teachers - 1) * assistantTeacherSalary) /
     pre3Children
   ).toFixed(2);
-  console.log(pre3_classPersonnel);
+  
 
   pre3_floaters = (salarySubsTeachers / classTotal / pre3Children).toFixed(2);
-  console.log(pre3_floaters);
+  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  console.log(benefitsPerChild);
+  
 
   pre3_subs = (subsCostForLeaveTotal / classTotal / pre3Children).toFixed(2);
-  console.log(pre3_subs);
+  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  console.log(NP_ed_program);
+  
 
   pre3_NP_occupancy = Math.round(occupancy / classTotal / pre3Children);
-  console.log(pre3_NP_occupancy);
+  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  console.log(NP_admin);
+  
 
   pre3_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / pre3Children
   );
-  console.log(pre3_cleaning);
+  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    console.log(miscCost + "This is misc");
+    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  console.log(op_reserve);
+  
 
   pre3_cost =
     parseFloat(pre3_adminPersonnel) +
@@ -3611,7 +917,7 @@ function calcPre3Cost() {
     parseInt(pre3_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  console.log(pre3_cost.toFixed(0));
+  
 
   $("#pre3AnnualCost").html(accounting.formatMoney(pre3_cost));
   $("#pre3MonthlyCost").html(accounting.formatMoney(pre3_cost / 12));
@@ -3622,52 +928,52 @@ function calcPre3Cost() {
 function calcPre4Cost() {
   //pre4 cost
   pre4_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  console.log(pre4_adminPersonnel + "admin personnel");
+  
 
   pre4Teachers = pre4Children / statesVarArray[0].ratios_current_pre4;
 
   pre4_classPersonnel = (
-    (statesVarArray[0].wages_bls_leadteacher +
-      (pre4Teachers - 1) * statesVarArray[0].wages_bls_assistantteacher) /
+    (leadSalary +
+      (pre4Teachers - 1) * assistantTeacherSalary) /
     pre4Children
   ).toFixed(2);
-  console.log(pre4_classPersonnel);
+  
 
   pre4_floaters = (salarySubsTeachers / classTotal / pre4Children).toFixed(2);
-  console.log(pre4_floaters);
+  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  console.log(benefitsPerChild);
+  
 
   pre4_subs = (subsCostForLeaveTotal / classTotal / pre4Children).toFixed(2);
-  console.log(pre4_subs);
+  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  console.log(NP_ed_program);
+  
 
   pre4_NP_occupancy = Math.round(occupancy / classTotal / pre4Children);
-  console.log(pre4_NP_occupancy);
+  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  console.log(NP_admin);
+  
 
   pre4_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / pre4Children
   );
-  console.log(toddler_cleaning);
+  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    console.log(miscCost + "This is misc");
+    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  console.log(op_reserve);
+  
 
   pre4_cost =
     parseFloat(pre4_adminPersonnel) +
@@ -3681,7 +987,7 @@ function calcPre4Cost() {
     parseInt(pre4_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  console.log(pre4_cost.toFixed(0));
+  
 
   $("#pre4AnnualCost").html(accounting.formatMoney(pre4_cost));
   $("#pre4MonthlyCost").html(accounting.formatMoney(pre4_cost / 12));
@@ -3724,45 +1030,77 @@ function populateFCC() {
     $("#noOfPre4").val(2);
   }
 
-  console.log(salaryLevelFamilyCare);
+  if ($("#noOfProvider").val() == "") {
+    $("#noOfProvider").val(1);
+  }
+
+  if ($("#noOfAssistantTeachersFCC").val() == "") {
+    $("#noOfAssistantTeachersFCC").val(1);
+  }
+
+  
 
   if (salaryLevelFamilyCare == "Kindergarten") {
-    if ($("#noOfProvider").val() == "") {
-      $("#noOfProvider").val(1);
-    }
 
-    if ($("#noOfAssistantTeachersFCC").val() == "") {
-      $("#noOfAssistantTeachersFCC").val(1);
-    }
+    $.getJSON("json/child_care_center.json", function (data){
 
-    $("#salaryOfProvider").val(
-      $("#noOfProvider").val() * statesVarArray[0].wages_kg_leadteacher
-    );
+     salaryOfProvider =  $("#noOfProvider").val() * data[stateSelected].Kg_lead_teacher_salary;
+      $("#salaryOfProvider").val((accounting.formatMoney(salaryOfProvider)).slice(0,-3));
+      
 
-    $("#salaryOfAssistantTeachersFCC").val(
-      $("#noOfAssistantTeachersFCC").val() *
-        statesVarArray[0].wages_kg_assistantteacher
-    );
+      wageOfProvider = salaryOfProvider / 2080;
+      $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
-    $("#wageOfProvider").val(
-      (
-        ($("#noOfProvider").val() * statesVarArray[0].wages_kg_leadteacher) /
-        2080
-      ).toFixed(2)
-    );
+      salaryOfAssistantTeachersFCC =  $("#noOfAssistantTeachersFCC").val() * data[stateSelected].Kg_assistant_teacher_salary;
 
-    $("#wageOfAssistantTeachersFCC").val(
-      (
-        ($("#noOfAssistantTeachersFCC").val() *
-          statesVarArray[0].wages_kg_assistantteacher) /
-        2080
-      ).toFixed(2)
-    );
+      $("#salaryOfAssistantTeachersFCC").val((accounting.formatMoney(salaryOfAssistantTeachersFCC)).slice(0,-3));
+      
 
-    totalFTEmployeeFCC =
+      wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
+      $("#wageOfAssistantTeachersFCC").val(accounting.formatMoney(wageOfAssistantTeachersFCC));
+
+      wageFloaterFCC = data[stateSelected].Kg_floater_salary / 2080;
+
+    });
+
+    
+
+    
+  }
+
+  if (salaryLevelFamilyCare == "BLS") {
+
+    $.getJSON("json/child_care_center.json", function (data){
+
+     salaryOfProvider =  $("#noOfProvider").val() * data[stateSelected].bls_lead_teacher_salary;
+      $("#salaryOfProvider").val((accounting.formatMoney(salaryOfProvider)).slice(0,-3));
+      
+
+      wageOfProvider = salaryOfProvider / 2080;
+      $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
+
+      salaryOfAssistantTeachersFCC =  $("#noOfAssistantTeachersFCC").val() * data[stateSelected].bls_assistant_teacher_salary;
+
+      $("#salaryOfAssistantTeachersFCC").val((accounting.formatMoney(salaryOfAssistantTeachersFCC)).slice(0,-3));
+      
+
+      wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
+      $("#wageOfAssistantTeachersFCC").val(accounting.formatMoney(wageOfAssistantTeachersFCC));
+
+      wageFloaterFCC = data[stateSelected].bls_floater_salary / 2080;
+
+    });
+
+    
+
+    
+  }
+
+  
+
+  totalFTEmployeeFCC =
       parseInt($("#noOfProvider").val()) +
       parseInt($("#noOfAssistantTeachersFCC").val());
-  }
 
   $(".totalFTEmployee").html(totalFTEmployeeFCC);
 
@@ -3808,17 +1146,25 @@ function populateFCC() {
 }
 
 function calcTotalWagesAndBenefitsFCC() {
-  totalWagesFCC =
-    parseInt($("#salaryOfProvider").val()) +
-    parseInt($("#salaryOfAssistantTeachersFCC").val());
 
+  providerSalary = accounting.unformat($("#salaryOfProvider").val());
+  
+  assistantSalary = accounting.unformat($("#salaryOfAssistantTeachersFCC").val());
+
+  totalWagesFCC =
+  providerSalary +
+  assistantSalary;
+
+  console.log(totalWagesFCC) ; 
   mandatoryBenefitsFCC = (
     mandatoryBenefitsVal *
-    (totalWagesFCC - parseInt($("#salaryOfProvider").val()))
+    (totalWagesFCC - providerSalary)
   ).toFixed(0);
 
+  console.log(mandatoryBenefitsFCC);
+
   assistantTeacherUnitCostFCC = (
-    parseInt($("#salaryOfAssistantTeachersFCC").val()) /
+    assistantSalary /
     parseInt($("#noOfAssistantTeachersFCC").val())
   ).toFixed(0);
 
@@ -3830,13 +1176,19 @@ function calcTotalWagesAndBenefitsFCC() {
 
   paidLeaveCostFCC = Math.round(
     $("input[name='paidLeaveFCC']").val() *
-      (statesVarArray[0].wages_kg_floater / 2080) *
+      (wageFloaterFCC) *
       10
   );
 
   totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
   totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
-  totalHealthFCC = statesVarArray[0].health_insurance * totalFTEmployeeFCC;
+
+  $.getJSON("json/child_care_center.json", function (data){
+
+    healthInsuranceFCC = data[stateSelected].health_insurance;
+
+  });
+  totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
 
   discretionaryBenefits =
     totalSickDaysCostFCC + totalPaidLeaveCostFCC + totalHealthFCC;
@@ -3845,7 +1197,9 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt(totalWagesFCC) +
     parseInt(mandatoryBenefitsFCC) +
     parseInt(discretionaryBenefits);
-  console.log(totalWagesAndBenefitsFCC);
+
+    console.log(totalWagesAndBenefitsFCC);
+  
 
   //CONST VALUES
   np_adminFCC = 3725;
@@ -3869,7 +1223,7 @@ function calcTotalWagesAndBenefitsFCC() {
 
   costPerChildFCC = parseInt(totalExpensesFCC) / parseInt(childTotalFCC);
 
-  console.log(costPerChildFCC);
+  
 }
 
 function calcInfantFCC() {
@@ -3915,7 +1269,7 @@ function calcPre4FCC() {
 /**********SYSTEM COSTS**********/
 
 function populateSC() {
-  if (stateSelected == "AL") {
+  if (stateSelected == "Alabama") {
     if ($("#childCareFacilities").val() == "") {
       $("#childCareFacilities").val(statesVarArray[0].ctc_facilities);
     }
@@ -3965,7 +1319,7 @@ function calcFixedCost() {
 
   totalFixedCost =
     parseInt(total_ctc_fixedCost) + parseInt(total_fcc_fixedCost);
-  console.log(totalFixedCost);
+  
 
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
   $("#totalChildCareFixedCost").html(
@@ -3988,7 +1342,7 @@ function calcOpCost() {
       3
   );
 
-  console.log(avgCostPerChild);
+  
 
   opCostPercentage = ($("input[name='operatingCost']").val() / 100).toFixed(2);
 
