@@ -38,67 +38,81 @@
           <h2>Cost of Child Care During the Coronavirus Pandemic</h2>
         </div>
         <div class="col s12">
-          <p>Select your state from the drop-down menu below to populate the calculator with default data.</p>
-          <p>Next, select if you want to estimate the cost of child care pre-pandemic (Current Scenario), or the cost of child care meeting emergency child care regulations (COVID-19 Scenario).</p> 
-          <p>For details of the data assumptions and calculations, please see the methodological appendix.</p> 
+          <p>
+            Select your state from the drop-down menu below to populate the
+            calculator with default data.
+          </p>
+          <p>
+            Next, select if you want to estimate the cost of child care
+            pre-pandemic (Current Scenario), or the cost of child care meeting
+            emergency child care regulations (COVID-19 Scenario).
+          </p>
+          <p>
+            For details of the data assumptions and calculations, please see the
+            methodological appendix.
+          </p>
         </div>
       </div>
 
       <!-- dropdown options-->
       <div class="row">
         <div class="input-field col s4">
-          <select class="browser-default" onchange="getState();getRatio();getSalaryLevel();populateFCC();checkHealth();populateSC();" id="stateSelect">
+          <select
+            class="browser-default"
+            onchange="getState();getRatio();populateFCC();checkHealth();populateSC();"
+            id="stateSelect"
+          >
             <option value="" disabled selected>Select your state</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KN">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NW">New Mexico</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New_Hampshire">New Hampshire</option>
+            <option value="New_Jersey">New Jersey</option>
+            <option value="New_Mexico">New Mexico</option>
+            <option value="New_York">New York</option>
+            <option value="North_Carolina">North Carolina</option>
+            <option value="North_Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode_Island">Rhode Island</option>
+            <option value="South_Carolina">South Carolina</option>
+            <option value="South_Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West_Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
           </select>
         </div>
       </div>
@@ -159,7 +173,13 @@
         <div id="childCareCenter" class="col s12">
           <div class="col s12">
             <h5 class="left-align">Size of Center</h5>
-            <p>The ratio and group size data below are pre-populated based on the selected state and scenario but can also edit the data in each cell. Users should then enter the number of classrooms in their model program. The number of children will be automatically calculated. </p>
+            <p>
+              The ratio and group size data below are pre-populated based on the
+              selected state and scenario but can also edit the data in each
+              cell. Users should then enter the number of classrooms in their
+              model program. The number of children will be automatically
+              calculated.
+            </p>
             <hr />
           </div>
 
@@ -167,8 +187,6 @@
             <div id="stateAlert" style="display: none;">
               <span style="color: red;">Please select a state above.</span>
             </div>
-
-            
 
             <table class="centered">
               <thead>
@@ -185,12 +203,20 @@
                   <th>Infant</th>
                   <td>
                     <div class="input-field">
-                      <input name="infantRatio" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="infantRatio"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="infantGroupSize" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="infantGroupSize"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
@@ -212,12 +238,20 @@
                   <th>Toddler</th>
                   <td>
                     <div class="input-field">
-                      <input name="toddlerRatio" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="toddlerRatio"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="toddlerGroupSize" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="toddlerGroupSize"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
@@ -239,12 +273,20 @@
                   <th>3 year olds</th>
                   <td>
                     <div class="input-field">
-                      <input name="pre3Ratio" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="pre3Ratio"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="pre3GroupSize" type="text" onchange="calculateTotal()" />
+                      <input
+                        name="pre3GroupSize"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
@@ -266,12 +308,20 @@
                   <th>4 year olds</th>
                   <td>
                     <div class="input-field">
-                      <input name="pre4Ratio" type="text" onchange="calculateTotal()"  />
+                      <input
+                        name="pre4Ratio"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
                     <div class="input-field">
-                      <input name="pre4GroupSize" type="text" onchange="calculateTotal()"  />
+                      <input
+                        name="pre4GroupSize"
+                        type="text"
+                        onchange="calculateTotal()"
+                      />
                     </div>
                   </td>
                   <td>
@@ -306,7 +356,16 @@
             <div class="col s12">
               <h5 class="left-align">Salaries and Staffing</h5>
               <hr />
-              <p>Select one of two default salary levels. Selecting “Current Salaries” will use salary data that reflects the current wages paid to the early childhood workforce. Selecting “Higher salaries” will use salary data that aligns more closely with public school salaries. See the methodology for full details of salary data used in the calculator. Users can also edit the salary data and enter new values in either the Annual Salary column or the Hourly Wage column.</p>
+              <p>
+                Select one of two default salary levels. Selecting “Current
+                Salaries” will use salary data that reflects the current wages
+                paid to the early childhood workforce. Selecting “Higher
+                salaries” will use salary data that aligns more closely with
+                public school salaries. See the methodology for full details of
+                salary data used in the calculator. Users can also edit the
+                salary data and enter new values in either the Annual Salary
+                column or the Hourly Wage column.
+              </p>
             </div>
 
             <div class="row radio-row">
@@ -357,7 +416,14 @@
 
             <div class="col s12">
               <h5 class="left-align">Staffing</h5>
-              <p>The table below shows the staff positions and number of staff in each position in the model child care center. See the methodology for full details of these assumptions. Users can override the number of staff at each position, as well as the annual salary or hourly wage. Additional staff can be added by clicking the plus icon and entering the required details.</p>
+              <p>
+                The table below shows the staff positions and number of staff in
+                each position in the model child care center. See the
+                methodology for full details of these assumptions. Users can
+                override the number of staff at each position, as well as the
+                annual salary or hourly wage. Additional staff can be added by
+                clicking the plus icon and entering the required details.
+              </p>
             </div>
 
             <table>
@@ -387,8 +453,8 @@
                       <input
                         type="text"
                         id="salaryProgramDirectors"
-						name="salaryProgramDirectors"
-						onchange="salaryConverter('ProgramDirectors');setToUserAdded();"
+                        name="salaryProgramDirectors"
+                        onchange="salaryConverter('ProgramDirectors');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -399,7 +465,6 @@
                         id="wageProgramDirectors"
                         name="wageProgramDirectors"
                         onchange="wageConverter('ProgramDirectors');setToUserAdded();"
-						
                       />
                     </div>
                   </td>
@@ -421,8 +486,8 @@
                       <input
                         type="text"
                         name="salaryAssistantDirectors"
-						id="salaryAssistantDirectors"
-						onchange="salaryConverter('AssistantDirectors');setToUserAdded();"
+                        id="salaryAssistantDirectors"
+                        onchange="salaryConverter('AssistantDirectors');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -454,8 +519,8 @@
                       <input
                         type="text"
                         name="salaryAdministrativeAssistants"
-						id="salaryAdministrativeAssistants"
-						onchange="salaryConverter('AdministrativeAssistants');setToUserAdded();"
+                        id="salaryAdministrativeAssistants"
+                        onchange="salaryConverter('AdministrativeAssistants');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -487,8 +552,8 @@
                       <input
                         type="text"
                         name="salaryLeadTeachers"
-						id="salaryLeadTeachers"
-						onchange="salaryConverter('LeadTeachers');setToUserAdded();"
+                        id="salaryLeadTeachers"
+                        onchange="salaryConverter('LeadTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -497,8 +562,8 @@
                       <input
                         type="text"
                         name="wageLeadTeachers"
-						id="wageLeadTeachers"
-						onchange="wageConverter('LeadTeachers');setToUserAdded();"
+                        id="wageLeadTeachers"
+                        onchange="wageConverter('LeadTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -520,8 +585,8 @@
                       <input
                         type="text"
                         name="salaryAssistantTeachers"
-						id="salaryAssistantTeachers"
-						onchange="salaryConverter('AssistantTeachers');setToUserAdded();"
+                        id="salaryAssistantTeachers"
+                        onchange="salaryConverter('AssistantTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -530,8 +595,8 @@
                       <input
                         type="text"
                         name="wageAssistantTeachers"
-						id="wageAssistantTeachers"
-						onchange="wageConverter('AssistantTeachers');setToUserAdded();"
+                        id="wageAssistantTeachers"
+                        onchange="wageConverter('AssistantTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -553,8 +618,8 @@
                       <input
                         type="text"
                         name="salarySubsTeachers"
-						id="salarySubsTeachers"
-						onchange="salaryConverter('SubsTeachers');setToUserAdded();"
+                        id="salarySubsTeachers"
+                        onchange="salaryConverter('SubsTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -563,8 +628,8 @@
                       <input
                         type="text"
                         name="wageSubsTeachers"
-						id="wageSubsTeachers"
-						onchange="wageConverter('SubsTeachers');setToUserAdded();"
+                        id="wageSubsTeachers"
+                        onchange="wageConverter('SubsTeachers');setToUserAdded();"
                       />
                     </div>
                   </td>
@@ -596,7 +661,15 @@
               <div class="col s12">
                 <h5 class="left-align">Benefits</h5>
                 <hr />
-                <p>If your model program provides health insurance to employees, select the check box below. The calculator will use the annual expense in the “cost per full time employee” box, which is pre-populated with state data but can be overridden by the user. In addition, 10 paid sick days and 10 days paid leave are included by default for all staff. These values can be updated by the user. </p>
+                <p>
+                  If your model program provides health insurance to employees,
+                  select the check box below. The calculator will use the annual
+                  expense in the “cost per full time employee” box, which is
+                  pre-populated with state data but can be overridden by the
+                  user. In addition, 10 paid sick days and 10 days paid leave
+                  are included by default for all staff. These values can be
+                  updated by the user.
+                </p>
               </div>
             </div>
 
@@ -607,8 +680,8 @@
                     <input
                       type="checkbox"
                       class="filled-in"
-					  checked="checked"
-					  onchange="checkHealth()"
+                      checked="checked"
+                      onchange="checkHealth()"
                     />
                     <span>Health Insurance</span>
                   </label>
@@ -617,7 +690,7 @@
               <div class="col s6">
                 Cost per full time employee
                 <div class="input-field inline">
-                  <input type="text" name="costOfFTEmployee"/>
+                  <input type="text" name="costOfFTEmployee" />
                 </div>
               </div>
             </div>
@@ -626,17 +699,13 @@
               <div class="col s2">Sick Days</div>
               <div class="col s4">
                 <input type="text" name="sickdays" id="sickdays" />
-                
               </div>
             </div>
 
             <div class="row">
               <div class="col s2">Paid Leave</div>
               <div class="col s4">
-                
-                
-                  <input type="text" name="paidLeave" id="paidLeave" />
-                
+                <input type="text" name="paidLeave" id="paidLeave" />
               </div>
             </div>
 
@@ -696,7 +765,12 @@
               <div class="col s12">
                 Miscellaneous
                 <div class="input-field inline">
-                  <input type="text" name="miscCost" id="miscCost" onchange="calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"/>
+                  <input
+                    type="text"
+                    name="miscCost"
+                    id="miscCost"
+                    onchange="calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                  />
                 </div>
               </div>
             </div>
@@ -778,7 +852,9 @@
               <div class="col s12">
                 <h5 class="left-align">Enrollment</h5>
                 <hr />
-                <p>Users can override the default data for ratios and group size.</p>
+                <p>
+                  Users can override the default data for ratios and group size.
+                </p>
               </div>
             </div>
 
@@ -839,7 +915,17 @@
             <div class="col s12">
               <h5 class="left-align">Salaries and Staffing</h5>
               <hr />
-              <p>In this calculator, an annual salary is included for family child care providers/owners. Selecting “Current Salaries” will use salary data that reflects the current wages paid to the early childhood workforce. Selecting “Higher salaries” will use salary data that aligns more closely with public school salaries. See the methodology for full details of salary data used in the calculator. Users can also edit the salary data and enter new values in either the Annual Salary column or the Hourly Wage column. </p>
+              <p>
+                In this calculator, an annual salary is included for family
+                child care providers/owners. Selecting “Current Salaries” will
+                use salary data that reflects the current wages paid to the
+                early childhood workforce. Selecting “Higher salaries” will use
+                salary data that aligns more closely with public school
+                salaries. See the methodology for full details of salary data
+                used in the calculator. Users can also edit the salary data and
+                enter new values in either the Annual Salary column or the
+                Hourly Wage column.
+              </p>
             </div>
 
             <div class="row radio-row">
@@ -853,7 +939,6 @@
                       name="salary"
                       value="BLS"
                       type="radio"
-                      
                       onclick="getSalaryLevel();populateFCC();"
                     />
                     <span>Current Salaries</span>
@@ -891,7 +976,14 @@
 
             <div class="col s12">
               <h5 class="left-align">Staffing</h5>
-              <p>The table below shows the staff positions and number of staff in each position in the model family child care home. See the methodology for full details of these assumptions. Users can override the number of staff at each position, as well as the annual salary or hourly wage. Additional staff can be added by clicking the plus icon and entering the required details. </p>
+              <p>
+                The table below shows the staff positions and number of staff in
+                each position in the model family child care home. See the
+                methodology for full details of these assumptions. Users can
+                override the number of staff at each position, as well as the
+                annual salary or hourly wage. Additional staff can be added by
+                clicking the plus icon and entering the required details.
+              </p>
             </div>
 
             <table>
@@ -926,14 +1018,16 @@
                       />
                     </div>
                   </td>
-                  <td><div class="input-field">
-                    <input
-                      type="text"
-                      id="wageOfProvider"
-                      name="wageOfProvider"
-                      onchange="wageConverter('OfProvider');setToUserAdded();"
-                    />
-                  </div></td>
+                  <td>
+                    <div class="input-field">
+                      <input
+                        type="text"
+                        id="wageOfProvider"
+                        name="wageOfProvider"
+                        onchange="wageConverter('OfProvider');setToUserAdded();"
+                      />
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>Assistant teacher</td>
@@ -957,16 +1051,17 @@
                       />
                     </div>
                   </td>
-                  <td><div class="input-field">
-                    <input
-                      type="text"
-                      id="wageOfAssistantTeachersFCC"
-                      name="wageOfAssistantTeachersFCC"
-                      onchange="wageConverter('OfAssistantTeachersFCC');setToUserAdded();"
-                    />
-                  </div></td>
+                  <td>
+                    <div class="input-field">
+                      <input
+                        type="text"
+                        id="wageOfAssistantTeachersFCC"
+                        name="wageOfAssistantTeachersFCC"
+                        onchange="wageConverter('OfAssistantTeachersFCC');setToUserAdded();"
+                      />
+                    </div>
+                  </td>
                 </tr>
-                
               </tbody>
             </table>
 
@@ -992,7 +1087,15 @@
               <div class="col s12">
                 <h5 class="left-align">Benefits</h5>
                 <hr />
-                <p>If your model program provides health insurance to employees, select the check box below. The calculator will use the annual expense in the “cost per full time employee” box, which is pre-populated with state data but can be overridden by the user. In addition, 10 paid sick days and 10 days paid leave are included by default for all staff. These values can be updated by the user.</p>
+                <p>
+                  If your model program provides health insurance to employees,
+                  select the check box below. The calculator will use the annual
+                  expense in the “cost per full time employee” box, which is
+                  pre-populated with state data but can be overridden by the
+                  user. In addition, 10 paid sick days and 10 days paid leave
+                  are included by default for all staff. These values can be
+                  updated by the user.
+                </p>
               </div>
             </div>
 
@@ -1093,7 +1196,12 @@
               <div class="col s12">
                 Miscellaneous
                 <div class="input-field inline">
-                  <input type="text" name="miscCostFCC" id="miscCostFCC" onchange="populateFCC()"/>
+                  <input
+                    type="text"
+                    name="miscCostFCC"
+                    id="miscCostFCC"
+                    onchange="populateFCC()"
+                  />
                 </div>
               </div>
             </div>
@@ -1171,7 +1279,17 @@
         <div id="systems" class="col s12">
           <form action="">
             <div class="row">
-              <p>On this tab the cost per child results generated on the Child Care Center and Family Child Care Home tabs are used to estimate the cost to fund (1) the monthly fixed costs of a specified percentage of the providers in the state and (2) the full monthly operating cost of a specified percentage of child care slots in the state. Data on the number of child care centers and family child care homes in the selected state, and the capacity of those programs, is drawn from CAP’s child care deserts database but can also be updated by the user.  </p>
+              <p>
+                On this tab the cost per child results generated on the Child
+                Care Center and Family Child Care Home tabs are used to estimate
+                the cost to fund (1) the monthly fixed costs of a specified
+                percentage of the providers in the state and (2) the full
+                monthly operating cost of a specified percentage of child care
+                slots in the state. Data on the number of child care centers and
+                family child care homes in the selected state, and the capacity
+                of those programs, is drawn from CAP’s child care deserts
+                database but can also be updated by the user.
+              </p>
             </div>
 
             <div class="row">
@@ -1248,7 +1366,6 @@
                 Percent of providers fixed costs covered:
                 <div class="input-field inline">
                   <input type="text" name="fixedCost" />
-                  
                 </div>
               </div>
             </div>
@@ -1258,7 +1375,6 @@
                 Percent of capacity operating costs covered:
                 <div class="input-field inline">
                   <input type="text" name="operatingCost" />
-                  
                 </div>
               </div>
             </div>
