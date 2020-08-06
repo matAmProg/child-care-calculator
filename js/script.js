@@ -4,6 +4,16 @@ $(document).ready(function () {
   $("select").formSelect();
 });
 
+//onchange="getState();getRatio();populateFCC();checkHealth();populateStatewideCosts()"
+
+$(document).on("change", "select", function () {
+  getState();
+  getRatio();
+  checkHealth();
+  populateFCC();
+  populateSC();
+});
+
 /**********CHILD CARE CENTER**********/
 
 //GLOBAL VARIABLES
@@ -41,55 +51,17 @@ var salaryLevelFamilyCare,
   noOfLeadTeachers,
   noOfAssistantTeachers,
   noOfSubstituteTeachers,
-  totalTeachers  ;
+  totalTeachers,
+  costPerChildFCC,
+  wageFloaterFCC,
+  healthInsuranceFCC,
+  additionalBenefits,
+  pre3Teachers,
+  pre4Teachers;
 
-  var eduProgram = occupancy = progAndAdmin = 0;
+var eduProgram = (occupancy = progAndAdmin = 0);
 
-/**STATE VARIABLES ARRAY**/
 
-var statesVarArray = [
-  {
-    ratios_current_infant: 5,
-    groupsize_current_infant: 10,
-    ratios_current_toddler: 8,
-    groupsize_current_toddler: 16,
-    ratios_current_pre3: 11,
-    groupsize_current_pre3: 22,
-    ratios_current_pre4: 11,
-    groupsize_current_pre4: 22,
-    ratios_covid_infant: 5,
-    groupsize_covid_infant: 10,
-    ratios_covid_toddler: 8,
-    groupsize_covid_toddler: 11,
-    ratios_covid_pre3: 11,
-    groupsize_covid_pre3: 11,
-    ratios_covid_pre4: 11,
-    groupsize_covid_pre4: 11,
-    wages_bls_director: 46910.0,
-    wages_bls_assistantdirector: 37528.0,
-    wages_bls_adminassistant: 15080.0,
-    wages_bls_leadteacher: 24470.0,
-    wages_bls_assistantteacher: 20770.0,
-    wages_bls_floater: 15080.0,
-    wages_bls_mentalhealthprof: 41090.0,
-    wages_kg_director: 83710.0,
-    wages_kg_assistantdirector: 66968.0,
-    wages_kg_adminassistant: 25540.0,
-    wages_kg_leadteacher: 46190.0,
-    wages_kg_assistantteacher: 39206.0,
-    wages_kg_floater: 31200.0,
-    wages_kg_mentalhealthprof: 41090.0,
-    health_insurance: 4636.0,
-    sub_staff_leave: 4176.0,
-    sub_sick_leave: 4176.0,
-    sanitation_supplies: 2880.0,
-    cost_per_child: 20340.0,
-    ctc_facilities: 1643,
-    ctc_slots: 98597,
-    fcc_facilities: 866,
-    fcc_slots: 6928,
-  },
-];
 
 //FUNCTION TO GET STATE
 function getState() {
@@ -135,7 +107,6 @@ function getRatio() {
   populateSizeOfCenter(stateSelected);
   calculateTotal();
   getSalaryLevel();
-  
 }
 
 /**FUNCTION TO POPULATE SIZE OF CENTER RATIO AND GROUPSIZE FIELDS**/
@@ -274,7 +245,6 @@ function getSalaryLevel() {
   salaryLevelChildCare = childCareForm.elements["salary"].value;
 
   console.log(salaryLevelChildCare + " --> salaryLevelChildcare");
-  
 
   //POPULATING BASE VALUES FOR STAFF FIELD
   if ($("#noOfProgramDirectors").val() == "") {
@@ -323,16 +293,13 @@ function getSalaryLevel() {
 
   //TOTAL COST OF PERSONNEL & NON PERSONNEL
   totalPersonnel = personnelSubtotal + nonpersonnelSubtotal;
-  
 
   //reserve fund
   reserveFundPercentage = 0.05;
   reserveFund = reserveFundPercentage * totalPersonnel;
-  
 
   //Total expense
   totalExpense = totalPersonnel + reserveFund;
- 
 
   //Cost per child calculations
   calcInfantsCost();
@@ -354,10 +321,9 @@ function populateStaff(salaryLevel) {
       if (!isNaN(noOfProgramDirectors)) {
         totalsalaryDirectors =
           noOfProgramDirectors * data[stateSelected].bls_director_salary;
-          
 
         $("#salaryProgramDirectors").val(
-          (accounting.formatMoney(totalsalaryDirectors)).slice(0, -3)
+          accounting.formatMoney(totalsalaryDirectors).slice(0, -3)
         );
 
         wageProgramDirectors = totalsalaryDirectors / 2080;
@@ -371,7 +337,7 @@ function populateStaff(salaryLevel) {
           noOfAssistantDirectors *
           data[stateSelected].bls_assistant_director_salary;
         $("#salaryAssistantDirectors").val(
-          (accounting.formatMoney(salaryAssistantDirectors)).slice(0,-3)
+          accounting.formatMoney(salaryAssistantDirectors).slice(0, -3)
         );
 
         wageAssistantDirectors = salaryAssistantDirectors / 2080;
@@ -385,7 +351,7 @@ function populateStaff(salaryLevel) {
           noOfAdministrativeAssistants *
           data[stateSelected].bls_administrative_assistant_salary;
         $("#salaryAdministrativeAssistants").val(
-          (accounting.formatMoney(salaryAdministrativeAssistants)).slice(0, -3)
+          accounting.formatMoney(salaryAdministrativeAssistants).slice(0, -3)
         );
         wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
         $("#wageAdministrativeAssistants").val(
@@ -398,18 +364,19 @@ function populateStaff(salaryLevel) {
           noOfLeadTeachers * data[stateSelected].bls_lead_teacher_salary;
 
         $("#salaryLeadTeachers").val(
-          (accounting.formatMoney(salaryLeadTeachers)).slice(0, -3)
+          accounting.formatMoney(salaryLeadTeachers).slice(0, -3)
         );
-        
+
         wageLeadTeachers = salaryLeadTeachers / 2080;
         $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
       }
 
       if (!isNaN(noOfAssistantTeachers)) {
         salaryAssistantTeachers =
-          noOfAssistantTeachers * data[stateSelected].bls_assistant_teacher_salary;
+          noOfAssistantTeachers *
+          data[stateSelected].bls_assistant_teacher_salary;
         $("#salaryAssistantTeachers").val(
-          (accounting.formatMoney(salaryAssistantTeachers)).slice(0, -3)
+          accounting.formatMoney(salaryAssistantTeachers).slice(0, -3)
         );
 
         wageAssistantTeachers = salaryAssistantTeachers / 2080;
@@ -421,9 +388,9 @@ function populateStaff(salaryLevel) {
       totalTeachers =
         parseInt(noOfLeadTeachers) + parseInt(noOfAssistantTeachers);
 
-      console.log(totalTeachers + " --> total teachers");  
+      console.log(totalTeachers + " --> total teachers");
       var dailyCoverage = 0.2;
-      
+
       noOfSubstituteTeachers = totalTeachers * dailyCoverage;
 
       $("#noOfSubstituteTeachers").val(noOfSubstituteTeachers.toFixed(1));
@@ -432,25 +399,23 @@ function populateStaff(salaryLevel) {
         salarySubsTeachers =
           noOfSubstituteTeachers * data[stateSelected].bls_floater_salary;
         $("#salarySubsTeachers").val(
-          (accounting.formatMoney(salarySubsTeachers)).slice(0, -3)
+          accounting.formatMoney(salarySubsTeachers).slice(0, -3)
         );
 
-        wageSubsTeachers = salarySubsTeachers / 2080
+        wageSubsTeachers = salarySubsTeachers / 2080;
         $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
       }
     });
   }
-
 
   if (salaryLevel == "kg") {
     $.getJSON("json/child_care_center.json", function (data) {
       if (!isNaN(noOfProgramDirectors)) {
         totalsalaryDirectors =
           noOfProgramDirectors * data[stateSelected].Kg_director_salary;
-          
 
         $("#salaryProgramDirectors").val(
-          (accounting.formatMoney(totalsalaryDirectors)).slice(0, -3)
+          accounting.formatMoney(totalsalaryDirectors).slice(0, -3)
         );
 
         wageProgramDirectors = totalsalaryDirectors / 2080;
@@ -464,7 +429,7 @@ function populateStaff(salaryLevel) {
           noOfAssistantDirectors *
           data[stateSelected].Kg_assistant_director_salary;
         $("#salaryAssistantDirectors").val(
-          (accounting.formatMoney(salaryAssistantDirectors)).slice(0,-3)
+          accounting.formatMoney(salaryAssistantDirectors).slice(0, -3)
         );
 
         wageAssistantDirectors = salaryAssistantDirectors / 2080;
@@ -478,7 +443,7 @@ function populateStaff(salaryLevel) {
           noOfAdministrativeAssistants *
           data[stateSelected].Kg_administrative_assistant_salary;
         $("#salaryAdministrativeAssistants").val(
-          (accounting.formatMoney(salaryAdministrativeAssistants)).slice(0, -3)
+          accounting.formatMoney(salaryAdministrativeAssistants).slice(0, -3)
         );
         wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
         $("#wageAdministrativeAssistants").val(
@@ -491,18 +456,19 @@ function populateStaff(salaryLevel) {
           noOfLeadTeachers * data[stateSelected].Kg_lead_teacher_salary;
 
         $("#salaryLeadTeachers").val(
-          (accounting.formatMoney(salaryLeadTeachers)).slice(0, -3)
+          accounting.formatMoney(salaryLeadTeachers).slice(0, -3)
         );
-        
+
         wageLeadTeachers = salaryLeadTeachers / 2080;
         $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
       }
 
       if (!isNaN(noOfAssistantTeachers)) {
         salaryAssistantTeachers =
-          noOfAssistantTeachers * data[stateSelected].Kg_assistant_teacher_salary;
+          noOfAssistantTeachers *
+          data[stateSelected].Kg_assistant_teacher_salary;
         $("#salaryAssistantTeachers").val(
-          (accounting.formatMoney(salaryAssistantTeachers)).slice(0, -3)
+          accounting.formatMoney(salaryAssistantTeachers).slice(0, -3)
         );
 
         wageAssistantTeachers = salaryAssistantTeachers / 2080;
@@ -514,7 +480,7 @@ function populateStaff(salaryLevel) {
       totalTeachers =
         parseInt(noOfLeadTeachers) + parseInt(noOfAssistantTeachers);
       var dailyCoverage = 0.2;
-      
+
       noOfSubstituteTeachers = totalTeachers * dailyCoverage;
 
       $("#noOfSubstituteTeachers").val(noOfSubstituteTeachers.toFixed(1));
@@ -523,7 +489,7 @@ function populateStaff(salaryLevel) {
         salarySubsTeachers =
           noOfSubstituteTeachers * data[stateSelected].Kg_floater_salary;
         $("#salarySubsTeachers").val(
-          (accounting.formatMoney(salarySubsTeachers)).slice(0, -3)
+          accounting.formatMoney(salarySubsTeachers).slice(0, -3)
         );
 
         wageSubsTeachers = salarySubsTeachers / 2080;
@@ -536,9 +502,8 @@ function populateStaff(salaryLevel) {
 //FUNCTION TO CONVERT SALARY TO WAGE
 function salaryConverter(id) {
   if ($("#salary" + id).val() != "") {
-
     var salary = accounting.unformat($("#salary" + id).val());
-    var wage = salary/2080;
+    var wage = salary / 2080;
     $("#wage" + id).val(accounting.formatMoney(wage));
   }
 }
@@ -546,52 +511,49 @@ function salaryConverter(id) {
 //FUNCTION TO CONVERT WAGE TO SALARY
 function wageConverter(id) {
   if ($("#wage" + id).val() != "") {
-
     var wage = accounting.unformat($("#wage" + id).val());
     var salary = wage * 2080;
-    $("#salary" + id).val((accounting.formatMoney(salary)).slice(0, -3));
+    $("#salary" + id).val(accounting.formatMoney(salary).slice(0, -3));
   }
 }
 
 //FUNCTION TO CHECK FOR CHECKBOX
 function checkHealth() {
-  if ($("input[type='checkbox']").prop("checked") == false) {
-    $("input[name='costOfFTEmployee']").val(0);
-  } else {
-    $("input[name='costOfFTEmployee']").val(statesVarArray[0].health_insurance);
-  }
+  $.getJSON("json/child_care_center.json", function (data) {
+    if ($("input[type='checkbox']").prop("checked") == false) {
+      $("input[name='costOfFTEmployee']").val(0);
+    } else {
+      $("input[name='costOfFTEmployee']").val(
+        data[stateSelected].health_insurance
+      );
+    }
 
-  if ($("#checkboxFCC").prop("checked") == false) {
-    $("#costOfFTEmployeeFCC").val(0);
-  } else {
-    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
-  }
+    if ($("#checkboxFCC").prop("checked") == false) {
+      $("#costOfFTEmployeeFCC").val(0);
+    } else {
+      $("#costOfFTEmployeeFCC").val(data[stateSelected].health_insurance);
+    }
+  });
 }
 
 //FUNCTION TO CALCULATE TOTAL PERSONNEL COST
 function calcTotalPersonnelCost() {
   //total admin staff wage
 
-  
-  
   adminStaffTotalWage =
     totalsalaryDirectors +
     salaryAssistantDirectors +
     salaryAdministrativeAssistants;
-  
 
   //total teaching staff wage
   teachingStaffTotalWage =
     salaryLeadTeachers + salaryAssistantTeachers + salarySubsTeachers;
- 
 
   //total staff wage
   staffTotalWage = adminStaffTotalWage + teachingStaffTotalWage;
-  
 
   //total no of teaching staff
   totalTeachingStaff = totalTeachers + noOfSubstituteTeachers;
-  
 
   paidLeave = $("#paidLeave").val();
   sickdays = $("#sickdays").val();
@@ -602,36 +564,25 @@ function calcTotalPersonnelCost() {
   console.log(floaterWage + "floater wage");
   var floaterNo = $("#noOfSubstituteTeachers").val();
 
-  var floaterSalary = floaterWage/floaterNo;
-  console.log(floaterSalary+"floater sal");
+  var floaterSalary = floaterWage / floaterNo;
+  console.log(floaterSalary + "floater sal");
 
   subsCostForPaidLeave =
-    totalTeachingStaff *
-    paidLeave *
-    8 *
-    (floaterSalary / 2080);
-  
+    totalTeachingStaff * paidLeave * 8 * (floaterSalary / 2080);
 
   //sub cost for sick leave
   subsCostForSickLeave =
-    totalTeachingStaff *
-    sickdays *
-    8 *
-    (floaterSalary / 2080);
-  
+    totalTeachingStaff * sickdays * 8 * (floaterSalary / 2080);
 
   //total subs cost
   subsCostForLeaveTotal = subsCostForSickLeave + subsCostForPaidLeave;
-  
 
   //total staff wage
   subTotalWages = staffTotalWage + subsCostForLeaveTotal;
-  
 
   //CONST Mandatory benefits value
   mandatoryBenefitsVal = 0.1065;
   mandatoryBenefitsSalary = mandatoryBenefitsVal * subTotalWages;
-  
 
   //Total staff
   totalStaff =
@@ -639,16 +590,15 @@ function calcTotalPersonnelCost() {
     parseInt($("#noOfProgramDirectors").val()) +
     parseInt($("#noOfAssistantDirectors").val()) +
     parseInt($("#noOfAdministrativeAssistants").val());
-  
 
   //Additional Benefits
-  additionalBenefits = totalStaff * statesVarArray[0].health_insurance;
-  
+  $.getJSON("json/child_care_center.json", function (data) {
+    additionalBenefits = totalStaff * data[stateSelected].health_insurance;
+  });
 
   //Subtotal Personnel
   personnelSubtotal =
     subTotalWages + mandatoryBenefitsSalary + additionalBenefits;
-  
 }
 
 //FUNCTION TO CALCULATE TOTAL NONPERSONNEL COST
@@ -666,7 +616,7 @@ function calcTotalNonPersonnelCost() {
   costPerClassroom = 720;
 
   sanitationCost = costPerClassroom * classTotal;
-  
+
   $("#sanitationCost").val(sanitationCost);
 
   if ($("#miscCost").val() != "") {
@@ -682,83 +632,68 @@ function calcTotalNonPersonnelCost() {
       parseInt($("#costPerCleaning").val()) +
       sanitationCost) *
     12;
-  
 
   //CONST Nonpersonnel expenses
-  
 
-  $.getJSON("json/child_care_center.json", function(data){
-
-    eduProgram = data[stateSelected].NP_Education_program_for_children_and_staff * childTotal;
+  $.getJSON("json/child_care_center.json", function (data) {
+    eduProgram =
+      data[stateSelected].NP_Education_program_for_children_and_staff *
+      childTotal;
     console.log(eduProgram + " edu");
 
     occupancy = data[stateSelected].NP_Occupancy * classTotal;
     console.log(occupancy);
 
-    progAndAdmin = data[stateSelected].NP_Program_management_and_administration * childTotal;
-    console.log(progAndAdmin+" prog");
-
-
+    progAndAdmin =
+      data[stateSelected].NP_Program_management_and_administration * childTotal;
+    console.log(progAndAdmin + " prog");
   });
 
-  console.log(eduProgram + " eduprog")
-  
+  console.log(eduProgram + " eduprog");
 
   //Total Nonpersonnel Cost
   nonpersonnelSubtotal =
     totalAdditionalCleaning + eduProgram + occupancy + progAndAdmin;
-  
 }
 
 //FUNCTION TO CALCULATE INFANT COST PER CHILD
 function calcInfantsCost() {
   //infants cost
   infant_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  
+
   infantRatio = parseInt($("input[name='infantRatio']").val());
-  
+
   infantTeachers = infantChildren / infantRatio;
-  
+
   leadSalary = salaryLeadTeachers / noOfLeadTeachers;
   assistantTeacherSalary = salaryAssistantTeachers / noOfAssistantTeachers;
-  
+
   infant_classPersonnel =
-    (leadSalary +
-      (infantTeachers - 1) * assistantTeacherSalary) /
+    (leadSalary + (infantTeachers - 1) * assistantTeacherSalary) /
     infantChildren;
-  
 
   infant_floaters = salarySubsTeachers / classTotal / infantChildren;
-  
 
   benefitsPerChild =
     (mandatoryBenefitsSalary + additionalBenefits) / childTotal;
-  
 
   infant_subs = subsCostForLeaveTotal / classTotal / infantChildren;
-  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  
 
   infant_NP_occupancy = Math.round(occupancy / classTotal / infantChildren);
-  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  
 
   infant_cleaning = totalAdditionalCleaning / classTotal / infantChildren;
-  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  
 
   infant_cost =
     parseFloat(infant_adminPersonnel) +
@@ -772,7 +707,6 @@ function calcInfantsCost() {
     parseInt(infant_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  
 
   $("#infantAnnualCost").html(accounting.formatMoney(infant_cost));
   $("#infantMonthlyCost").html(accounting.formatMoney(infant_cost / 12));
@@ -783,58 +717,46 @@ function calcInfantsCost() {
 function calcToddlersCost() {
   //toddlers cost
   toddler_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  
 
   toddlerTeachers = 2;
 
   toddler_classPersonnel = (
-    (leadSalary +
-      (toddlerTeachers - 1) * assistantTeacherSalary) /
+    (leadSalary + (toddlerTeachers - 1) * assistantTeacherSalary) /
     toddlerChildren
   ).toFixed(2);
-  
 
   toddler_floaters = (
     salarySubsTeachers /
     classTotal /
     toddlerChildren
   ).toFixed(2);
-  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  
 
   toddler_subs = (subsCostForLeaveTotal / classTotal / toddlerChildren).toFixed(
     2
   );
-  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
- 
 
   toddler_NP_occupancy = Math.round(occupancy / classTotal / toddlerChildren);
-  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  
 
   toddler_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / toddlerChildren
   );
-  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  
 
   toddler_cost =
     parseFloat(toddler_adminPersonnel) +
@@ -848,7 +770,6 @@ function calcToddlersCost() {
     parseInt(toddler_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  
 
   $("#toddlerAnnualCost").html(accounting.formatMoney(toddler_cost));
   $("#toddlerMonthlyCost").html(accounting.formatMoney(toddler_cost / 12));
@@ -859,51 +780,42 @@ function calcToddlersCost() {
 function calcPre3Cost() {
   //pre3 cost
   pre3_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  
-  pre3Teachers = pre3Children / statesVarArray[0].ratios_current_pre3;
+
+  $.getJSON("json/child_care_center.json", function (data) {
+    pre3Teachers = pre3Children / data[stateSelected].ratios_current_pre3;
+  });
 
   pre3_classPersonnel = (
-    (leadSalary +
-      (pre3Teachers - 1) * assistantTeacherSalary) /
+    (leadSalary + (pre3Teachers - 1) * assistantTeacherSalary) /
     pre3Children
   ).toFixed(2);
-  
 
   pre3_floaters = (salarySubsTeachers / classTotal / pre3Children).toFixed(2);
-  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  
 
   pre3_subs = (subsCostForLeaveTotal / classTotal / pre3Children).toFixed(2);
-  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  
 
   pre3_NP_occupancy = Math.round(occupancy / classTotal / pre3Children);
-  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  
 
   pre3_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / pre3Children
   );
-  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  
 
   pre3_cost =
     parseFloat(pre3_adminPersonnel) +
@@ -917,7 +829,6 @@ function calcPre3Cost() {
     parseInt(pre3_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  
 
   $("#pre3AnnualCost").html(accounting.formatMoney(pre3_cost));
   $("#pre3MonthlyCost").html(accounting.formatMoney(pre3_cost / 12));
@@ -928,52 +839,42 @@ function calcPre3Cost() {
 function calcPre4Cost() {
   //pre4 cost
   pre4_adminPersonnel = (adminStaffTotalWage / childTotal).toFixed(2);
-  
 
-  pre4Teachers = pre4Children / statesVarArray[0].ratios_current_pre4;
+  $.getJSON("json/child_care_center.json", function (data) {
+    pre4Teachers = pre4Children / data[stateSelected].ratios_current_pre4;
+  });
 
   pre4_classPersonnel = (
-    (leadSalary +
-      (pre4Teachers - 1) * assistantTeacherSalary) /
+    (leadSalary + (pre4Teachers - 1) * assistantTeacherSalary) /
     pre4Children
   ).toFixed(2);
-  
 
   pre4_floaters = (salarySubsTeachers / classTotal / pre4Children).toFixed(2);
-  
 
   benefitsPerChild = (
     (mandatoryBenefitsSalary + additionalBenefits) /
     childTotal
   ).toFixed(2);
-  
 
   pre4_subs = (subsCostForLeaveTotal / classTotal / pre4Children).toFixed(2);
-  
 
   NP_ed_program = Math.round(eduProgram / childTotal);
-  
 
   pre4_NP_occupancy = Math.round(occupancy / classTotal / pre4Children);
-  
 
   NP_admin = Math.round(progAndAdmin / childTotal);
-  
 
   pre4_cleaning = Math.round(
     totalAdditionalCleaning / classTotal / pre4Children
   );
-  
 
   miscCost = $("#miscCost").val();
 
   if (miscCost != 0) {
     miscCost = miscCost / childTotal;
-    
   }
 
   op_reserve = Math.round(reserveFund / childTotal);
-  
 
   pre4_cost =
     parseFloat(pre4_adminPersonnel) +
@@ -987,7 +888,6 @@ function calcPre4Cost() {
     parseInt(pre4_cleaning) +
     parseInt(miscCost) +
     parseInt(op_reserve);
-  
 
   $("#pre4AnnualCost").html(accounting.formatMoney(pre4_cost));
   $("#pre4MonthlyCost").html(accounting.formatMoney(pre4_cost / 12));
@@ -1038,69 +938,77 @@ function populateFCC() {
     $("#noOfAssistantTeachersFCC").val(1);
   }
 
-  
+  console.log(salaryLevelFamilyCare);
+  console.log(stateSelected);
 
   if (salaryLevelFamilyCare == "Kindergarten") {
+    console.log("kg section is reached");
 
-    $.getJSON("json/child_care_center.json", function (data){
-
-     salaryOfProvider =  $("#noOfProvider").val() * data[stateSelected].Kg_lead_teacher_salary;
-      $("#salaryOfProvider").val((accounting.formatMoney(salaryOfProvider)).slice(0,-3));
-      
+    $.getJSON("json/family_care_center.json", function (data) {
+      salaryOfProvider =
+        parseInt($("#noOfProvider").val()) *
+        data[stateSelected].kg_lead_teacher_salary;
+      $("#salaryOfProvider").val(
+        accounting.formatMoney(salaryOfProvider).slice(0, -3)
+      );
 
       wageOfProvider = salaryOfProvider / 2080;
       $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
-      salaryOfAssistantTeachersFCC =  $("#noOfAssistantTeachersFCC").val() * data[stateSelected].Kg_assistant_teacher_salary;
+      salaryOfAssistantTeachersFCC =
+        $("#noOfAssistantTeachersFCC").val() *
+        data[stateSelected].kg_assistant_teacher_salary;
 
-      $("#salaryOfAssistantTeachersFCC").val((accounting.formatMoney(salaryOfAssistantTeachersFCC)).slice(0,-3));
-      
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting.formatMoney(salaryOfAssistantTeachersFCC).slice(0, -3)
+      );
 
       wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
-      $("#wageOfAssistantTeachersFCC").val(accounting.formatMoney(wageOfAssistantTeachersFCC));
-
-      wageFloaterFCC = data[stateSelected].Kg_floater_salary / 2080;
-
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(wageOfAssistantTeachersFCC)
+      );
     });
 
-    
-
-    
+    $.getJSON("json/child_care_center.json", function (data) {
+      wageFloaterFCC = data[stateSelected].Kg_floater_salary / 2080;
+    });
   }
 
   if (salaryLevelFamilyCare == "BLS") {
+    $.getJSON("json/family_care_center.json", function (data) {
+      salaryOfProvider =
+        $("#noOfProvider").val() * data[stateSelected].bls_lead_teacher_salary;
+      $("#salaryOfProvider").val(
+        accounting.formatMoney(salaryOfProvider).slice(0, -3)
+      );
 
-    $.getJSON("json/child_care_center.json", function (data){
-
-     salaryOfProvider =  $("#noOfProvider").val() * data[stateSelected].bls_lead_teacher_salary;
-      $("#salaryOfProvider").val((accounting.formatMoney(salaryOfProvider)).slice(0,-3));
-      
+      console.log(data[stateSelected].bls_lead_teacher_salary);
 
       wageOfProvider = salaryOfProvider / 2080;
       $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
-      salaryOfAssistantTeachersFCC =  $("#noOfAssistantTeachersFCC").val() * data[stateSelected].bls_assistant_teacher_salary;
+      salaryOfAssistantTeachersFCC =
+        $("#noOfAssistantTeachersFCC").val() *
+        data[stateSelected].bls_assistant_teacher_salary;
 
-      $("#salaryOfAssistantTeachersFCC").val((accounting.formatMoney(salaryOfAssistantTeachersFCC)).slice(0,-3));
-      
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting.formatMoney(salaryOfAssistantTeachersFCC).slice(0, -3)
+      );
 
       wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
-      $("#wageOfAssistantTeachersFCC").val(accounting.formatMoney(wageOfAssistantTeachersFCC));
-
-      wageFloaterFCC = data[stateSelected].bls_floater_salary / 2080;
-
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(wageOfAssistantTeachersFCC)
+      );
     });
 
-    
-
-    
+    $.getJSON("json/child_care_center.json", function (data) {
+      wageFloaterFCC = data[stateSelected].bls_floater_salary / 2080;
+    });
   }
 
-  
-
   totalFTEmployeeFCC =
-      parseInt($("#noOfProvider").val()) +
-      parseInt($("#noOfAssistantTeachersFCC").val());
+    parseInt($("#noOfProvider").val()) +
+    parseInt($("#noOfAssistantTeachersFCC").val());
 
   $(".totalFTEmployee").html(totalFTEmployeeFCC);
 
@@ -1113,7 +1021,9 @@ function populateFCC() {
   }
 
   if ($("#checkboxFCC").prop("checked") == true) {
-    $("#costOfFTEmployeeFCC").val(statesVarArray[0].health_insurance);
+    $.getJSON("json/family_care_center.json", function (data) {
+      $("#costOfFTEmployeeFCC").val(data[stateSelected].health_insurance);
+    });
   }
 
   if ($("input[name='deepCleaningCostFCC']").val() == "") {
@@ -1138,24 +1048,26 @@ function populateFCC() {
     parseInt($("#noOfPre3").val()) +
     parseInt($("#noOfPre4").val());
 
+  $(".childTotalFCC").html(childTotalFCC);
+
   calcTotalWagesAndBenefitsFCC();
   calcInfantFCC();
   calcToddlerFCC();
   calcPre3FCC();
   calcPre4FCC();
+  //populateStatewideCosts();
 }
 
 function calcTotalWagesAndBenefitsFCC() {
-
   providerSalary = accounting.unformat($("#salaryOfProvider").val());
-  
-  assistantSalary = accounting.unformat($("#salaryOfAssistantTeachersFCC").val());
 
-  totalWagesFCC =
-  providerSalary +
-  assistantSalary;
+  assistantSalary = accounting.unformat(
+    $("#salaryOfAssistantTeachersFCC").val()
+  );
 
-  console.log(totalWagesFCC) ; 
+  totalWagesFCC = providerSalary + assistantSalary;
+
+  console.log(totalWagesFCC);
   mandatoryBenefitsFCC = (
     mandatoryBenefitsVal *
     (totalWagesFCC - providerSalary)
@@ -1164,8 +1076,7 @@ function calcTotalWagesAndBenefitsFCC() {
   console.log(mandatoryBenefitsFCC);
 
   assistantTeacherUnitCostFCC = (
-    assistantSalary /
-    parseInt($("#noOfAssistantTeachersFCC").val())
+    assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val())
   ).toFixed(0);
 
   sickDaysCostFCC = Math.round(
@@ -1175,19 +1086,16 @@ function calcTotalWagesAndBenefitsFCC() {
   );
 
   paidLeaveCostFCC = Math.round(
-    $("input[name='paidLeaveFCC']").val() *
-      (wageFloaterFCC) *
-      10
+    $("input[name='paidLeaveFCC']").val() * wageFloaterFCC * 10
   );
 
   totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
   totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
 
-  $.getJSON("json/child_care_center.json", function (data){
-
+  $.getJSON("json/family_care_center.json", function (data) {
     healthInsuranceFCC = data[stateSelected].health_insurance;
-
   });
+
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
 
   discretionaryBenefits =
@@ -1198,8 +1106,7 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt(mandatoryBenefitsFCC) +
     parseInt(discretionaryBenefits);
 
-    console.log(totalWagesAndBenefitsFCC);
-  
+  console.log(totalWagesAndBenefitsFCC);
 
   //CONST VALUES
   np_adminFCC = 3725;
@@ -1222,8 +1129,6 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt(totalWagesAndBenefitsFCC) + parseInt(totalOtherExpensesFCC);
 
   costPerChildFCC = parseInt(totalExpensesFCC) / parseInt(childTotalFCC);
-
-  
 }
 
 function calcInfantFCC() {
@@ -1269,31 +1174,19 @@ function calcPre4FCC() {
 /**********SYSTEM COSTS**********/
 
 function populateSC() {
-  if (stateSelected == "Alabama") {
-    if ($("#childCareFacilities").val() == "") {
-      $("#childCareFacilities").val(statesVarArray[0].ctc_facilities);
-    }
+  $.getJSON("json/system_costs.json", function (data) {
+    $("#childCareFacilities").val(data[stateSelected].centers_programs);
 
-    if ($("#childCareSlots").val() == "") {
-      $("#childCareSlots").val(statesVarArray[0].ctc_slots);
-    }
+    $("#childCareSlots").val(data[stateSelected].centers_slots);
 
-    if ($("#familyHomeFacilities").val() == "") {
-      $("#familyHomeFacilities").val(statesVarArray[0].fcc_facilities);
-    }
+    $("#familyHomeFacilities").val(data[stateSelected].FCC_programs);
 
-    if ($("#familyHomeSlots").val() == "") {
-      $("#familyHomeSlots").val(statesVarArray[0].fcc_slots);
-    }
-  }
+    $("#familyHomeSlots").val(data[stateSelected].FCC_slots);
 
-  if ($("input[name='fixedCost']").val() == "") {
     $("input[name='fixedCost']").val(40);
-  }
 
-  if ($("input[name='operatingCost']").val() == "") {
     $("input[name='operatingCost']").val(60);
-  }
+  });
 
   calcFixedCost();
   calcOpCost();
@@ -1319,7 +1212,6 @@ function calcFixedCost() {
 
   totalFixedCost =
     parseInt(total_ctc_fixedCost) + parseInt(total_fcc_fixedCost);
-  
 
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
   $("#totalChildCareFixedCost").html(
@@ -1341,8 +1233,6 @@ function calcOpCost() {
       parseInt(preMonthly)) /
       3
   );
-
-  
 
   opCostPercentage = ($("input[name='operatingCost']").val() / 100).toFixed(2);
 
