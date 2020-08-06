@@ -41,7 +41,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Alaska": {
       "pre_covid_infant_groupsize": 10,
@@ -85,7 +84,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Arizona": {
       "pre_covid_infant_groupsize": 10,
@@ -129,7 +127,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Arkansas": {
       "pre_covid_infant_groupsize": 12,
@@ -173,7 +170,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "California": {
       "pre_covid_infant_groupsize": 12,
@@ -217,7 +213,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Colorado": {
       "pre_covid_infant_groupsize": 10,
@@ -261,7 +256,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Connecticut": {
       "pre_covid_infant_groupsize": 8,
@@ -305,7 +299,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Delaware": {
       "pre_covid_infant_groupsize": 8,
@@ -349,7 +342,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "District_of_Columbia": {
       "pre_covid_infant_groupsize": 8,
@@ -393,7 +385,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Florida": {
       "pre_covid_infant_groupsize": 12,
@@ -437,7 +428,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Georgia": {
       "pre_covid_infant_groupsize": 12,
@@ -481,7 +471,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Hawaii": {
       "pre_covid_infant_groupsize": 6,
@@ -525,7 +514,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Idaho": {
       "pre_covid_infant_groupsize": 15,
@@ -569,7 +557,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Illinois": {
       "pre_covid_infant_groupsize": 12,
@@ -613,7 +600,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Indiana": {
       "pre_covid_infant_groupsize": 8,
@@ -657,7 +643,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Iowa": {
       "pre_covid_infant_groupsize": 8,
@@ -701,7 +686,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Kansas": {
       "pre_covid_infant_groupsize": 9,
@@ -745,7 +729,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Kentucky": {
       "pre_covid_infant_groupsize": 10,
@@ -789,7 +772,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Louisiana": {
       "pre_covid_infant_groupsize": 12,
@@ -833,7 +815,6 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Maine": {
       "pre_covid_infant_groupsize": 8,
@@ -877,17 +858,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Maryland": {
       "pre_covid_infant_groupsize": 6,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 6,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 3,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 6,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -921,17 +901,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Massachusetts": {
       "pre_covid_infant_groupsize": 6,
       "pre_covid_toddler_groupsize": 8,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 6,
-      "pre_covid_toddler_ratio": 8,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 3,
+      "pre_covid_toddler_ratio": 4,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 6,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 20,
@@ -965,17 +944,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Michigan": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 10,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1009,17 +987,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Minnesota": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 14,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 14,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 7,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -1053,17 +1030,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Mississippi": {
       "pre_covid_infant_groupsize": 10,
       "pre_covid_toddler_groupsize": 10,
       "pre_covid_pre3_groupsize": 14,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 10,
-      "pre_covid_toddler_ratio": 10,
+      "pre_covid_infant_ratio": 5,
+      "pre_covid_toddler_ratio": 9,
       "pre_covid_pre3_ratio": 14,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_pre4_ratio": 16,
       "covid_infant_groupsize": 10,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 14,
@@ -1097,17 +1073,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Missouri": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 16,
       "covid_pre3_groupsize": 20,
@@ -1141,17 +1116,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Montana": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1185,17 +1159,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Nebraska": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1229,17 +1202,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Nevada": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 18,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 26,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 18,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 26,
+      "pre_covid_infant_ratio": 6,
+      "pre_covid_toddler_ratio": 9,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 13,
       "covid_infant_groupsize": 12,
       "covid_toddler_groupsize": 18,
       "covid_pre3_groupsize": 24,
@@ -1273,17 +1245,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-   
    },
    "New_Hampshire": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 18,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 18,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 8,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 8,
@@ -1317,17 +1288,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "New_Jersey": {
       "pre_covid_infant_groupsize": 20,
       "pre_covid_toddler_groupsize": 20,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 20,
-      "pre_covid_toddler_ratio": 20,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -1361,17 +1331,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "New_Mexico": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 6,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -1405,17 +1374,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "New_York": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 18,
       "pre_covid_pre4_groupsize": 21,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 18,
-      "pre_covid_pre4_ratio": 21,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 5,
+      "pre_covid_pre3_ratio": 7,
+      "pre_covid_pre4_ratio": 8,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1449,17 +1417,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "North_Carolina": {
       "pre_covid_infant_groupsize": 10,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 25,
       "pre_covid_pre4_groupsize": 25,
-      "pre_covid_infant_ratio": 10,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 25,
-      "pre_covid_pre4_ratio": 25,
+      "pre_covid_infant_ratio": 5,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 15,
+      "pre_covid_pre4_ratio": 20,
       "covid_infant_groupsize": 10,
       "covid_toddler_groupsize": 12,
       "covid_pre3_groupsize": 25,
@@ -1493,17 +1460,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "North_Dakota": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 10,
       "pre_covid_pre3_groupsize": 14,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 10,
-      "pre_covid_pre3_ratio": 14,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 5,
+      "pre_covid_pre3_ratio": 7,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 8,
@@ -1537,17 +1503,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Ohio": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 28,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 28,
+      "pre_covid_infant_ratio": 6,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 14,
       "covid_infant_groupsize": 6,
       "covid_toddler_groupsize": 6,
       "covid_pre3_groupsize": 9,
@@ -1581,17 +1546,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Oklahoma": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 30,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 30,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 15,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1625,17 +1589,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Oregon": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 10,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 10,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 5,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1669,17 +1632,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Pennsylvania": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 12,
       "covid_pre3_groupsize": 20,
@@ -1713,17 +1675,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Rhode_Island": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 18,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 18,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 9,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1757,17 +1718,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "South_Carolina": {
       "pre_covid_infant_groupsize": 10,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 34,
-      "pre_covid_infant_ratio": 10,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 34,
+      "pre_covid_infant_ratio": 5,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 17,
       "covid_infant_groupsize": 10,
       "covid_toddler_groupsize": 16,
       "covid_pre3_groupsize": 24,
@@ -1801,17 +1761,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "South_Dakota": {
       "pre_covid_infant_groupsize": 20,
       "pre_covid_toddler_groupsize": 20,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 20,
-      "pre_covid_toddler_ratio": 20,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 5,
+      "pre_covid_toddler_ratio": 5,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 20,
       "covid_toddler_groupsize": 20,
       "covid_pre3_groupsize": 20,
@@ -1845,17 +1804,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Tennessee": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 12,
       "pre_covid_pre3_groupsize": 18,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 12,
-      "pre_covid_pre3_ratio": 18,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 6,
+      "pre_covid_pre3_ratio": 9,
+      "pre_covid_pre4_ratio": 13,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 10,
@@ -1889,17 +1847,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Texas": {
       "pre_covid_infant_groupsize": 10,
       "pre_covid_toddler_groupsize": 18,
       "pre_covid_pre3_groupsize": 30,
       "pre_covid_pre4_groupsize": 35,
-      "pre_covid_infant_ratio": 10,
-      "pre_covid_toddler_ratio": 18,
-      "pre_covid_pre3_ratio": 30,
-      "pre_covid_pre4_ratio": 35,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 9,
+      "pre_covid_pre3_ratio": 15,
+      "pre_covid_pre4_ratio": 18,
       "covid_infant_groupsize": 10,
       "covid_toddler_groupsize": 18,
       "covid_pre3_groupsize": 30,
@@ -1933,17 +1890,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "Utah": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 14,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 30,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 14,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 30,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 7,
+      "pre_covid_pre3_ratio": 12,
+      "pre_covid_pre4_ratio": 15,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 14,
       "covid_pre3_groupsize": 20,
@@ -1977,17 +1933,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Vermont": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 10,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 10,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 5,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 10,
       "covid_pre3_groupsize": 20,
@@ -2021,17 +1976,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Virginia": {
       "pre_covid_infant_groupsize": 12,
       "pre_covid_toddler_groupsize": 30,
       "pre_covid_pre3_groupsize": 30,
       "pre_covid_pre4_groupsize": 30,
-      "pre_covid_infant_ratio": 12,
-      "pre_covid_toddler_ratio": 30,
-      "pre_covid_pre3_ratio": 30,
-      "pre_covid_pre4_ratio": 30,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -2065,17 +2019,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Washington": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 14,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 20,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 14,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 20,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 7,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 10,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -2109,17 +2062,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
    },
    "West_Virginia": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 16,
       "covid_pre3_groupsize": 20,
@@ -2153,17 +2105,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Wisconsin": {
       "pre_covid_infant_groupsize": 8,
       "pre_covid_toddler_groupsize": 16,
       "pre_covid_pre3_groupsize": 20,
       "pre_covid_pre4_groupsize": 24,
-      "pre_covid_infant_ratio": 8,
-      "pre_covid_toddler_ratio": 16,
-      "pre_covid_pre3_ratio": 20,
-      "pre_covid_pre4_ratio": 24,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 13,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 16,
       "covid_pre3_groupsize": 20,
@@ -2197,17 +2148,16 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-      
    },
    "Wyoming": {
       "pre_covid_infant_groupsize": 10,
       "pre_covid_toddler_groupsize": 18,
       "pre_covid_pre3_groupsize": 24,
       "pre_covid_pre4_groupsize": 30,
-      "pre_covid_infant_ratio": 10,
-      "pre_covid_toddler_ratio": 18,
-      "pre_covid_pre3_ratio": 24,
-      "pre_covid_pre4_ratio": 30,
+      "pre_covid_infant_ratio": 4,
+      "pre_covid_toddler_ratio": 8,
+      "pre_covid_pre3_ratio": 10,
+      "pre_covid_pre4_ratio": 12,
       "covid_infant_groupsize": 8,
       "covid_toddler_groupsize": 8,
       "covid_pre3_groupsize": 9,
@@ -2241,50 +2191,5 @@
       "paid_leave": 10,
       "covid_sanitation_cost_per_classroom_per_month": 720,
       "covid_sanitation_cost_per_cleaning": 500
-     
-   },
-   "": {
-      "pre_covid_infant_groupsize": null,
-      "pre_covid_toddler_groupsize": null,
-      "pre_covid_pre3_groupsize": null,
-      "pre_covid_pre4_groupsize": null,
-      "pre_covid_infant_ratio": null,
-      "pre_covid_toddler_ratio": null,
-      "pre_covid_pre3_ratio": null,
-      "pre_covid_pre4_ratio": null,
-      "covid_infant_groupsize": null,
-      "covid_toddler_groupsize": null,
-      "covid_pre3_groupsize": null,
-      "covid_pre4_groupsize": null,
-      "covid_infant_ratio": null,
-      "covid_toddler_ratio": null,
-      "covid_pre3_ratio": null,
-      "covid_pre4_ratio": null,
-      "bls_director_salary": null,
-      "bls_assistant_director_salary": null,
-      "bls_administrative_assistant_salary": null,
-      "bls_lead_teacher_salary": null,
-      "bls_assistant_teacher_salary": null,
-      "bls_floater_salary": null,
-      "bls_mental_health_professional": null,
-      "Kg_director_salary": null,
-      "Kg_assistant_director_salary": null,
-      "Kg_lead_teacher_salary": null,
-      "Kg_assistant_teacher_salary": null,
-      "Kg_administrative_assistant_salary": null,
-      "Kg_floater_salary": null,
-      "Kg_mental_health_professional": null,
-      "mandatory_benefits_%": null,
-      "health_insurance": null,
-      "NP_Education_program_for_children_and_staff": null,
-      "NP_Occupancy": null,
-      "NP_Program_management_and_administration": null,
-      "monthly_fixed_cost": null,
-      "contribution_to_operating_reserve_fund_%": null,
-      "sick_days": null,
-      "paid_leave": null,
-      "covid_sanitation_cost_per_classroom_per_month": null,
-      "covid_sanitation_cost_per_cleaning": null
-      
    }
 }
