@@ -13,6 +13,8 @@
       content="width=device-width, initial-scale=1, maximum-scale=1.0"
     />
     <title>Child care calculator</title>
+
+    <!---Loading CSS files-->
     <link rel="icon" type="image/png" href="img/capFavicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -23,15 +25,23 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
-  </head>
 
-  <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Loading JS files-->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      async
+      defer
+    ></script>
     <!-- <script type="text/javascript" src="js/jquery.waypoints.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/accounting.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+      async
+      defer
+    ></script>
+    <script type="text/javascript" src="js/accounting.js" async defer></script>
+    <script type="text/javascript" src="js/script.js" async defer></script>
+  </head>
+  <body>
     <div class="container">
       <div class="row">
         <div class="col s12">
@@ -54,10 +64,14 @@
         </div>
       </div>
 
-      <!-- dropdown options-->
+      <!--Select States Dropdown-->
       <div class="row">
         <div class="input-field col s4">
-          <select class="browser-default" id="stateSelect">
+          <select
+            class="browser-default"
+            id="stateSelect"
+            onchange="getState();getRatio();checkState();populateSizeOfCenter();getSalaryLevelCC();populateBenefits();populateFCC();populateSC();"
+          >
             <option value="" disabled selected>Select your state</option>
             <option value="Alabama">Alabama</option>
             <option value="Alaska">Alaska</option>
@@ -113,6 +127,7 @@
         </div>
       </div>
 
+      <!--Select Ratios-->
       <div class="row radio-row">
         <div class="col s2">
           <p>Ratios</p>
@@ -126,7 +141,7 @@
                 value="covid"
                 type="radio"
                 checked
-                onclick="getRatio()"
+                onclick="getRatio();checkState();populateSizeOfCenter();getSalaryLevelCC();populateFCC();"
               />
               <span>COVID Scenario</span>
             </label>
@@ -137,15 +152,20 @@
             <label>
               <input
                 name="ratios"
-                id="current"
-                value="current"
+                id="precovid"
+                value="precovid"
                 type="radio"
-                onclick="getRatio()"
+                onclick="getRatio();checkState();populateSizeOfCenter();getSalaryLevelCC();populateFCC();"
               />
               <span>Pre-COVID Scenario</span>
             </label>
           </p>
         </div>
+      </div>
+
+      <!--Alert to select state-->
+      <div id="stateAlert" class="row" style="display: none;">
+        <span style="color: red;">Please select a state above.</span>
       </div>
 
       <!--Tabs Header-->
@@ -165,10 +185,12 @@
 
       <!--Tabs Content-->
       <div class="row">
-        <!--------------Child Care Center Content------------------>
+        <!--Child Care Center Content-->
+
         <div id="childCareCenter" class="col s12">
           <div class="col s12">
             <h5 class="left-align">Size of Center</h5>
+            <hr />
             <p>
               The ratio and group size data below are pre-populated based on the
               selected state and scenario but can also edit the data in each
@@ -176,601 +198,589 @@
               model program. The number of children will be automatically
               calculated.
             </p>
-            <hr />
           </div>
 
-          <form action="" id="childCareForm">
-            <div id="stateAlert" style="display: none;">
-              <span style="color: red;">Please select a state above.</span>
+          <table class="centered">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Ratios</th>
+                <th>Group Size</th>
+                <th>Number of classrooms</th>
+                <th>Number of children</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th>Infant</th>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="infantRatio"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="infantGroupSize"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="infantClassrooms"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input name="infantChildren" type="number" disabled />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th>Toddler</th>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="toddlerRatio"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="toddlerGroupSize"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="toddlerClassrooms"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input name="toddlerChildren" type="number" disabled />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th>3 year olds</th>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre3Ratio"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre3GroupSize"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre3Classrooms"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input name="pre3Children" type="number" disabled />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th>4 year olds</th>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre4Ratio"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre4GroupSize"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      name="pre4Classrooms"
+                      type="number"
+                      onchange="calcTotalChildren()"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input name="pre4Children" type="number" disabled />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th class="total">Total</th>
+                <td></td>
+                <td></td>
+                <td>
+                  <div id="classTotal"></div>
+                </td>
+                <td>
+                  <div id="childTotal"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="col s12">
+            <h5 class="left-align">Salaries and Staffing</h5>
+            <hr />
+            <p>
+              Select one of two default salary levels. Selecting “Current
+              Salaries” will use salary data that reflects the current wages
+              paid to the early childhood workforce. Selecting “Higher salaries”
+              will use salary data that aligns more closely with public school
+              salaries. See the methodology for full details of salary data used
+              in the calculator. Users can also edit the salary data and enter
+              new values in either the Annual Salary column or the Hourly Wage
+              column.
+            </p>
+          </div>
+
+          <div class="row radio-row">
+            <div class="col s2">
+              <p>Salary level</p>
             </div>
+            <div class="col s3">
+              <p>
+                <label>
+                  <input
+                    name="salary"
+                    value="bls"
+                    type="radio"
+                    checked
+                    onclick="getSalaryLevelCC()"
+                  />
+                  <span>Current Salaries</span>
+                </label>
+              </p>
+            </div>
+            <div class="col s4">
+              <p>
+                <label>
+                  <input
+                    name="salary"
+                    value="kg"
+                    type="radio"
+                    onclick="getSalaryLevelCC()"
+                  />
+                  <span>Higher Salaries</span>
+                </label>
+              </p>
+            </div>
+          </div>
 
-            <table class="centered">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Ratios</th>
-                  <th>Group Size</th>
-                  <th>Number of classrooms</th>
-                  <th>Number of children</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>Infant</th>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="infantRatio"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="infantGroupSize"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="infantClassrooms"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input name="infantChildren" type="text" disabled />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Toddler</th>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="toddlerRatio"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="toddlerGroupSize"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="toddlerClassrooms"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input name="toddlerChildren" type="text" disabled />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>3 year olds</th>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre3Ratio"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre3GroupSize"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre3Classrooms"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input name="pre3Children" type="text" disabled />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>4 year olds</th>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre4Ratio"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre4GroupSize"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        name="pre4Classrooms"
-                        type="text"
-                        onchange="calculateTotal()"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input name="pre4Children" type="text" disabled />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="total">Total</th>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <div id="classTotal"></div>
-                  </td>
-                  <td>
-                    <div id="childTotal"></div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col s12">
+            <h5 class="left-align">Staffing</h5>
+            <p>
+              The table below shows the staff positions and number of staff in
+              each position in the model child care center. See the methodology
+              for full details of these assumptions. Users can override the
+              number of staff at each position, as well as the annual salary or
+              hourly wage. Additional staff can be added by clicking the plus
+              icon and entering the required details.
+            </p>
+          </div>
 
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>#</th>
+                <th>Salary</th>
+                <th>Hourly Wage</th>
+              </tr>
+            </thead>
+            <tbody id="dynamicInput">
+              <tr>
+                <td>Program Director</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfProgramDirectors"
+                      id="noOfProgramDirectors"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="salaryProgramDirectors"
+                      name="salaryProgramDirectors"
+                      onchange="salaryConverter('ProgramDirectors');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="wageProgramDirectors"
+                      name="wageProgramDirectors"
+                      onchange="wageConverter('ProgramDirectors');"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Assistant Director</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfAssistantDirectors"
+                      id="noOfAssistantDirectors"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="salaryAssistantDirectors"
+                      id="salaryAssistantDirectors"
+                      onchange="salaryConverter('AssistantDirectors');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="wageAssistantDirectors"
+                      id="wageAssistantDirectors"
+                      onchange="wageConverter('AssistantDirectors');"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Administrative Assistant</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfAdministrativeAssistants"
+                      id="noOfAdministrativeAssistants"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="salaryAdministrativeAssistants"
+                      id="salaryAdministrativeAssistants"
+                      onchange="salaryConverter('AdministrativeAssistants');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="wageAdministrativeAssistants"
+                      id="wageAdministrativeAssistants"
+                      onchange="wageConverter('AdministrativeAssistants');"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Lead Teacher</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfLeadTeachers"
+                      id="noOfLeadTeachers"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="salaryLeadTeachers"
+                      id="salaryLeadTeachers"
+                      onchange="salaryConverter('LeadTeachers');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="wageLeadTeachers"
+                      id="wageLeadTeachers"
+                      onchange="wageConverter('LeadTeachers');"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Assistant Teacher</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfAssistantTeachers"
+                      id="noOfAssistantTeachers"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="salaryAssistantTeachers"
+                      id="salaryAssistantTeachers"
+                      onchange="salaryConverter('AssistantTeachers');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="wageAssistantTeachers"
+                      id="wageAssistantTeachers"
+                      onchange="wageConverter('AssistantTeachers');"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Floater</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfSubstituteTeachers"
+                      id="noOfSubstituteTeachers"
+                      onchange="getSalaryLevel();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="salarySubsTeachers"
+                      id="salarySubsTeachers"
+                      onchange="salaryConverter('SubsTeachers');"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="wageSubsTeachers"
+                      id="wageSubsTeachers"
+                      onchange="wageConverter('SubsTeachers');"
+                    />
+                  </div>
+                </td>
+              </tr>
+
+              <tr></tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col s6">
+              <a
+                class="btn-floating btn-small waves-effect waves-light red"
+                onclick="addRow('dynamicInput');"
+                id="addBtn"
+                ><i class="material-icons">add</i></a
+              >Add Custom Staff Member
+            </div>
+            <div class="col s6" id="removeBtn" style="display: none;">
+              <a
+                class="btn-floating btn-small waves-effect waves-light red"
+                onclick="removeRow('dynamicInput');"
+                ><i class="material-icons">close</i></a
+              >Remove Custom Staff Member
+            </div>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col s4">
+              <strong class="total">Total no of full time employees</strong>
+            </div>
+            <div class="col s4" id="totalStaff"></div>
+            <div class="col s4" id="totalStaffWage"></div>
+          </div> -->
+
+          <div class="row">
             <div class="col s12">
-              <h5 class="left-align">Salaries and Staffing</h5>
+              <h5 class="left-align">Benefits</h5>
               <hr />
               <p>
-                Select one of two default salary levels. Selecting “Current
-                Salaries” will use salary data that reflects the current wages
-                paid to the early childhood workforce. Selecting “Higher
-                salaries” will use salary data that aligns more closely with
-                public school salaries. See the methodology for full details of
-                salary data used in the calculator. Users can also edit the
-                salary data and enter new values in either the Annual Salary
-                column or the Hourly Wage column.
+                If your model program provides health insurance to employees,
+                select the check box below. The calculator will use the annual
+                expense in the “cost per full time employee” box, which is
+                pre-populated with state data but can be overridden by the user.
+                In addition, 10 paid sick days and 10 days paid leave are
+                included by default for all staff. These values can be updated
+                by the user.
               </p>
             </div>
+          </div>
 
-            <div class="row radio-row">
-              <div class="col s2">
-                <p>Salary level</p>
-              </div>
-              <div class="col s3">
-                <p>
-                  <label>
-                    <input
-                      name="salary"
-                      value="bls"
-                      type="radio"
-                      checked
-                      onclick="getSalaryLevel()"
-                    />
-                    <span>Current Salaries</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s4">
-                <p>
-                  <label>
-                    <input
-                      name="salary"
-                      value="kg"
-                      type="radio"
-                      onclick="getSalaryLevel()"
-                    />
-                    <span>Higher Salaries</span>
-                  </label>
-                </p>
-              </div>
-              <!-- <div class="col s3">
-                <p>
-                  <label>
-                    <input
-                      name="salary"
-                      value="userAdded"
-                      type="radio"
-                      onclick="getSalaryLevel()"
-                    />
-                    <span>User added</span>
-                  </label>
-                </p>
-              </div> -->
-            </div>
-
-            <div class="col s12">
-              <h5 class="left-align">Staffing</h5>
+          <div class="row">
+            <div class="col s6">
               <p>
-                The table below shows the staff positions and number of staff in
-                each position in the model child care center. See the
-                methodology for full details of these assumptions. Users can
-                override the number of staff at each position, as well as the
-                annual salary or hourly wage. Additional staff can be added by
-                clicking the plus icon and entering the required details.
+                <label>
+                  <input
+                    type="checkbox"
+                    class="filled-in"
+                    checked="checked"
+                    onchange="checkHealth()"
+                  />
+                  <span>Health Insurance</span>
+                </label>
               </p>
             </div>
+            <div class="col s6">
+              Cost per full time employee:
+              <div class="input-field inline">
+                <input type="text" name="costOfFTEmployee" />
+              </div>
+            </div>
+          </div>
 
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>#</th>
-                  <th>Salary</th>
-                  <th>Hourly Wage</th>
-                </tr>
-              </thead>
-              <tbody id="dynamicInput">
-                <tr>
-                  <td>Program Director</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfProgramDirectors"
-                        id="noOfProgramDirectors"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="salaryProgramDirectors"
-                        name="salaryProgramDirectors"
-                        onchange="salaryConverter('ProgramDirectors');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="wageProgramDirectors"
-                        name="wageProgramDirectors"
-                        onchange="wageConverter('ProgramDirectors');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Assistant Director</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfAssistantDirectors"
-                        id="noOfAssistantDirectors"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="salaryAssistantDirectors"
-                        id="salaryAssistantDirectors"
-                        onchange="salaryConverter('AssistantDirectors');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="wageAssistantDirectors"
-                        id="wageAssistantDirectors"
-                        onchange="wageConverter('AssistantDirectors');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Administrative Assistant</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfAdministrativeAssistants"
-                        id="noOfAdministrativeAssistants"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="salaryAdministrativeAssistants"
-                        id="salaryAdministrativeAssistants"
-                        onchange="salaryConverter('AdministrativeAssistants');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="wageAdministrativeAssistants"
-                        id="wageAdministrativeAssistants"
-                        onchange="wageConverter('AdministrativeAssistants');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lead Teacher</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfLeadTeachers"
-                        id="noOfLeadTeachers"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="salaryLeadTeachers"
-                        id="salaryLeadTeachers"
-                        onchange="salaryConverter('LeadTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="wageLeadTeachers"
-                        id="wageLeadTeachers"
-                        onchange="wageConverter('LeadTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Assistant Teacher</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfAssistantTeachers"
-                        id="noOfAssistantTeachers"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="salaryAssistantTeachers"
-                        id="salaryAssistantTeachers"
-                        onchange="salaryConverter('AssistantTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="wageAssistantTeachers"
-                        id="wageAssistantTeachers"
-                        onchange="wageConverter('AssistantTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Floater</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="noOfSubstituteTeachers"
-                        id="noOfSubstituteTeachers"
-                        onchange="getSalaryLevel();setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="salarySubsTeachers"
-                        id="salarySubsTeachers"
-                        onchange="salaryConverter('SubsTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="wageSubsTeachers"
-                        id="wageSubsTeachers"
-                        onchange="wageConverter('SubsTeachers');setToUserAdded();"
-                      />
-                    </div>
-                  </td>
-                </tr>
+          <div class="row">
+            <div class="col s2">Sick Days</div>
+            <div class="col s4">
+              <input type="text" name="sickdays" id="sickdays" />
+            </div>
+          </div>
 
-                <tr></tr>
-              </tbody>
-            </table>
+          <div class="row">
+            <div class="col s2">Paid Leave</div>
+            <div class="col s4">
+              <input type="text" name="paidLeave" id="paidLeave" />
+            </div>
+          </div>
 
-            <div class="row">
-              <div class="col s6">
-                <a
-                  class="btn-floating btn-small waves-effect waves-light red"
-                  onclick="addInput('dynamicInput');setToUserAdded();"
-                  ><i class="material-icons">add</i></a
-                >Add Custom Staff Member
+          <div class="row">
+            <div class="col s12">
+              <h5 class="left-align">Additional expenses</h5>
+              <hr />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              Deep Cleaning
+              <div class="input-field inline">
+                <input type="text" name="deepCleaningCost" />
+                <span
+                  class="helper-text"
+                  data-error="wrong"
+                  data-success="right"
+                  >Sessions per month</span
+                >
               </div>
             </div>
 
-            <div class="row">
-              <div class="col s4">
-                <strong class="total">Total no of full time employees</strong>
-              </div>
-              <div class="col s4" id="totalStaff"></div>
-              <div class="col s4" id="totalStaffWage"></div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Benefits</h5>
-                <hr />
-                <p>
-                  If your model program provides health insurance to employees,
-                  select the check box below. The calculator will use the annual
-                  expense in the “cost per full time employee” box, which is
-                  pre-populated with state data but can be overridden by the
-                  user. In addition, 10 paid sick days and 10 days paid leave
-                  are included by default for all staff. These values can be
-                  updated by the user.
-                </p>
+            <div class="col s6">
+              Cost per cleaning
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="costPerCleaning"
+                  id="costPerCleaning"
+                />
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col s6">
-                <p>
-                  <label>
-                    <input
-                      type="checkbox"
-                      class="filled-in"
-                      checked="checked"
-                      onchange="checkHealth()"
-                    />
-                    <span>Health Insurance</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s6">
-                Cost per full time employee
-                <div class="input-field inline">
-                  <input type="text" name="costOfFTEmployee" />
-                </div>
+          <div class="row">
+            <div class="col s12">
+              Sanitation supplies
+              <div class="input-field inline">
+                <input type="text" name="sanitationCost" id="sanitationCost" />
+                <span
+                  class="helper-text"
+                  data-error="wrong"
+                  data-success="right"
+                  >Total cost per month</span
+                >
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col s2">Sick Days</div>
-              <div class="col s4">
-                <input type="text" name="sickdays" id="sickdays" />
+          <div class="row">
+            <div class="col s12">
+              Miscellaneous
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="miscCost"
+                  id="miscCost"
+                  onchange="calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                />
               </div>
             </div>
-
-            <div class="row">
-              <div class="col s2">Paid Leave</div>
-              <div class="col s4">
-                <input type="text" name="paidLeave" id="paidLeave" />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Additional expenses</h5>
-                <hr />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s6">
-                Deep Cleaning
-                <div class="input-field inline">
-                  <input type="text" name="deepCleaningCost" />
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Sessions per month</span
-                  >
-                </div>
-              </div>
-
-              <div class="col s6">
-                Cost per cleaning
-                <div class="input-field inline">
-                  <input
-                    type="text"
-                    name="costPerCleaning"
-                    id="costPerCleaning"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                Sanitation supplies
-                <div class="input-field inline">
-                  <input
-                    type="text"
-                    name="sanitationCost"
-                    id="sanitationCost"
-                  />
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Total cost per month</span
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                Miscellaneous
-                <div class="input-field inline">
-                  <input
-                    type="text"
-                    name="miscCost"
-                    id="miscCost"
-                    onchange="calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
+          </div>
 
           <div class="row resultsBox">
             <div class="col s12">
@@ -843,7 +853,7 @@
 
         <!------------------Family Child Care Homes Content--------------------->
         <div id="familyHomes" class="col s12">
-          <form action="" id="familyCareForm">
+          
             <div class="row">
               <div class="col s12">
                 <h5 class="left-align">Enrollment</h5>
@@ -935,11 +945,11 @@
                 <p>
                   <label>
                     <input
-                      name="salary"
+                      name="salaryFCC"
                       value="BLS"
                       type="radio"
                       checked
-                      onclick="getSalaryLevel();populateFCC();"
+                      onclick="getSalaryLevelFCC();populateFCC();"
                     />
                     <span>Current Salaries</span>
                   </label>
@@ -949,28 +959,28 @@
                 <p>
                   <label>
                     <input
-                      name="salary"
+                      name="salaryFCC"
                       value="Kindergarten"
                       type="radio"
-                      onclick="getSalaryLevel();populateFCC();"
+                      onclick="getSalaryLevelFCC();populateFCC();"
                     />
                     <span>Higher Salaries</span>
                   </label>
                 </p>
               </div>
               <!-- <div class="col s3">
-                <p>
-                  <label>
-                    <input
-                      name="salary"
-                      value="userAdded"
-                      type="radio"
-                      onclick="getSalaryLevel()"
-                    />
-                    <span>User added</span>
-                  </label>
-                </p>
-              </div> -->
+                  <p>
+                    <label>
+                      <input
+                        name="salary"
+                        value="userAdded"
+                        type="radio"
+                        onclick="getSalaryLevel()"
+                      />
+                      <span>User added</span>
+                    </label>
+                  </p>
+                </div> -->
             </div>
 
             <div class="col s12">
@@ -1003,7 +1013,7 @@
                         type="text"
                         id="noOfProvider"
                         name="noOfProvider"
-                        onchange="populateFCC();setToUserAdded();"
+                        onchange="populateFCC();"
                       />
                     </div>
                   </td>
@@ -1013,7 +1023,7 @@
                         type="text"
                         id="salaryOfProvider"
                         name="salaryOfProvider"
-                        onchange="salaryConverter('OfProvider');setToUserAdded();"
+                        onchange="salaryConverter('OfProvider');"
                       />
                     </div>
                   </td>
@@ -1023,7 +1033,7 @@
                         type="text"
                         id="wageOfProvider"
                         name="wageOfProvider"
-                        onchange="wageConverter('OfProvider');setToUserAdded();"
+                        onchange="wageConverter('OfProvider');"
                       />
                     </div>
                   </td>
@@ -1036,7 +1046,7 @@
                         type="text"
                         id="noOfAssistantTeachersFCC"
                         name="noOfAssistantTeachersFCC"
-                        onchange="populateFCC();setToUserAdded();"
+                        onchange="populateFCC();"
                       />
                     </div>
                   </td>
@@ -1046,7 +1056,7 @@
                         type="text"
                         id="salaryOfAssistantTeachersFCC"
                         name="salaryOfAssistantTeachersFCC"
-                        onchange="salaryConverter('OfAssistantTeachersFCC');setToUserAdded();"
+                        onchange="salaryConverter('OfAssistantTeachersFCC');"
                       />
                     </div>
                   </td>
@@ -1056,7 +1066,7 @@
                         type="text"
                         id="wageOfAssistantTeachersFCC"
                         name="wageOfAssistantTeachersFCC"
-                        onchange="wageConverter('OfAssistantTeachersFCC');setToUserAdded();"
+                        onchange="wageConverter('OfAssistantTeachersFCC');"
                       />
                     </div>
                   </td>
@@ -1068,9 +1078,16 @@
               <div class="col s6">
                 <a
                   class="btn-floating btn-small waves-effect waves-light red"
-                  onclick="addInput('dynamicInput2');setToUserAdded();"
+                  onclick="addRow('dynamicInput2');"
                   ><i class="material-icons">add</i></a
                 >Add Custom Staff Member
+              </div>
+              <div class="col s6" id="removeBtn2" style="display: none;">
+                <a
+                  class="btn-floating btn-small waves-effect waves-light red"
+                  onclick="removeRow('dynamicInput2');"
+                  ><i class="material-icons">close</i></a
+                >Remove Custom Staff Member
               </div>
             </div>
 
@@ -1204,7 +1221,7 @@
                 </div>
               </div>
             </div>
-          </form>
+         
 
           <div class="row resultsBox">
             <div class="col s12">
@@ -1274,9 +1291,10 @@
             </div>
           </div>
         </div>
+
         <!----------Systems Content-------------->
         <div id="systems" class="col s12">
-          <form action="">
+          
             <div class="row">
               <p>
                 On this tab the cost per child results generated on the Child
@@ -1377,7 +1395,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          
 
           <div class="row resultsBox">
             <div class="col s12">
@@ -1421,10 +1439,5 @@
         </div>
       </div>
     </div>
-
-    <script
-      type="text/javascript"
-      src="js/iframeSizer.contentWindow.min.js"
-    ></script>
   </body>
 </html>
