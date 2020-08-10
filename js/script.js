@@ -301,9 +301,9 @@ function populateStaff() {
     salaryProgramDirectors =
       noOfProgramDirectors * dataC[stateSelected].bls_director_salary;
     $("#salaryProgramDirectors").val(
-      accounting.formatMoney(salaryProgramDirectors).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_director_salary).slice(0, -3)
     );
-    wageProgramDirectors = salaryProgramDirectors / 2080;
+    wageProgramDirectors = dataC[stateSelected].bls_director_salary / 2080;
     $("#wageProgramDirectors").val(
       accounting.formatMoney(wageProgramDirectors)
     );
@@ -313,9 +313,9 @@ function populateStaff() {
       noOfAssistantDirectors *
       dataC[stateSelected].bls_assistant_director_salary;
     $("#salaryAssistantDirectors").val(
-      accounting.formatMoney(salaryAssistantDirectors).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_assistant_director_salary).slice(0, -3)
     );
-    wageAssistantDirectors = salaryAssistantDirectors / 2080;
+    wageAssistantDirectors = dataC[stateSelected].bls_assistant_director_salary / 2080;
     $("#wageAssistantDirectors").val(
       accounting.formatMoney(wageAssistantDirectors)
     );
@@ -325,9 +325,9 @@ function populateStaff() {
       noOfAdministrativeAssistants *
       dataC[stateSelected].bls_administrative_assistant_salary;
     $("#salaryAdministrativeAssistants").val(
-      accounting.formatMoney(salaryAdministrativeAssistants).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_administrative_assistant_salary).slice(0, -3)
     );
-    wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
+    wageAdministrativeAssistants = dataC[stateSelected].bls_administrative_assistant_salary / 2080;
     $("#wageAdministrativeAssistants").val(
       accounting.formatMoney(wageAdministrativeAssistants)
     );
@@ -336,18 +336,18 @@ function populateStaff() {
     salaryLeadTeachers =
       noOfLeadTeachers * dataC[stateSelected].bls_lead_teacher_salary;
     $("#salaryLeadTeachers").val(
-      accounting.formatMoney(salaryLeadTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_lead_teacher_salary).slice(0, -3)
     );
-    wageLeadTeachers = salaryLeadTeachers / 2080;
+    wageLeadTeachers = dataC[stateSelected].bls_lead_teacher_salary / 2080;
     $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
 
     //Assistant Teacher
     salaryAssistantTeachers =
       noOfAssistantTeachers * dataC[stateSelected].bls_assistant_teacher_salary;
     $("#salaryAssistantTeachers").val(
-      accounting.formatMoney(salaryAssistantTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_assistant_teacher_salary).slice(0, -3)
     );
-    wageAssistantTeachers = salaryAssistantTeachers / 2080;
+    wageAssistantTeachers = dataC[stateSelected].bls_assistant_teacher_salary / 2080;
     $("#wageAssistantTeachers").val(
       accounting.formatMoney(wageAssistantTeachers)
     );
@@ -362,10 +362,10 @@ function populateStaff() {
     salarySubsTeachers =
       noOfSubstituteTeachers * dataC[stateSelected].bls_floater_salary;
     $("#salarySubsTeachers").val(
-      accounting.formatMoney(salarySubsTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].bls_floater_salary).slice(0, -3)
     );
 
-    wageSubsTeachers = salarySubsTeachers / 2080;
+    wageSubsTeachers = dataC[stateSelected].bls_floater_salary / 2080;
     $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
   }
 
@@ -374,9 +374,9 @@ function populateStaff() {
     salaryProgramDirectors =
       noOfProgramDirectors * dataC[stateSelected].Kg_director_salary;
     $("#salaryProgramDirectors").val(
-      accounting.formatMoney(salaryProgramDirectors).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_director_salary).slice(0, -3)
     );
-    wageProgramDirectors = salaryProgramDirectors / 2080;
+    wageProgramDirectors = dataC[stateSelected].Kg_director_salary / 2080;
     $("#wageProgramDirectors").val(
       accounting.formatMoney(wageProgramDirectors)
     );
@@ -386,9 +386,9 @@ function populateStaff() {
       noOfAssistantDirectors *
       dataC[stateSelected].Kg_assistant_director_salary;
     $("#salaryAssistantDirectors").val(
-      accounting.formatMoney(salaryAssistantDirectors).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_assistant_director_salary).slice(0, -3)
     );
-    wageAssistantDirectors = salaryAssistantDirectors / 2080;
+    wageAssistantDirectors = dataC[stateSelected].Kg_assistant_director_salary / 2080;
     $("#wageAssistantDirectors").val(
       accounting.formatMoney(wageAssistantDirectors)
     );
@@ -398,9 +398,9 @@ function populateStaff() {
       noOfAdministrativeAssistants *
       dataC[stateSelected].Kg_administrative_assistant_salary;
     $("#salaryAdministrativeAssistants").val(
-      accounting.formatMoney(salaryAdministrativeAssistants).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_administrative_assistant_salary).slice(0, -3)
     );
-    wageAdministrativeAssistants = salaryAdministrativeAssistants / 2080;
+    wageAdministrativeAssistants = dataC[stateSelected].Kg_administrative_assistant_salary / 2080;
     $("#wageAdministrativeAssistants").val(
       accounting.formatMoney(wageAdministrativeAssistants)
     );
@@ -409,18 +409,18 @@ function populateStaff() {
     salaryLeadTeachers =
       noOfLeadTeachers * dataC[stateSelected].Kg_lead_teacher_salary;
     $("#salaryLeadTeachers").val(
-      accounting.formatMoney(salaryLeadTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_lead_teacher_salary).slice(0, -3)
     );
-    wageLeadTeachers = salaryLeadTeachers / 2080;
+    wageLeadTeachers = dataC[stateSelected].Kg_lead_teacher_salary / 2080;
     $("#wageLeadTeachers").val(accounting.formatMoney(wageLeadTeachers));
 
     //Assistant Teacher
     salaryAssistantTeachers =
       noOfAssistantTeachers * dataC[stateSelected].Kg_assistant_teacher_salary;
     $("#salaryAssistantTeachers").val(
-      accounting.formatMoney(salaryAssistantTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_assistant_teacher_salary).slice(0, -3)
     );
-    wageAssistantTeachers = salaryAssistantTeachers / 2080;
+    wageAssistantTeachers = dataC[stateSelected].Kg_assistant_teacher_salary / 2080;
     $("#wageAssistantTeachers").val(
       accounting.formatMoney(wageAssistantTeachers)
     );
@@ -435,10 +435,10 @@ function populateStaff() {
     salarySubsTeachers =
       noOfSubstituteTeachers * dataC[stateSelected].Kg_floater_salary;
     $("#salarySubsTeachers").val(
-      accounting.formatMoney(salarySubsTeachers).slice(0, -3)
+      accounting.formatMoney(dataC[stateSelected].Kg_floater_salary).slice(0, -3)
     );
 
-    wageSubsTeachers = salarySubsTeachers / 2080;
+    wageSubsTeachers = dataC[stateSelected].Kg_floater_salary / 2080;
     $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
   }
 }
@@ -897,10 +897,10 @@ function populateFCC() {
       dataF[stateSelected].bls_lead_teacher_salary;
 
     $("#salaryOfProvider").val(
-      accounting.formatMoney(salaryOfProvider).slice(0, -3)
+      accounting.formatMoney(dataF[stateSelected].bls_lead_teacher_salary).slice(0, -3)
     );
 
-    wageOfProvider = salaryOfProvider / 2080;
+    wageOfProvider = dataF[stateSelected].bls_lead_teacher_salary / 2080;
     $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
     salaryOfAssistantTeachersFCC =
@@ -908,10 +908,10 @@ function populateFCC() {
       dataF[stateSelected].bls_assistant_teacher_salary;
 
     $("#salaryOfAssistantTeachersFCC").val(
-      accounting.formatMoney(salaryOfAssistantTeachersFCC).slice(0, -3)
+      accounting.formatMoney(dataF[stateSelected].bls_assistant_teacher_salary).slice(0, -3)
     );
 
-    wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
+    wageOfAssistantTeachersFCC = dataF[stateSelected].bls_assistant_teacher_salary / 2080;
     $("#wageOfAssistantTeachersFCC").val(
       accounting.formatMoney(wageOfAssistantTeachersFCC)
     );
@@ -1004,11 +1004,9 @@ function populateFCC() {
 
 //FUNCTION TO CALCULATE WAGES AND BENEFITS TOTAL
 function calcTotalWagesAndBenefitsFCC() {
-  providerSalary = accounting.unformat($("#salaryOfProvider").val());
+  providerSalary = salaryOfProvider;
   console.log(providerSalary);
-  assistantSalary = accounting.unformat(
-    $("#salaryOfAssistantTeachersFCC").val()
-  );
+  assistantSalary = salaryOfAssistantTeachersFCC;
 
   console.log(assistantSalary);
   totalWagesFCC = providerSalary + assistantSalary;
