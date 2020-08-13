@@ -131,6 +131,13 @@ function checkState() {
 //FUNCTION TO GET RATIOS
 function getRatio() {
   ratioSelected = $("input[name='ratios']:checked").val();
+  if(ratioSelected == "precovid"){
+
+    $("input[type='checkbox']").prop("checked", false);
+    $("input[name='costOfFTEmployee']").val(0);
+    $("#costOfFTEmployeeFCC").val(0);
+
+  }
   console.log(ratioSelected + " --> Ratio Selected!");
 }
 
@@ -597,6 +604,9 @@ function calcTotalPersonnelCost() {
 //FUNCTION TO CALCULATE TOTAL NONPERSONNEL COST
 function calcTotalNonPersonnelCost() {
   //Total additional cleaning
+
+  sanitationCost = parseInt($("#sanitationCost").val());
+  console.log(sanitationCost);
   totalAdditionalCleaning =
     (parseInt($("input[name='deepCleaningCost']").val()) *
       parseInt($("#costPerCleaning").val()) +
@@ -1022,26 +1032,29 @@ function calcTotalWagesAndBenefitsFCC() {
   assistantTeacherUnitCostFCC = (
     assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val())
   ).toFixed(0);
-
+  
+  console.log(assistantTeacherUnitCostFCC);
   sickDaysCostFCC = Math.round(
     parseInt($("input[name='sickdaysFCC']").val()) *
       (assistantTeacherUnitCostFCC / 2080) *
       10
   );
-
+  console.log(sickDaysCostFCC);  
   paidLeaveCostFCC = Math.round(
     parseInt($("input[name='paidLeaveFCC']").val()) * wageFloaterFCC * 10
   );
 
-  console.log(wageFloaterFCC);
+  console.log(paidLeaveCostFCC);
 
   totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
   totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
 
+  console.log(totalSickDaysCostFCC);
+  console.log(totalPaidLeaveCostFCC);
   healthInsuranceFCC = dataF[stateSelected].health_insurance;
 
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
-
+  console.log(totalHealthFCC);
   discretionaryBenefits =
     totalSickDaysCostFCC + totalPaidLeaveCostFCC + totalHealthFCC;
 
@@ -1057,27 +1070,33 @@ function calcTotalWagesAndBenefitsFCC() {
   np_programFCC = 7250;
   np_occupancyFCC = 3731;
 
+  costPerClassroom =  parseInt($("input[name='sanitationCostFCC']").val());
   //Additional Cleaning Cost
   totalCleaningCostFCC =
     parseInt(costPerClassroom) +
     parseInt($("input[name='deepCleaningCostFCC']").val()) *
       parseInt($("input[name='costPerCleaningFCC']").val());
+  
+  miscCostFCC = parseInt($("input[name='miscCostFCC']").val());    
 
   totalOtherExpensesFCC =
     parseInt(np_adminFCC) +
     parseInt(np_programFCC) +
     parseInt(np_occupancyFCC) +
-    parseInt(totalCleaningCostFCC);
+    parseInt(totalCleaningCostFCC)+
+    parseInt(miscCostFCC);
 
   totalExpensesFCC =
     parseInt(totalWagesAndBenefitsFCC) + parseInt(totalOtherExpensesFCC);
 
+    console.log(totalExpensesFCC);  
   costPerChildFCC = parseInt(totalExpensesFCC) / parseInt(childTotalFCC);
+  console.log(costPerChildFCC); 
 }
 
 //FUNCTION TO CALCULATE INFANT COST
 function calcInfantFCC() {
-  totalInfantCostFCC = costPerChildFCC * parseInt($("#noOfInfant").val());
+  totalInfantCostFCC = Math.round(costPerChildFCC);
   console.log(accounting.formatMoney(totalInfantCostFCC));
   $("#infantAnnualCostFCC").html(accounting.formatMoney(totalInfantCostFCC));
   $("#infantMonthlyCostFCC").html(
@@ -1090,7 +1109,7 @@ function calcInfantFCC() {
 
 //FUNCTION TO CALCULATE TODDLER COST
 function calcToddlerFCC() {
-  totalToddlerCostFCC = costPerChildFCC * parseInt($("#noOfToddler").val());
+  totalToddlerCostFCC = Math.round(costPerChildFCC);
 
   $("#toddlerAnnualCostFCC").html(accounting.formatMoney(totalToddlerCostFCC));
   $("#toddlerMonthlyCostFCC").html(
@@ -1103,7 +1122,7 @@ function calcToddlerFCC() {
 
 //FUNCTION TO CALCULATE PRE3 COST
 function calcPre3FCC() {
-  totalPre3CostFCC = costPerChildFCC * parseInt($("#noOfPre3").val());
+  totalPre3CostFCC = Math.round(costPerChildFCC);
 
   $("#pre3AnnualCostFCC").html(accounting.formatMoney(totalPre3CostFCC));
   $("#pre3MonthlyCostFCC").html(accounting.formatMoney(totalPre3CostFCC / 12));
@@ -1112,7 +1131,7 @@ function calcPre3FCC() {
 
 //FUNCTION TO CALCULATE PRE4 COST
 function calcPre4FCC() {
-  totalPre4CostFCC = costPerChildFCC * parseInt($("#noOfPre4").val());
+  totalPre4CostFCC = Math.round(costPerChildFCC);
 
   $("#pre4AnnualCostFCC").html(accounting.formatMoney(totalPre4CostFCC));
   $("#pre4MonthlyCostFCC").html(accounting.formatMoney(totalPre4CostFCC / 12));
