@@ -138,6 +138,15 @@ function getRatio() {
     $("#costOfFTEmployeeFCC").val(0);
 
   }
+
+  if(ratioSelected == "covid"){
+
+    $("input[type='checkbox']").prop("checked", true);
+    $("input[name='costOfFTEmployee']").val(dataC[stateSelected].health_insurance);
+    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+
+
+  }
   console.log(ratioSelected + " --> Ratio Selected!");
 }
 
@@ -544,17 +553,20 @@ function checkHealth() {
     );
   }
 
-  //   if ($("#checkboxFCC").prop("checked") == false) {
-  //     $("#costOfFTEmployeeFCC").val(0);
-  //   } else {
-  //     $("#costOfFTEmployeeFCC").val(dataC[stateSelected].health_insurance);
-  //   }
+    if ($("#checkboxFCC").prop("checked") == false) {
+      $("#costOfFTEmployeeFCC").val(0);
+    } else{
+      $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    }
 }
 
 //FUNCTION TO CALC TOTAL PERSONNEL COST
 function calcTotalPersonnelCost() {
   //total admin staff wage
 
+  costPerFTEmployee = parseInt($("input[name='costOfFTEmployee']").val());
+  sickDays = parseInt($("#sickdays").val());
+  paidLeave = parseInt($("#paidLeave").val());
   adminStaffTotalWage =
     salaryProgramDirectors +
     salaryAssistantDirectors +
@@ -594,7 +606,7 @@ function calcTotalPersonnelCost() {
     parseInt($("#noOfAssistantDirectors").val()) +
     parseInt($("#noOfAdministrativeAssistants").val());
 
-  additionalBenefits = totalStaff * dataC[stateSelected].health_insurance;
+  additionalBenefits = totalStaff * costPerFTEmployee;
 
   //Subtotal Personnel
   personnelSubtotal =
@@ -1051,7 +1063,7 @@ function calcTotalWagesAndBenefitsFCC() {
 
   console.log(totalSickDaysCostFCC);
   console.log(totalPaidLeaveCostFCC);
-  healthInsuranceFCC = dataF[stateSelected].health_insurance;
+  healthInsuranceFCC = parseInt($("#costOfFTEmployeeFCC").val());
 
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
   console.log(totalHealthFCC);
