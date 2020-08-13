@@ -81,6 +81,7 @@
             <option value="Colorado">Colorado</option>
             <option value="Connecticut">Connecticut</option>
             <option value="Delaware">Delaware</option>
+            <option value="District_of_Columbia">District of Columbia</option>
             <option value="Florida">Florida</option>
             <option value="Georgia">Georgia</option>
             <option value="Hawaii">Hawaii</option>
@@ -731,7 +732,7 @@
             <div class="col s6">
               Deep Cleaning
               <div class="input-field inline">
-                <input type="text" name="deepCleaningCost" />
+                <input type="text" name="deepCleaningCost" onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
                 <span
                   class="helper-text"
                   data-error="wrong"
@@ -748,6 +749,7 @@
                   type="text"
                   name="costPerCleaning"
                   id="costPerCleaning"
+                  onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                 />
               </div>
             </div>
@@ -757,7 +759,7 @@
             <div class="col s12">
               Sanitation supplies
               <div class="input-field inline">
-                <input type="text" name="sanitationCost" id="sanitationCost" />
+                <input type="text" name="sanitationCost" id="sanitationCost" onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
                 <span
                   class="helper-text"
                   data-error="wrong"
@@ -1167,7 +1169,7 @@
               <div class="col s6">
                 Deep Cleaning
                 <div class="input-field inline">
-                  <input type="text" name="deepCleaningCostFCC" />
+                  <input type="text" name="deepCleaningCostFCC" onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
                   <span
                     class="helper-text"
                     data-error="wrong"
@@ -1184,6 +1186,7 @@
                     type="text"
                     name="costPerCleaningFCC"
                     id="costPerCleaningFCC"
+                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                   />
                 </div>
               </div>
@@ -1197,6 +1200,7 @@
                     type="text"
                     name="sanitationCostFCC"
                     id="sanitationCostFCC"
+                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                   />
                   <span
                     class="helper-text"
@@ -1216,7 +1220,7 @@
                     type="text"
                     name="miscCostFCC"
                     id="miscCostFCC"
-                    onchange="populateFCC()"
+                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                   />
                 </div>
               </div>
