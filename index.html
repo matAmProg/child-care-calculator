@@ -241,7 +241,7 @@
                     <input
                       name="infantClassrooms"
                       type="number"
-                      onchange="calcTotalChildren();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                      onchange="calcTotalChildren();calcTeachersCC();populateStaff();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -280,7 +280,7 @@
                     <input
                       name="toddlerClassrooms"
                       type="number"
-                      onchange="calcTotalChildren();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                      onchange="calcTotalChildren();calcTeachersCC();populateStaff();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -319,7 +319,7 @@
                     <input
                       name="pre3Classrooms"
                       type="number"
-                      onchange="calcTotalChildren();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                      onchange="calcTotalChildren();calcTeachersCC();populateStaff();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -358,7 +358,7 @@
                     <input
                       name="pre4Classrooms"
                       type="number"
-                      onchange="calcTotalChildren();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                      onchange="calcTotalChildren();calcTeachersCC();populateStaff();populateBenefits();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -1406,6 +1406,7 @@
                       type="text"
                       name="childCareFacilities"
                       id="childCareFacilities"
+                      onchange="calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1415,6 +1416,7 @@
                       type="text"
                       name="childCareSlots"
                       id="childCareSlots"
+                      onchange="calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1427,6 +1429,7 @@
                       type="text"
                       name="familyHomeFacilities"
                       id="familyHomeFacilities"
+                      onchange="calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1436,6 +1439,7 @@
                       type="text"
                       name="familyHomeSlots"
                       id="familyHomeSlots"
+                      onchange="calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1454,7 +1458,7 @@
             <div class="col s6">
               Percent of providers fixed costs covered:
               <div class="input-field inline">
-                <input type="text" name="fixedCost" />
+                <input type="text" name="fixedCost" onchange="calcFixedCost();calcOpCost();"/>
               </div>
             </div>
           </div>
@@ -1463,7 +1467,7 @@
             <div class="col s6">
               Percent of capacity operating costs covered:
               <div class="input-field inline">
-                <input type="text" name="operatingCost" />
+                <input type="text" name="operatingCost" onchange="calcFixedCost();calcOpCost();"/>
               </div>
             </div>
           </div>
