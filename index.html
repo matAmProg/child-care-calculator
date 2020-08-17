@@ -220,9 +220,11 @@
                     <input
                       name="infantRatio"
                       type="number"
-                      onchange="checkChildRatio('infant');calcTotalChildren();"
+                      onchange="checkChildRatio('infant');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
-                    <p class="errRatio" id="infant">Ratio should be smaller than Group Size</p>
+                    <p class="errRatio" id="infant">
+                      Ratio should be smaller than Group Size
+                    </p>
                   </div>
                 </td>
                 <td>
@@ -230,7 +232,7 @@
                     <input
                       name="infantGroupSize"
                       type="number"
-                      onchange="calcTotalChildren()"
+                      onchange="checkChildRatio('infant');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -257,9 +259,11 @@
                     <input
                       name="toddlerRatio"
                       type="number"
-                      onchange="checkChildRatio('toddler');calcTotalChildren();"
+                      onchange="checkChildRatio('toddler');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
-                    <p class="errRatio" id="toddler">Ratio should be smaller than Group Size</p>
+                    <p class="errRatio" id="toddler">
+                      Ratio should be smaller than Group Size
+                    </p>
                   </div>
                 </td>
                 <td>
@@ -267,7 +271,7 @@
                     <input
                       name="toddlerGroupSize"
                       type="number"
-                      onchange="calcTotalChildren()"
+                      onchange="checkChildRatio('toddler');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -294,9 +298,11 @@
                     <input
                       name="pre3Ratio"
                       type="number"
-                      onchange="checkChildRatio('pre3');calcTotalChildren();"
+                      onchange="checkChildRatio('pre3');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
-                    <p class="errRatio" id="pre3">Ratio should be smaller than Group Size</p>
+                    <p class="errRatio" id="pre3">
+                      Ratio should be smaller than Group Size
+                    </p>
                   </div>
                 </td>
                 <td>
@@ -304,7 +310,7 @@
                     <input
                       name="pre3GroupSize"
                       type="number"
-                      onchange="calcTotalChildren()"
+                      onchange="checkChildRatio('pre3');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -331,9 +337,11 @@
                     <input
                       name="pre4Ratio"
                       type="number"
-                      onchange="checkChildRatio('pre4');calcTotalChildren();"
+                      onchange="checkChildRatio('pre4');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
-                    <p class="errRatio" id="pre4">Ratio should be smaller than Group Size</p>
+                    <p class="errRatio" id="pre4">
+                      Ratio should be smaller than Group Size
+                    </p>
                   </div>
                 </td>
                 <td>
@@ -341,7 +349,7 @@
                     <input
                       name="pre4GroupSize"
                       type="number"
-                      onchange="calcTotalChildren()"
+                      onchange="checkChildRatio('pre4');calcTotalChildren();calcTeachersCC();populateStaff();calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -472,7 +480,7 @@
                       type="text"
                       id="wageProgramDirectors"
                       name="wageProgramDirectors"
-                      onchange="formatField(this);wageConverter('ProgramDirectors');"
+                      onchange="formatField(this);wageConverter('ProgramDirectors');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -505,7 +513,7 @@
                       type="text"
                       name="wageAssistantDirectors"
                       id="wageAssistantDirectors"
-                      onchange="formatField(this);wageConverter('AssistantDirectors');"
+                      onchange="formatField(this);wageConverter('AssistantDirectors');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -538,7 +546,7 @@
                       type="text"
                       name="wageAdministrativeAssistants"
                       id="wageAdministrativeAssistants"
-                      onchange="formatField(this);wageConverter('AdministrativeAssistants');"
+                      onchange="formatField(this);wageConverter('AdministrativeAssistants');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -571,7 +579,7 @@
                       type="text"
                       name="wageLeadTeachers"
                       id="wageLeadTeachers"
-                      onchange="formatField(this);wageConverter('LeadTeachers');"
+                      onchange="formatField(this);wageConverter('LeadTeachers');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -604,7 +612,7 @@
                       type="text"
                       name="wageAssistantTeachers"
                       id="wageAssistantTeachers"
-                      onchange="formatField(this);wageConverter('AssistantTeachers');"
+                      onchange="formatField(this);wageConverter('AssistantTeachers');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -637,7 +645,7 @@
                       type="text"
                       name="wageSubsTeachers"
                       id="wageSubsTeachers"
-                      onchange="formatField(this);wageConverter('SubsTeachers');"
+                      onchange="formatField(this);wageConverter('SubsTeachers');calcTotalPersonnelCost();calcTotalNonPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                     />
                   </div>
                 </td>
@@ -706,7 +714,11 @@
             <div class="col s6">
               Cost per full time employee:
               <div class="input-field inline">
-                <input type="text" name="costOfFTEmployee"  onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
+                <input
+                  type="text"
+                  name="costOfFTEmployee"
+                  onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                />
               </div>
             </div>
           </div>
@@ -714,14 +726,24 @@
           <div class="row">
             <div class="col s2">Sick Days</div>
             <div class="col s4">
-              <input type="text" name="sickdays" id="sickdays" onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"/>
+              <input
+                type="text"
+                name="sickdays"
+                id="sickdays"
+                onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+              />
             </div>
           </div>
 
           <div class="row">
             <div class="col s2">Paid Leave</div>
             <div class="col s4">
-              <input type="text" name="paidLeave" id="paidLeave" onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
+              <input
+                type="text"
+                name="paidLeave"
+                id="paidLeave"
+                onchange="calcTotalPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+              />
             </div>
           </div>
 
@@ -736,7 +758,11 @@
             <div class="col s6">
               Deep Cleaning
               <div class="input-field inline">
-                <input type="text" name="deepCleaningCost" onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
+                <input
+                  type="text"
+                  name="deepCleaningCost"
+                  onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                />
                 <span
                   class="helper-text"
                   data-error="wrong"
@@ -763,7 +789,12 @@
             <div class="col s12">
               Sanitation supplies
               <div class="input-field inline">
-                <input type="text" name="sanitationCost" id="sanitationCost" onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();" />
+                <input
+                  type="text"
+                  name="sanitationCost"
+                  id="sanitationCost"
+                  onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                />
                 <span
                   class="helper-text"
                   data-error="wrong"
@@ -859,122 +890,141 @@
 
         <!------------------Family Child Care Homes Content--------------------->
         <div id="familyHomes" class="col s12">
-          
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Enrollment</h5>
-                <hr />
-                <p>
-                  Users can override the default data for ratios and group size.
-                </p>
-              </div>
-            </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Number of children</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>Infant</td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" name="noOfInfant" id="noOfInfant" onchange="calcAssistantTeacherFCC();calcEmployeeFCC();calcChildTotalFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Toddler</td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" name="noOfToddler" id="noOfToddler" onchange="calcEmployeeFCC();calcChildTotalFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>3 year olds</td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" name="noOfPre3" id="noOfPre3" onchange="calcEmployeeFCC();calcChildTotalFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>4 year olds</td>
-                  <td>
-                    <div class="input-field">
-                      <input type="text" name="noOfPre4" id="noOfPre4" onchange="calcEmployeeFCC();calcChildTotalFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="total">Total</td>
-                  <td>
-                    <div
-                      class="childTotalFCC"
-                      style="max-width: 91px; text-align: center;"
-                    ></div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
+          <div class="row">
             <div class="col s12">
-              <h5 class="left-align">Salaries and Staffing</h5>
+              <h5 class="left-align">Enrollment</h5>
               <hr />
               <p>
-                In this calculator, an annual salary is included for family
-                child care providers/owners. Selecting “Current Salaries” will
-                use salary data that reflects the current wages paid to the
-                early childhood workforce. Selecting “Higher salaries” will use
-                salary data that aligns more closely with public school
-                salaries. See the methodology for full details of salary data
-                used in the calculator. Users can also edit the salary data and
-                enter new values in either the Annual Salary column or the
-                Hourly Wage column.
+                Users can override the default data for ratios and group size.
               </p>
             </div>
+          </div>
 
-            <div class="row radio-row">
-              <div class="col s2">
-                <p>Salary level</p>
-              </div>
-              <div class="col s3">
-                <p>
-                  <label>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Number of children</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Infant</td>
+                <td>
+                  <div class="input-field">
                     <input
-                      name="salaryFCC"
-                      value="BLS"
-                      type="radio"
-                      checked
-                      onclick="getSalaryLevelFCC();populateFCC();"
+                      type="text"
+                      name="noOfInfant"
+                      id="noOfInfant"
+                      onchange="calcChildTotalFCC();calcAssistantTeacherFCC();calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                     />
-                    <span>Current Salaries</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s3">
-                <p>
-                  <label>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Toddler</td>
+                <td>
+                  <div class="input-field">
                     <input
-                      name="salaryFCC"
-                      value="Kindergarten"
-                      type="radio"
-                      onclick="getSalaryLevelFCC();populateFCC();"
+                      type="text"
+                      name="noOfToddler"
+                      id="noOfToddler"
+                      onchange="calcChildTotalFCC();calcAssistantTeacherFCC();calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                     />
-                    <span>Higher Salaries</span>
-                  </label>
-                </p>
-              </div>
-              <!-- <div class="col s3">
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>3 year olds</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfPre3"
+                      id="noOfPre3"
+                      onchange="calcChildTotalFCC();calcAssistantTeacherFCC();calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>4 year olds</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="noOfPre4"
+                      id="noOfPre4"
+                      onchange="calcChildTotalFCC();calcAssistantTeacherFCC();calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="total">Total</td>
+                <td>
+                  <div
+                    class="childTotalFCC"
+                    style="max-width: 91px; text-align: center;"
+                  ></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="col s12">
+            <h5 class="left-align">Salaries and Staffing</h5>
+            <hr />
+            <p>
+              In this calculator, an annual salary is included for family child
+              care providers/owners. Selecting “Current Salaries” will use
+              salary data that reflects the current wages paid to the early
+              childhood workforce. Selecting “Higher salaries” will use salary
+              data that aligns more closely with public school salaries. See the
+              methodology for full details of salary data used in the
+              calculator. Users can also edit the salary data and enter new
+              values in either the Annual Salary column or the Hourly Wage
+              column.
+            </p>
+          </div>
+
+          <div class="row radio-row">
+            <div class="col s2">
+              <p>Salary level</p>
+            </div>
+            <div class="col s3">
+              <p>
+                <label>
+                  <input
+                    name="salaryFCC"
+                    value="BLS"
+                    type="radio"
+                    checked
+                    onclick="getSalaryLevelFCC();populateFCC();"
+                  />
+                  <span>Current Salaries</span>
+                </label>
+              </p>
+            </div>
+            <div class="col s3">
+              <p>
+                <label>
+                  <input
+                    name="salaryFCC"
+                    value="Kindergarten"
+                    type="radio"
+                    onclick="getSalaryLevelFCC();populateFCC();"
+                  />
+                  <span>Higher Salaries</span>
+                </label>
+              </p>
+            </div>
+            <!-- <div class="col s3">
                   <p>
                     <label>
                       <input
@@ -987,249 +1037,264 @@
                     </label>
                   </p>
                 </div> -->
-            </div>
+          </div>
 
+          <div class="col s12">
+            <h5 class="left-align">Staffing</h5>
+            <p>
+              The table below shows the staff positions and number of staff in
+              each position in the model family child care home. See the
+              methodology for full details of these assumptions. Users can
+              override the number of staff at each position, as well as the
+              annual salary or hourly wage. Additional staff can be added by
+              clicking the plus icon and entering the required details.
+            </p>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>#</th>
+                <th>Salary</th>
+                <th>Hourly Wage</th>
+              </tr>
+            </thead>
+            <tbody id="dynamicInput2">
+              <tr>
+                <td>Provider/Owner</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="noOfProvider"
+                      name="noOfProvider"
+                      onchange="calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="salaryOfProvider"
+                      name="salaryOfProvider"
+                      onchange="formatField(this);salaryConverter('OfProvider');calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="wageOfProvider"
+                      name="wageOfProvider"
+                      onchange="formatField(this);wageConverter('OfProvider');calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Assistant teacher</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="noOfAssistantTeachersFCC"
+                      name="noOfAssistantTeachersFCC"
+                      onchange="calcEmployeeFCC();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="salaryOfAssistantTeachersFCC"
+                      name="salaryOfAssistantTeachersFCC"
+                      onchange="formatField(this);salaryConverter('OfAssistantTeachersFCC');calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      id="wageOfAssistantTeachersFCC"
+                      name="wageOfAssistantTeachersFCC"
+                      onchange="formatField(this);wageConverter('OfAssistantTeachersFCC');calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col s6">
+              <a
+                class="btn-floating btn-small waves-effect waves-light red"
+                onclick="addRow('dynamicInput2');"
+                ><i class="material-icons">add</i></a
+              >Add Custom Staff Member
+            </div>
+            <div class="col s6" id="removeBtn2" style="display: none;">
+              <a
+                class="btn-floating btn-small waves-effect waves-light red"
+                onclick="removeRow('dynamicInput2');"
+                ><i class="material-icons">close</i></a
+              >Remove Custom Staff Member
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s4">
+              <strong class="total">Total no of full time employees</strong>
+            </div>
+            <div class="col s4 totalFTEmployee"></div>
+            <div class="col s4" id="totalStaffWage"></div>
+          </div>
+
+          <div class="row">
             <div class="col s12">
-              <h5 class="left-align">Staffing</h5>
+              <h5 class="left-align">Benefits</h5>
+              <hr />
               <p>
-                The table below shows the staff positions and number of staff in
-                each position in the model family child care home. See the
-                methodology for full details of these assumptions. Users can
-                override the number of staff at each position, as well as the
-                annual salary or hourly wage. Additional staff can be added by
-                clicking the plus icon and entering the required details.
+                If your model program provides health insurance to employees,
+                select the check box below. The calculator will use the annual
+                expense in the “cost per full time employee” box, which is
+                pre-populated with state data but can be overridden by the user.
+                In addition, 10 paid sick days and 10 days paid leave are
+                included by default for all staff. These values can be updated
+                by the user.
               </p>
             </div>
+          </div>
 
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>#</th>
-                  <th>Salary</th>
-                  <th>Hourly Wage</th>
-                </tr>
-              </thead>
-              <tbody id="dynamicInput2">
-                <tr>
-                  <td>Provider/Owner</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="noOfProvider"
-                        name="noOfProvider"
-                        onchange="populateFCC();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="salaryOfProvider"
-                        name="salaryOfProvider"
-                        onchange="salaryConverter('OfProvider');"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="wageOfProvider"
-                        name="wageOfProvider"
-                        onchange="wageConverter('OfProvider');"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Assistant teacher</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="noOfAssistantTeachersFCC"
-                        name="noOfAssistantTeachersFCC"
-                        onchange="populateFCC();"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="salaryOfAssistantTeachersFCC"
-                        name="salaryOfAssistantTeachersFCC"
-                        onchange="salaryConverter('OfAssistantTeachersFCC');"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        id="wageOfAssistantTeachersFCC"
-                        name="wageOfAssistantTeachersFCC"
-                        onchange="wageConverter('OfAssistantTeachersFCC');"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="row">
-              <div class="col s6">
-                <a
-                  class="btn-floating btn-small waves-effect waves-light red"
-                  onclick="addRow('dynamicInput2');"
-                  ><i class="material-icons">add</i></a
-                >Add Custom Staff Member
-              </div>
-              <div class="col s6" id="removeBtn2" style="display: none;">
-                <a
-                  class="btn-floating btn-small waves-effect waves-light red"
-                  onclick="removeRow('dynamicInput2');"
-                  ><i class="material-icons">close</i></a
-                >Remove Custom Staff Member
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s4">
-                <strong class="total">Total no of full time employees</strong>
-              </div>
-              <div class="col s4 totalFTEmployee"></div>
-              <div class="col s4" id="totalStaffWage"></div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Benefits</h5>
-                <hr />
-                <p>
-                  If your model program provides health insurance to employees,
-                  select the check box below. The calculator will use the annual
-                  expense in the “cost per full time employee” box, which is
-                  pre-populated with state data but can be overridden by the
-                  user. In addition, 10 paid sick days and 10 days paid leave
-                  are included by default for all staff. These values can be
-                  updated by the user.
-                </p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s6">
-                <p>
-                  <label>
-                    <input
-                      type="checkbox"
-                      class="filled-in"
-                      checked="checked"
-                      onchange="checkHealth();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
-                      id="checkboxFCC"
-                    />
-                    <span>Health Insurance</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s6">
-                Cost per full time employee
-                <div class="input-field inline">
-                  <input type="text" id="costOfFTEmployeeFCC" onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                Sick Days
-                <div class="input-field inline">
-                  <input type="text" name="sickdaysFCC" onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                Paid Leave
-                <div class="input-field inline">
-                  <input type="text" name="paidLeaveFCC" onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Additional expenses</h5>
-                <hr />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s6">
-                Deep Cleaning
-                <div class="input-field inline">
-                  <input type="text" name="deepCleaningCostFCC" onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"/>
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Sessions per month</span
-                  >
-                </div>
-              </div>
-
-              <div class="col s6">
-                Cost per cleaning
-                <div class="input-field inline">
+          <div class="row">
+            <div class="col s6">
+              <p>
+                <label>
                   <input
-                    type="text"
-                    name="costPerCleaningFCC"
-                    id="costPerCleaningFCC"
-                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    type="checkbox"
+                    class="filled-in"
+                    checked="checked"
+                    onchange="checkHealth();calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                    id="checkboxFCC"
                   />
-                </div>
+                  <span>Health Insurance</span>
+                </label>
+              </p>
+            </div>
+            <div class="col s6">
+              Cost per full time employee
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  id="costOfFTEmployeeFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              Sick Days
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="sickdaysFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              Paid Leave
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="paidLeaveFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <h5 class="left-align">Additional expenses</h5>
+              <hr />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              Deep Cleaning
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="deepCleaningCostFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+                <span
+                  class="helper-text"
+                  data-error="wrong"
+                  data-success="right"
+                  >Sessions per month</span
+                >
               </div>
             </div>
 
-            <div class="row">
-              <div class="col s12">
-                Sanitation supplies
-                <div class="input-field inline">
-                  <input
-                    type="text"
-                    name="sanitationCostFCC"
-                    id="sanitationCostFCC"
-                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
-                  />
-                  <span
-                    class="helper-text"
-                    data-error="wrong"
-                    data-success="right"
-                    >Total cost per month</span
-                  >
-                </div>
+            <div class="col s6">
+              Cost per cleaning
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="costPerCleaningFCC"
+                  id="costPerCleaningFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col s12">
-                Miscellaneous
-                <div class="input-field inline">
-                  <input
-                    type="text"
-                    name="miscCostFCC"
-                    id="miscCostFCC"
-                    onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
-                  />
-                </div>
+          <div class="row">
+            <div class="col s12">
+              Sanitation supplies
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="sanitationCostFCC"
+                  id="sanitationCostFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+                <span
+                  class="helper-text"
+                  data-error="wrong"
+                  data-success="right"
+                  >Total cost per month</span
+                >
               </div>
             </div>
-         
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              Miscellaneous
+              <div class="input-field inline">
+                <input
+                  type="text"
+                  name="miscCostFCC"
+                  id="miscCostFCC"
+                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                />
+              </div>
+            </div>
+          </div>
 
           <div class="row resultsBox">
             <div class="col s12">
@@ -1302,108 +1367,106 @@
 
         <!----------Systems Content-------------->
         <div id="systems" class="col s12">
-          
-            <div class="row">
-              <p>
-                On this tab the cost per child results generated on the Child
-                Care Center and Family Child Care Home tabs are used to estimate
-                the cost to fund (1) the monthly fixed costs of a specified
-                percentage of the providers in the state and (2) the full
-                monthly operating cost of a specified percentage of child care
-                slots in the state. Data on the number of child care centers and
-                family child care homes in the selected state, and the capacity
-                of those programs, is drawn from CAP’s child care deserts
-                database but can also be updated by the user.
-              </p>
-            </div>
+          <div class="row">
+            <p>
+              On this tab the cost per child results generated on the Child Care
+              Center and Family Child Care Home tabs are used to estimate the
+              cost to fund (1) the monthly fixed costs of a specified percentage
+              of the providers in the state and (2) the full monthly operating
+              cost of a specified percentage of child care slots in the state.
+              Data on the number of child care centers and family child care
+              homes in the selected state, and the capacity of those programs,
+              is drawn from CAP’s child care deserts database but can also be
+              updated by the user.
+            </p>
+          </div>
 
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">Child care landscape</h5>
-                <hr />
+          <div class="row">
+            <div class="col s12">
+              <h5 class="left-align">Child care landscape</h5>
+              <hr />
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Providers</th>
+                <th>Capacity</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Child care centers</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="childCareFacilities"
+                      id="childCareFacilities"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="childCareSlots"
+                      id="childCareSlots"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Family child care homes</td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="familyHomeFacilities"
+                      id="familyHomeFacilities"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-field">
+                    <input
+                      type="text"
+                      name="familyHomeSlots"
+                      id="familyHomeSlots"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col s12">
+              <h5 class="left-align">System coverage</h5>
+              <hr />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              Percent of providers fixed costs covered:
+              <div class="input-field inline">
+                <input type="text" name="fixedCost" />
               </div>
             </div>
+          </div>
 
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Providers</th>
-                  <th>Capacity</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>Child care centers</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="childCareFacilities"
-                        id="childCareFacilities"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="childCareSlots"
-                        id="childCareSlots"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Family child care homes</td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="familyHomeFacilities"
-                        id="familyHomeFacilities"
-                      />
-                    </div>
-                  </td>
-                  <td>
-                    <div class="input-field">
-                      <input
-                        type="text"
-                        name="familyHomeSlots"
-                        id="familyHomeSlots"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="row">
-              <div class="col s12">
-                <h5 class="left-align">System coverage</h5>
-                <hr />
+          <div class="row">
+            <div class="col s6">
+              Percent of capacity operating costs covered:
+              <div class="input-field inline">
+                <input type="text" name="operatingCost" />
               </div>
             </div>
-
-            <div class="row">
-              <div class="col s6">
-                Percent of providers fixed costs covered:
-                <div class="input-field inline">
-                  <input type="text" name="fixedCost" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col s6">
-                Percent of capacity operating costs covered:
-                <div class="input-field inline">
-                  <input type="text" name="operatingCost" />
-                </div>
-              </div>
-            </div>
-          
+          </div>
 
           <div class="row resultsBox">
             <div class="col s12">
