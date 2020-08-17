@@ -1127,21 +1127,23 @@ function populateStaffFCC() {
     wageOfProvider = dataF[stateSelected].bls_lead_teacher_salary / 2080;
     $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
-    salaryOfAssistantTeachersFCC =
-      $("#noOfAssistantTeachersFCC").val() *
-      dataF[stateSelected].bls_assistant_teacher_salary;
+    if (parseInt($("#noOfAssistantTeachersFCC").val()) != 0) {
+      salaryOfAssistantTeachersFCC =
+        parseInt($("#noOfAssistantTeachersFCC").val()) *
+        dataF[stateSelected].bls_assistant_teacher_salary;
 
-    $("#salaryOfAssistantTeachersFCC").val(
-      accounting
-        .formatMoney(dataF[stateSelected].bls_assistant_teacher_salary)
-        .slice(0, -3)
-    );
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting
+          .formatMoney(dataF[stateSelected].bls_assistant_teacher_salary)
+          .slice(0, -3)
+      );
 
-    wageOfAssistantTeachersFCC =
-      dataF[stateSelected].bls_assistant_teacher_salary / 2080;
-    $("#wageOfAssistantTeachersFCC").val(
-      accounting.formatMoney(wageOfAssistantTeachersFCC)
-    );
+      wageOfAssistantTeachersFCC =
+        dataF[stateSelected].bls_assistant_teacher_salary / 2080;
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(wageOfAssistantTeachersFCC)
+      );
+    }
 
     wageFloaterFCC = dataC[stateSelected].bls_floater_salary / 2080;
   }
@@ -1158,18 +1160,20 @@ function populateStaffFCC() {
     wageOfProvider = salaryOfProvider / 2080;
     $("#wageOfProvider").val(accounting.formatMoney(wageOfProvider));
 
-    salaryOfAssistantTeachersFCC =
-      $("#noOfAssistantTeachersFCC").val() *
-      dataF[stateSelected].kg_assistant_teacher_salary;
+    if (parseInt($("#noOfAssistantTeachersFCC").val()) != 0) {
+      salaryOfAssistantTeachersFCC =
+        parseInt($("#noOfAssistantTeachersFCC").val()) *
+        dataF[stateSelected].kg_assistant_teacher_salary;
 
-    $("#salaryOfAssistantTeachersFCC").val(
-      accounting.formatMoney(salaryOfAssistantTeachersFCC).slice(0, -3)
-    );
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting.formatMoney(salaryOfAssistantTeachersFCC).slice(0, -3)
+      );
 
-    wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
-    $("#wageOfAssistantTeachersFCC").val(
-      accounting.formatMoney(wageOfAssistantTeachersFCC)
-    );
+      wageOfAssistantTeachersFCC = salaryOfAssistantTeachersFCC / 2080;
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(wageOfAssistantTeachersFCC)
+      );
+    }
 
     wageFloaterFCC = dataC[stateSelected].Kg_floater_salary / 2080;
   }
@@ -1196,25 +1200,39 @@ function calcTotalWagesAndBenefitsFCC() {
 
   console.log(mandatoryBenefitsFCC);
 
-  assistantTeacherUnitCostFCC = (
-    assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val())
-  ).toFixed(0);
+  if(parseInt($("#noOfAssistantTeachersFCC").val()) != 0){
 
-  console.log(assistantTeacherUnitCostFCC);
-  sickDaysCostFCC = Math.round(
-    parseInt($("input[name='sickdaysFCC']").val()) *
-      (assistantTeacherUnitCostFCC / 2080) *
-      10
-  );
-  console.log(sickDaysCostFCC);
-  paidLeaveCostFCC = Math.round(
-    parseInt($("input[name='paidLeaveFCC']").val()) * wageFloaterFCC * 10
-  );
+    assistantTeacherUnitCostFCC = (
+      assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val())
+    ).toFixed(0);
+  
+    console.log(assistantTeacherUnitCostFCC);
+    sickDaysCostFCC =
+      parseInt($("input[name='sickdaysFCC']").val()) *
+        (assistantTeacherUnitCostFCC / 2080) *
+        10;
+    
+    console.log(sickDaysCostFCC);
+    paidLeaveCostFCC = 
+      parseInt($("input[name='paidLeaveFCC']").val()) * wageFloaterFCC * 10
+    ;
+  
+    console.log(paidLeaveCostFCC);
+  
+    totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
+    totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
 
-  console.log(paidLeaveCostFCC);
 
-  totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
-  totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
+  }else{
+
+    sickDaysCostFCC = 0;
+    paidLeaveCostFCC = 
+      parseInt($("input[name='paidLeaveFCC']").val()) * wageFloaterFCC * 10
+    ;
+    totalSickDaysCostFCC = sickDaysCostFCC * totalFTEmployeeFCC;
+    totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
+  }
+  
 
   console.log(totalSickDaysCostFCC);
   console.log(totalPaidLeaveCostFCC);
@@ -1332,7 +1350,7 @@ function calcFixedCost() {
   fixedCostCTC = 48474;
   fixedCostFCC = 6772;
 
-  fixedCostPercentage = ($("input[name='fixedCost']").val() / 100).toFixed(2);
+  fixedCostPercentage = (parseInt($("input[name='fixedCost']").val()) / 100).toFixed(2);
 
   total_ctc_fixedCost =
     fixedCostPercentage *
