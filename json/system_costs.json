@@ -508,5 +508,15 @@
       "fixed_cost_FCC": null,
       "fixed_cost_monthly_%": 0.4,
       "operating_cost_monthly_%": 0.6
+   },
+   "United_States": {
+      "centers_programs": 105973,
+      "centers_slots": 8118802,
+      "FCC_programs": 111242,
+      "FCC_slots": 1070031,
+      "fixed_cost_centers": null,
+      "fixed_cost_FCC": null,
+      "fixed_cost_monthly_%": 0.4,
+      "operating_cost_monthly_%": 0.6
    }
 }
