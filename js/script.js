@@ -133,9 +133,13 @@ function checkState() {
 function getRatio() {
   ratioSelected = $("input[name='ratios']:checked").val();
   if (ratioSelected == "precovid") {
-    $("input[type='checkbox']").prop("checked", false);
-    $("input[name='costOfFTEmployee']").val(0);
-    $("#costOfFTEmployeeFCC").val(0);
+   
+    $("input[type='checkbox']").prop("checked", true);
+    $("input[name='costOfFTEmployee']").val(
+      dataC[stateSelected].health_insurance
+    );
+    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    
     $("input[name='deepCleaningCost']").val(0);
     $("input[name='sanitationCost']").val(0);
     $("input[name='deepCleaningCostFCC']").val(0);
@@ -233,7 +237,7 @@ function calcTeachersCC() {
     parseInt($("input[name='infantChildren']").val()) /
       parseInt($("input[name='infantRatio']").val())
   );
-  var c = Math.ceil(
+  var toddlerTeacher = Math.ceil(
     parseInt($("input[name='toddlerChildren']").val()) /
       parseInt($("input[name='toddlerRatio']").val())
   );
@@ -246,8 +250,11 @@ function calcTeachersCC() {
       parseInt($("input[name='pre4Ratio']").val())
   );
 
-  var totalTeach = infantTeacher + infantTeacher + pre3Teacher + pre4Teacher;
+  var totalTeach = infantTeacher + toddlerTeacher + pre3Teacher + pre4Teacher;
 
+  console.log("indv teachers"+ " "+infantTeacher +" "+ toddlerTeacher +" "+ pre3Teacher + " "+pre4Teacher);
+  console.log("Total teacher"+ " "+totalTeach);
+  console.log("Class total"+ " "+classTotal);
   $("#noOfLeadTeachers").val(classTotal);
   $("#noOfAssistantTeachers").val(totalTeach - classTotal);
   $("#noOfSubstituteTeachers").val((totalTeach * dailyCoverage).toFixed(1));
@@ -327,6 +334,7 @@ function calcTotalExpense() {
 
   //Total expense
   totalExpense = totalPersonnel + reserveFund;
+  console.log(totalExpense+" total expense");
 }
 
 //FUNCTION TO CHECK CHILD RATIO
@@ -527,7 +535,8 @@ function populateStaff() {
     $("#wageSubsTeachers").val(accounting.formatMoney(wageSubsTeachers));
   }
 
-  console.log(salarySubsTeachers + " sub salary-1");
+  console.log(salaryAssistantTeachers+ " = assistant teach sal");
+  console.log(noOfAssistantTeachers + " = no of assist teach");
 }
 
 //FUNCTION TO CONVERT SALARY TO WAGE
@@ -549,24 +558,67 @@ function wageConverter(id) {
 }
 
 //FUNCTION TO ADD CUSTOM FIELD
-
+var customStaffCount = 0;
 function addRow(divName) {
   var newRow = document.createElement("tr");
   $("#removeBtn").css("display", "block");
   $("#removeBtn2").css("display", "block");
 
+  customStaffCount = customStaffCount + 1;
+  console.log(customStaffCount);
   newRow.innerHTML =
-    "<td><div class='input-field'><input type='text' placeholder='Staff Name' class='customStaffName'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff'></div></td><td><div class='input-field'><input type='text' class='salaryCustomStaff'></div></td><td><div class='input-field'><input type='text' class='wageCustomStaff'></div></td>";
+    "<td><div class='input-field'><input type='text' placeholder='Staff Name' id='customStaffName"+customStaffCount+"'style='background-color:transparent!important;max-width:100%;text-align:left;' onchange='addCustomStaff(this)'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff"+customStaffCount+"' value='0' onchange='addCustomStaff(this)'></div></td><td><div class='input-field'><input type='text' class='salaryCustomStaff' id='salaryCustomStaff"+customStaffCount+"' value='0' onchange='addCustomStaff(this)'></div></td><td><div class='input-field'><input type='text' class='wageCustomStaff' id='wageCustomStaff"+customStaffCount+"' value='0' onchange='addCustomStaff(this)'></div></td>";
 
+  
   document.getElementById(divName).appendChild(newRow);
 }
 
 //FUNCTION TO REMOVE CUSTOM FIELD
 
 function removeRow(divName) {
+
+  customStaffCount = customStaffCount - 1;
+  console.log(customStaffCount);
   $("#" + divName + " tr")
     .last()
     .remove();
+}
+
+var customStaff = {
+
+};
+//FUNCTION TO ADD CUSTOM STAFF
+function addCustomStaff(obj){
+
+
+  console.log(customStaff);
+  if(obj.id == "customStaffName"+customStaffCount){
+
+    customStaff.name = obj.value;
+
+  }
+  if(obj.id == "noOfCustomStaff"+customStaffCount){
+
+    customStaff.number = parseInt(obj.value);
+
+  }
+  if(obj.id == "salaryCustomStaff"+customStaffCount){
+
+    customStaff.salary = parseInt(obj.value);
+
+  }
+  if(obj.id == "wageCustomStaff"+customStaffCount){
+
+    customStaff.wage = parseInt(obj.value);
+
+  }
+
+  console.log(customStaff);
+
+
+  
+
+
 }
 
 //FUNCTION TO POPULATE BENEFITS
@@ -677,6 +729,7 @@ function calcTotalPersonnelCost() {
     accounting.unformat($("#salaryAssistantTeachers").val()) *
     parseInt($("#noOfAssistantTeachers").val());
 
+  console.log(salaryAssistantTeachers+" = salary of assist teach in personnel cost")
   salarySubsTeachers =
     accounting.unformat($("#salarySubsTeachers").val()) *
     parseFloat($("#noOfSubstituteTeachers").val());
@@ -685,6 +738,7 @@ function calcTotalPersonnelCost() {
   teachingStaffTotalWage =
     salaryLeadTeachers + salaryAssistantTeachers + salarySubsTeachers;
 
+  console.log(teachingStaffTotalWage+"teach total = "+salaryLeadTeachers+" lead"+salaryAssistantTeachers+" assist"+salarySubsTeachers+"subs");
   //total staff wage
   staffTotalWage = adminStaffTotalWage + teachingStaffTotalWage;
 
@@ -745,6 +799,7 @@ function calcTotalNonPersonnelCost() {
   progAndAdmin =
     dataC[stateSelected].NP_Program_management_and_administration * childTotal;
 
+  console.log(eduProgram+" edu prog"+occupancy+" occu"+progAndAdmin+" progAdmin"+childTotal+" child total"+classTotal+" class total");
   //Total Nonpersonnel Cost
   nonpersonnelSubtotal =
     totalAdditionalCleaning + eduProgram + occupancy + progAndAdmin;
@@ -759,10 +814,17 @@ function calcInfantsCost() {
   infantRatio = parseInt($("input[name='infantRatio']").val());
 
   infantTeachers = Math.ceil(infantChildren / infantRatio);
-
+  console.log(noOfAssistantTeachers+" no of assis teach");
   leadSalary = salaryLeadTeachers / noOfLeadTeachers;
-  assistantTeacherSalary = salaryAssistantTeachers / noOfAssistantTeachers;
 
+  if(noOfAssistantTeachers != 0){
+
+    assistantTeacherSalary = salaryAssistantTeachers / noOfAssistantTeachers;
+  }else{
+    assistantTeacherSalary = 0;
+  }
+  
+  console.log(assistantTeacherSalary+" assis teach sal");
   infant_classPersonnel =
     (leadSalary + (infantTeachers - 1) * assistantTeacherSalary) /
     infantChildren;
