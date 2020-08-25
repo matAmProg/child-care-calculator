@@ -1413,20 +1413,23 @@ function calcFixedCost() {
   fixedCostFCC = 6772;
 
   fixedCostPercentage = (parseInt($("input[name='fixedCost']").val()) / 100).toFixed(2);
-
+  console.log(fixedCostPercentage);
   total_ctc_fixedCost =
     fixedCostPercentage *
     parseInt($("#childCareFacilities").val()) *
     fixedCostCTC;
 
+  console.log(total_ctc_fixedCost);
   total_fcc_fixedCost =
     fixedCostPercentage *
     parseInt($("#familyHomeFacilities").val()) *
     fixedCostFCC;
-
+  
+    console.log(total_fcc_fixedCost);
   totalFixedCost =
-    parseInt(total_ctc_fixedCost) + parseInt(total_fcc_fixedCost);
+    total_ctc_fixedCost + total_fcc_fixedCost;
 
+  console.log(totalFixedCost);  
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
   $("#totalChildCareFixedCost").html(
     accounting.formatMoney(total_ctc_fixedCost / 12)
@@ -1438,28 +1441,42 @@ function calcFixedCost() {
 
 //FUNCTION TO CALC OPERATING COST
 function calcOpCost() {
-  infantMonthly = $("#infantMonthlyCost").html().substring(1);
-  toddlerMonthly = $("#toddlerMonthlyCost").html().substring(1);
-  preMonthly = $("#pre3MonthlyCost").html().substring(1);
+  //infantMonthly = $("#infantMonthlyCost").html().substring(1);
+  infantMonthly = accounting.unformat($("#infantMonthlyCost").html());
+  toddlerMonthly = accounting.unformat($("#toddlerMonthlyCost").html());
+  pre3Monthly = accounting.unformat($("#pre3MonthlyCost").html());
+  pre4Monthly = accounting.unformat($("#pre4MonthlyCost").html());
 
-  avgCostPerChild = Math.round(
-    (parseInt(infantMonthly) +
-      parseInt(toddlerMonthly) +
-      parseInt(preMonthly)) /
-      3
-  );
+  
+  console.log((infantMonthly));
+  console.log(typeof infantMonthly);
+  
 
+  avgCostPerChild = 
+    (infantMonthly +
+    toddlerMonthly +
+    pre3Monthly + pre4Monthly) /
+      4
+  ;
+
+  console.log(avgCostPerChild);
   opCostPercentage = (
     parseInt($("input[name='operatingCost']").val()) / 100
   ).toFixed(2);
 
   total_ctc_opCost =
     parseInt($("#childCareSlots").val()) * opCostPercentage * avgCostPerChild;
+  
+
+  console.log(total_ctc_opCost);
+
+  costPerChildFCCMonthly = accounting.unformat($("#infantMonthlyCostFCC").html());
   total_fcc_opCost =
     parseInt($("#familyHomeSlots").val()) *
     opCostPercentage *
-    (costPerChildFCC / 12).toFixed(2);
+    costPerChildFCCMonthly;
 
+  console.log(total_fcc_opCost);  
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
 
   $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost / 12));
