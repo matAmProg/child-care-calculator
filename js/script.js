@@ -580,7 +580,7 @@ function addRowFCC(divName) {
 
 function removeRow(divName) {
   customStaffCountCC = customStaffCountCC - 1;
-  console.log(customStaffCountCC);
+
   customStaffArr.pop();
   calcTotalPersonnelCost();
   calcTotalNonPersonnelCost();
@@ -594,8 +594,6 @@ function removeRow(divName) {
   $("#" + divName + " tr")
     .last()
     .remove();
-
-  console.log(customStaffArr.length);
 }
 
 //FUNCTION TO REMOVE CUSTOM FIELD FROM FAMILY CARE CENTER
@@ -604,12 +602,10 @@ function removeRowFCC(divName) {
   customStaffCountFCC = customStaffCountFCC - 1;
 
   var popItem = customStaffArrFCC.pop();
-  console.log(popItem);
-  if(popItem != undefined){
 
+  if (popItem != undefined) {
     totalFTEmployeeFCC = totalFTEmployeeFCC - popItem.customStaffNoFCC;
   }
-  
 
   calcTotalWagesAndBenefitsFCC();
   calcInfantFCC();
@@ -631,6 +627,14 @@ function addCustomStaff(obj) {
   var name, number, salary, wage;
   var count = obj.id[obj.id.length - 1];
 
+  if (obj.id == "salaryCustomStaff" + count) {
+    salaryConverter("CustomStaff" + count);
+  }
+
+  if (obj.id == "wageCustomStaff" + count) {
+    wageConverter("CustomStaff" + count);
+  }
+
   if (
     $("#customStaffName" + count).val() != "" &&
     $("#noOfCustomStaff" + count).val() != 0 &&
@@ -649,7 +653,8 @@ function addCustomStaff(obj) {
       customStaffWage: wage,
     };
     customStaffArr[count] = staff;
-
+    // salaryConverter('CustomStaff'+count);
+    // wageConverter('CustomStaff'+count);
     calcTotalPersonnelCost();
     calcTotalNonPersonnelCost();
     calcInfantsCost();
@@ -667,6 +672,14 @@ var customStaffArrFCC = [];
 function addCustomStaffFCC(obj) {
   var name, number, salary, wage;
   var count = obj.id[obj.id.length - 1];
+
+  if (obj.id == "salaryCustomStaffFCC" + count) {
+    salaryConverter("CustomStaffFCC" + count);
+  }
+
+  if (obj.id == "wageCustomStaffFCC" + count) {
+    wageConverter("CustomStaffFCC" + count);
+  }
 
   if (
     $("#customStaffNameFCC" + count).val() != "" &&
@@ -1384,16 +1397,11 @@ function calcTotalWagesAndBenefitsFCC() {
       totalCustomStaffFCC + arrCustomFCC[i].customStaffNoFCC;
   }
 
-  console.log(totalCustomStaffFCC + " -->total custom staff FCC");
   totalWagesFCC = providerSalary + assistantSalary + totalCustomSalaryFCC;
   totalFTEmployeeFCC = totalFTEmployeeFCC + totalCustomStaffFCC;
-  console.log(totalWagesFCC + " -->Total wages!");
-  console.log(totalFTEmployeeFCC + " -->Total FT Employees!");
 
   mandatoryBenefitsFCC =
     mandatoryBenefitsVal * (totalWagesFCC - providerSalary);
-
-  console.log(mandatoryBenefitsFCC + " ->FCC Mandatory benefits!");
 
   if (parseInt($("#noOfAssistantTeachersFCC").val()) != 0) {
     assistantTeacherUnitCostFCC =
@@ -1421,16 +1429,14 @@ function calcTotalWagesAndBenefitsFCC() {
 
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
 
-  console.log(totalHealthFCC + " --> Total health insurance!");
   discretionaryBenefits =
     totalSickDaysCostFCC + totalPaidLeaveCostFCC + totalHealthFCC;
-  console.log(discretionaryBenefits + " --> Disc Bens FCC!");
+
   totalWagesAndBenefitsFCC =
     parseInt(totalWagesFCC) +
     parseInt(mandatoryBenefitsFCC) +
     parseInt(discretionaryBenefits);
 
-  console.log(totalWagesAndBenefitsFCC + " -->total wages and bens FCC");
   //CONST VALUES
   np_adminFCC = 3725;
   np_programFCC = 7250;
@@ -1452,14 +1458,10 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt(totalCleaningCostFCC) +
     parseInt(miscCostFCC);
 
-  console.log(totalOtherExpensesFCC + " -->total other exp");
-
   totalExpensesFCC =
     parseInt(totalWagesAndBenefitsFCC) + parseInt(totalOtherExpensesFCC);
 
-  console.log(totalExpensesFCC + " -->Total exps");
   costPerChildFCC = parseInt(totalExpensesFCC) / parseInt(childTotalFCC);
-  console.log(costPerChildFCC + " -->cost per child FCC");
 }
 
 //FUNCTION TO CALCULATE INFANT COST
@@ -1536,21 +1538,34 @@ function calcFixedCost() {
   fixedCostPercentage = (
     parseInt($("input[name='fixedCost']").val()) / 100
   ).toFixed(2);
-  console.log(fixedCostPercentage+" -->fixed per");  
+  console.log(fixedCostPercentage + " -->fixed per");
   total_ctc_fixedCost =
     fixedCostPercentage *
     parseInt($("#childCareFacilities").val()) *
-    fixedCostCTC;
-  
-  console.log(total_ctc_fixedCost+" -->total ctc fixedcost")  
+    (fixedCostCTC / 12);
+  console.log(
+    fixedCostPercentage +
+      " X " +
+      parseInt($("#childCareFacilities").val()) +
+      " X " +
+      fixedCostCTC
+  );
+  console.log(total_ctc_fixedCost + " -->total ctc fixedcost");
   total_fcc_fixedCost =
     fixedCostPercentage *
     parseInt($("#familyHomeFacilities").val()) *
-    fixedCostFCC;
+    (fixedCostFCC / 12);
 
-  console.log(total_fcc_fixedCost+" -->total fcc fixedcost")   
+  console.log(
+    fixedCostPercentage +
+      " X " +
+      parseInt($("#familyHomeFacilities").val()) +
+      " X " +
+      fixedCostFCC
+  );
+  console.log(total_fcc_fixedCost + " -->total fcc fixedcost");
   totalFixedCost = total_ctc_fixedCost + total_fcc_fixedCost;
-  console.log(totalFixedCost+" -->Total fixed cost");  
+  console.log(totalFixedCost + " -->Total fixed cost");
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
   $("#totalChildCareFixedCost").html(
     accounting.formatMoney(total_ctc_fixedCost / 12)
@@ -1587,8 +1602,8 @@ function calcOpCost() {
     costPerChildFCCMonthly;
 
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
-  
-  console.log(totalOpCost+" -->total op cost");
+
+  console.log(totalOpCost + " -->total op cost");
   $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost / 12));
   $("#totalChildCareOperatingCost").html(
     accounting.formatMoney(total_ctc_opCost / 12)
