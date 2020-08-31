@@ -166,8 +166,8 @@
       </div>
 
       <!--Alert to select state-->
-      <div id="stateAlert" class="row" style="display: none;">
-        <span style="color: red;">Please select a state above.</span>
+      <div id="stateAlert" class="row" style="display: none">
+        <span style="color: red">Please select a state above.</span>
       </div>
 
       <!--Tabs Header-->
@@ -455,7 +455,7 @@
             <tbody id="dynamicInput">
               <tr>
                 <td>Program Director</td>
-                <td>    
+                <td>
                   <div class="input-field">
                     <input
                       type="text"
@@ -665,7 +665,7 @@
                 ><i class="material-icons">add</i></a
               >Add Custom Staff Member
             </div>
-            <div class="col s6" id="removeBtn" style="display: none;">
+            <div class="col s6" id="removeBtn" style="display: none">
               <a
                 class="btn-floating btn-small waves-effect waves-light red"
                 onclick="removeRow('dynamicInput');"
@@ -971,7 +971,7 @@
                 <td>
                   <div
                     class="childTotalFCC"
-                    style="max-width: 91px; text-align: center;"
+                    style="max-width: 91px; text-align: center"
                   ></div>
                 </td>
               </tr>
@@ -1135,14 +1135,14 @@
             <div class="col s6">
               <a
                 class="btn-floating btn-small waves-effect waves-light red"
-                onclick="addRow('dynamicInput2');"
+                onclick="addRowFCC('dynamicInput2');"
                 ><i class="material-icons">add</i></a
               >Add Custom Staff Member
             </div>
-            <div class="col s6" id="removeBtn2" style="display: none;">
+            <div class="col s6" id="removeBtn2" style="display: none">
               <a
                 class="btn-floating btn-small waves-effect waves-light red"
-                onclick="removeRow('dynamicInput2');"
+                onclick="removeRowFCC('dynamicInput2');"
                 ><i class="material-icons">close</i></a
               >Remove Custom Staff Member
             </div>
@@ -1459,7 +1459,11 @@
             <div class="col s6">
               Percent of providers fixed costs covered:
               <div class="input-field inline">
-                <input type="text" name="fixedCost" onchange="calcFixedCost();calcOpCost();"/>
+                <input
+                  type="text"
+                  name="fixedCost"
+                  onchange="calcFixedCost();calcOpCost();"
+                />
               </div>
             </div>
           </div>
@@ -1468,7 +1472,11 @@
             <div class="col s6">
               Percent of capacity operating costs covered:
               <div class="input-field inline">
-                <input type="text" name="operatingCost" onchange="calcFixedCost();calcOpCost();"/>
+                <input
+                  type="text"
+                  name="operatingCost"
+                  onchange="calcFixedCost();calcOpCost();"
+                />
               </div>
             </div>
           </div>
@@ -1484,12 +1492,12 @@
                 <div class="col s6" id="totalFixedCosts"></div>
               </div>
 
-              <div class="row" style="margin-left: 70px;">
+              <div class="row" style="margin-left: 70px">
                 <div class="col s5">Child care centers</div>
                 <div class="col s4" id="totalChildCareFixedCost"></div>
               </div>
 
-              <div class="row" style="margin-left: 70px;">
+              <div class="row" style="margin-left: 70px">
                 <div class="col s5">Family child care home</div>
                 <div class="col s4" id="totalFamilyHomeFixedCost"></div>
               </div>
@@ -1501,12 +1509,12 @@
                 <div class="col s6" id="totalOperatingCosts"></div>
               </div>
 
-              <div class="row" style="margin-left: 70px;">
+              <div class="row" style="margin-left: 70px">
                 <div class="col s5">Child care centers</div>
                 <div class="col s4" id="totalChildCareOperatingCost"></div>
               </div>
 
-              <div class="row" style="margin-left: 70px;">
+              <div class="row" style="margin-left: 70px">
                 <div class="col s5">Family child care home</div>
                 <div class="col s4" id="totalFamilyHomeOperatingCost"></div>
               </div>
