@@ -1566,12 +1566,12 @@ function calcFixedCost() {
   console.log(total_fcc_fixedCost + " -->total fcc fixedcost");
   totalFixedCost = total_ctc_fixedCost + total_fcc_fixedCost;
   console.log(totalFixedCost + " -->Total fixed cost");
-  $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
+  $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost));
   $("#totalChildCareFixedCost").html(
-    accounting.formatMoney(total_ctc_fixedCost / 12)
+    accounting.formatMoney(total_ctc_fixedCost)
   );
   $("#totalFamilyHomeFixedCost").html(
-    accounting.formatMoney(total_fcc_fixedCost / 12)
+    accounting.formatMoney(total_fcc_fixedCost)
   );
 }
 
@@ -1586,29 +1586,34 @@ function calcOpCost() {
   avgCostPerChild =
     (infantMonthly + toddlerMonthly + pre3Monthly + pre4Monthly) / 4;
 
+  console.log(avgCostPerChild+" -->AVG cost per child")  
   opCostPercentage = (
     parseInt($("input[name='operatingCost']").val()) / 100
   ).toFixed(2);
 
   total_ctc_opCost =
     parseInt($("#childCareSlots").val()) * opCostPercentage * avgCostPerChild;
-
+  
+  console.log(total_ctc_opCost+" -->Total CTC opcost");  
   costPerChildFCCMonthly = accounting.unformat(
     $("#infantMonthlyCostFCC").html()
   );
+
+  console.log(costPerChildFCCMonthly+" -->cost per child FCC");
   total_fcc_opCost =
     parseInt($("#familyHomeSlots").val()) *
     opCostPercentage *
     costPerChildFCCMonthly;
-
+  
+  console.log(total_fcc_opCost+" -->Total fcc opcost")  
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
 
   console.log(totalOpCost + " -->total op cost");
-  $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost / 12));
+  $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost));
   $("#totalChildCareOperatingCost").html(
-    accounting.formatMoney(total_ctc_opCost / 12)
+    accounting.formatMoney(total_ctc_opCost)
   );
   $("#totalFamilyHomeOperatingCost").html(
-    accounting.formatMoney(total_fcc_opCost / 12)
+    accounting.formatMoney(total_fcc_opCost)
   );
 }
