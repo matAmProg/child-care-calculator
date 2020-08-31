@@ -319,21 +319,15 @@ function getSalaryLevelCC() {
 //FUNCTION TO CALCULATE TOTAL EXPENSE
 function calcTotalExpense() {
   //TOTAL COST OF PERSONNEL & NON PERSONNEL
-  console.log(
-    personnelSubtotal +
-      " (personnel total)" +
-      nonpersonnelSubtotal +
-      " (NP total)"
-  );
+
   totalPersonnel = personnelSubtotal + nonpersonnelSubtotal;
-  console.log(totalPersonnel + " -->TOTAL PERSONNEL");
+
   //reserve fund
   reserveFundPercentage = 0.05;
   reserveFund = reserveFundPercentage * totalPersonnel;
-  console.log(reserveFund + " -->Reserve Fund");
+
   //Total expense
   totalExpense = totalPersonnel + reserveFund;
-  console.log(totalExpense + " -->total expenseCC");
 }
 
 //FUNCTION TO CHECK CHILD RATIO
@@ -551,34 +545,80 @@ function wageConverter(id) {
   }
 }
 
-//FUNCTION TO ADD CUSTOM FIELD
-var customStaffCount = 0;
+//FUNCTION TO ADD CUSTOM FIELD TO CHILD CARE CENTER
+var customStaffCountCC = -1;
 function addRow(divName) {
   var newRow = document.createElement("tr");
   $("#removeBtn").css("display", "block");
-  $("#removeBtn2").css("display", "block");
 
-  customStaffCount = customStaffCount + 1;
+  customStaffCountCC = customStaffCountCC + 1;
 
-  newRow.innerHTML =
-    "<td><div class='input-field'><input type='text' placeholder='Staff Name' id='customStaffName" +
-    customStaffCount +
-    "'style='background-color:transparent!important;max-width:100%;text-align:left;' onchange='addCustomStaff(this)'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff" +
-    customStaffCount +
-    "' value='0' onchange='addCustomStaff(this);'></div></td><td><div class='input-field'><input type='text' class='salaryCustomStaff' id='salaryCustomStaff" +
-    customStaffCount +
-    "' value='0' onchange='addCustomStaff(this);'></div></td><td><div class='input-field'><input type='text' class='wageCustomStaff' id='wageCustomStaff" +
-    customStaffCount +
-    "' value='0' onchange='addCustomStaff(this);'></div></td>";
+  var str = "CustomStaff" + customStaffCountCC;
+
+  newRow.innerHTML = `<td><div class='input-field'><input type='text' placeholder='Staff Name' id='customStaffName${customStaffCountCC}'style='background-color:transparent!important;max-width:100%;text-align:left;' onchange='addCustomStaff(this)'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaff${customStaffCountCC}' value='0' onchange='addCustomStaff(this);'></div></td><td><div class='input-field'><input type='text' class='salaryCustomStaff' id='salaryCustomStaff${customStaffCountCC}' value='0' onchange='addCustomStaff(this);formatField(this);'></div></td><td><div class='input-field'><input type='text' class='wageCustomStaff' id='wageCustomStaff${customStaffCountCC}' value='0' onchange='addCustomStaff(this);formatField(this);'></div></td>`;
 
   document.getElementById(divName).appendChild(newRow);
 }
 
-//FUNCTION TO REMOVE CUSTOM FIELD
+//FUNCTION TO ADD CUSTOM FIELD TO FAMILY CARE CENTER
+var customStaffCountFCC = -1;
+function addRowFCC(divName) {
+  var newRow = document.createElement("tr");
+
+  $("#removeBtn2").css("display", "block");
+
+  customStaffCountFCC = customStaffCountFCC + 1;
+
+  var str = "CustomStaff" + customStaffCountFCC;
+
+  newRow.innerHTML = `<td><div class='input-field'><input type='text' placeholder='Staff Name' id='customStaffNameFCC${customStaffCountFCC}'style='background-color:transparent!important;max-width:100%;text-align:left;' onchange='addCustomStaffFCC(this)'></div></td><td><div class='input-field'><input type='text'    id='noOfCustomStaffFCC${customStaffCountFCC}' value='0' onchange='addCustomStaffFCC(this);'></div></td><td><div class='input-field'><input type='text' class='salaryCustomStaff' id='salaryCustomStaffFCC${customStaffCountFCC}' value='0' onchange='addCustomStaffFCC(this);formatField(this);'></div></td><td><div class='input-field'><input type='text' class='wageCustomStaff' id='wageCustomStaffFCC${customStaffCountFCC}' value='0' onchange='addCustomStaffFCC(this);formatField(this);'></div></td>`;
+
+  document.getElementById(divName).appendChild(newRow);
+}
+
+//FUNCTION TO REMOVE CUSTOM FIELD FROM CHILD CARE CENTER
 
 function removeRow(divName) {
-  customStaffCount = customStaffCount - 1;
+  customStaffCountCC = customStaffCountCC - 1;
+  console.log(customStaffCountCC);
   customStaffArr.pop();
+  calcTotalPersonnelCost();
+  calcTotalNonPersonnelCost();
+  calcInfantsCost();
+  calcToddlersCost();
+  calcPre3Cost();
+  calcPre4Cost();
+  if (customStaffCountCC == -1) {
+    $("#removeBtn").css("display", "none");
+  }
+  $("#" + divName + " tr")
+    .last()
+    .remove();
+
+  console.log(customStaffArr.length);
+}
+
+//FUNCTION TO REMOVE CUSTOM FIELD FROM FAMILY CARE CENTER
+
+function removeRowFCC(divName) {
+  customStaffCountFCC = customStaffCountFCC - 1;
+
+  var popItem = customStaffArrFCC.pop();
+  console.log(popItem);
+  if(popItem != undefined){
+
+    totalFTEmployeeFCC = totalFTEmployeeFCC - popItem.customStaffNoFCC;
+  }
+  
+
+  calcTotalWagesAndBenefitsFCC();
+  calcInfantFCC();
+  calcToddlerFCC();
+  calcPre3FCC();
+  calcPre4FCC();
+  if (customStaffCountFCC == -1) {
+    $("#removeBtn2").css("display", "none");
+  }
   $("#" + divName + " tr")
     .last()
     .remove();
@@ -586,34 +626,76 @@ function removeRow(divName) {
 
 var customStaffArr = [];
 
-//FUNCTION TO ADD CUSTOM STAFF
+//FUNCTION TO ADD CUSTOM STAFF TO CHILD CARE
 function addCustomStaff(obj) {
   var name, number, salary, wage;
+  var count = obj.id[obj.id.length - 1];
 
   if (
-    $("#customStaffName" + customStaffCount).val() != "" &&
-    $("#noOfCustomStaff" + customStaffCount).val() != 0 &&
-    $("#salaryCustomStaff" + customStaffCount).val() != 0 &&
-    $("#wageCustomStaff" + customStaffCount).val() != 0
+    $("#customStaffName" + count).val() != "" &&
+    $("#noOfCustomStaff" + count).val() != 0 &&
+    $("#salaryCustomStaff" + count).val() != 0 &&
+    $("#wageCustomStaff" + count).val() != 0
   ) {
-    name = $("#customStaffName" + customStaffCount).val();
-    number = parseInt($("#noOfCustomStaff" + customStaffCount).val());
-    salary = accounting.unformat(
-      $("#salaryCustomStaff" + customStaffCount).val()
-    );
-    wage = accounting.unformat($("#wageCustomStaff" + customStaffCount).val());
+    name = $("#customStaffName" + count).val();
+    number = parseInt($("#noOfCustomStaff" + count).val());
+    salary = accounting.unformat($("#salaryCustomStaff" + count).val());
+    wage = accounting.unformat($("#wageCustomStaff" + count).val());
 
-    customStaffArr.push({
+    let staff = {
       customStaffName: name,
       customStaffNo: number,
       customStaffSalary: salary,
       customStaffWage: wage,
-    });
+    };
+    customStaffArr[count] = staff;
+
+    calcTotalPersonnelCost();
+    calcTotalNonPersonnelCost();
+    calcInfantsCost();
+    calcToddlersCost();
+    calcPre3Cost();
+    calcPre4Cost();
   } else {
     return;
   }
 }
 
+var customStaffArrFCC = [];
+
+//FUNCTION TO ADD CUSTOM STAFF TO FAMILY CARE
+function addCustomStaffFCC(obj) {
+  var name, number, salary, wage;
+  var count = obj.id[obj.id.length - 1];
+
+  if (
+    $("#customStaffNameFCC" + count).val() != "" &&
+    $("#noOfCustomStaffFCC" + count).val() != 0 &&
+    $("#salaryCustomStaffFCC" + count).val() != 0 &&
+    $("#wageCustomStaffFCC" + count).val() != 0
+  ) {
+    name = $("#customStaffNameFCC" + count).val();
+    number = parseInt($("#noOfCustomStaffFCC" + count).val());
+    salary = accounting.unformat($("#salaryCustomStaffFCC" + count).val());
+    wage = accounting.unformat($("#wageCustomStaffFCC" + count).val());
+
+    let staff = {
+      customStaffNameFCC: name,
+      customStaffNoFCC: number,
+      customStaffSalaryFCC: salary,
+      customStaffWageFCC: wage,
+    };
+    customStaffArrFCC[count] = staff;
+
+    calcTotalWagesAndBenefitsFCC();
+    calcInfantFCC();
+    calcToddlerFCC();
+    calcPre3FCC();
+    calcPre4FCC();
+  } else {
+    return;
+  }
+}
 //FUNCTION TO POPULATE BENEFITS
 
 function populateBenefits() {
@@ -709,17 +791,31 @@ function calcTotalPersonnelCost() {
     accounting.unformat($("#salaryAdministrativeAssistants").val()) *
     parseInt($("#noOfAdministrativeAssistants").val());
 
+  var arrCustom = customStaffArr;
+
+  var totalCustomSalary = 0;
+  var totalCustomStaff = 0;
+
+  for (let i = 0; i < arrCustom.length; i++) {
+    totalCustomSalary =
+      totalCustomSalary +
+      arrCustom[i].customStaffNo * arrCustom[i].customStaffSalary;
+
+    totalCustomStaff = totalCustomStaff + arrCustom[i].customStaffNo;
+  }
+
   adminStaffTotalNo =
     parseInt($("#noOfProgramDirectors").val()) +
     parseInt($("#noOfAssistantDirectors").val()) +
-    parseInt($("#noOfAdministrativeAssistants").val());
+    parseInt($("#noOfAdministrativeAssistants").val()) +
+    totalCustomStaff;
 
   adminStaffTotalWage =
     salaryProgramDirectors +
     salaryAssistantDirectors +
-    salaryAdministrativeAssistants;
+    salaryAdministrativeAssistants +
+    totalCustomSalary;
 
-  console.log(adminStaffTotalWage + " -->admin staff total wage");
   salaryLeadTeachers =
     accounting.unformat($("#salaryLeadTeachers").val()) *
     parseInt($("#noOfLeadTeachers").val());
@@ -733,21 +829,18 @@ function calcTotalPersonnelCost() {
     parseFloat($("#noOfSubstituteTeachers").val());
 
   unitSalarySubsTeachers = accounting.unformat($("#salarySubsTeachers").val());
-  console.log(salarySubsTeachers + " -->salary of subs teacher");
+
   //total teaching staff wage
   teachingStaffTotalWage =
     salaryLeadTeachers + salaryAssistantTeachers + salarySubsTeachers;
-  console.log(teachingStaffTotalWage + " --> teaching staff total wage");
 
   //total staff wage
   staffTotalWage = adminStaffTotalWage + teachingStaffTotalWage;
-  console.log(staffTotalWage + " --> staff  total wage");
+
   //total no of teaching staff
   totalTeachingStaff = totalTeachers + noOfSubstituteTeachers;
   staffTotalNo = adminStaffTotalNo + totalTeachingStaff;
-  console.log(staffTotalNo + "-->total staff no");
-  console.log(totalTeachers + "-->total teachers");
-  console.log(noOfSubstituteTeachers + "-->no of subs teacher");
+
   subsCostForPaidLeave =
     staffTotalNo * paidLeave * 8 * (unitSalarySubsTeachers / 2080);
 
@@ -757,29 +850,22 @@ function calcTotalPersonnelCost() {
 
   //total subs cost
   subsCostForLeaveTotal = subsCostForSickLeave + subsCostForPaidLeave;
-  console.log(subsCostForLeaveTotal + " -->subs total cost");
+
   //total staff wage
   subTotalWages = staffTotalWage + subsCostForLeaveTotal;
-  console.log(subTotalWages + " -->subtotal wages after adding subs cost");
+
   //CONST Mandatory benefits value
   mandatoryBenefitsVal = 0.1065;
   mandatoryBenefitsSalary = mandatoryBenefitsVal * subTotalWages;
-  console.log(mandatoryBenefitsSalary + " -->mandatory salary");
+
   //Total staff
-  totalStaff =
-    totalTeachingStaff +
-    parseInt($("#noOfProgramDirectors").val()) +
-    parseInt($("#noOfAssistantDirectors").val()) +
-    parseInt($("#noOfAdministrativeAssistants").val());
+  totalStaff = totalTeachingStaff + adminStaffTotalNo;
 
   additionalBenefits = totalStaff * costPerFTEmployee;
-  console.log(costPerFTEmployee + " -->health insurance");
-  console.log(additionalBenefits + " -->additional benefits");
+
   //Subtotal Personnel
   personnelSubtotal =
     subTotalWages + mandatoryBenefitsSalary + additionalBenefits;
-
-  console.log(personnelSubtotal + " -->personnel total wages");
 }
 
 //FUNCTION TO CALCULATE TOTAL NONPERSONNEL COST
@@ -794,9 +880,8 @@ function calcTotalNonPersonnelCost() {
       sanitationCost) *
     12;
 
-  console.log(totalAdditionalCleaning + " -->total additional cleaning");
   //CONST Nonpersonnel expenses
-  console.log(childTotal + " -->Total children");
+
   eduProgram =
     dataC[stateSelected].NP_Education_program_for_children_and_staff *
     childTotal;
@@ -809,7 +894,6 @@ function calcTotalNonPersonnelCost() {
   //Total Nonpersonnel Cost
   nonpersonnelSubtotal =
     totalAdditionalCleaning + eduProgram + occupancy + progAndAdmin;
-  console.log(nonpersonnelSubtotal + " -->NP subtotal");
 }
 
 //FUNCTION TO CALCULATE INFANT COST PER CHILD
@@ -1286,17 +1370,34 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt($("#noOfAssistantTeachersFCC").val()) *
     accounting.unformat($("#salaryOfAssistantTeachersFCC").val());
 
-  totalWagesFCC = providerSalary + assistantSalary;
+  var arrCustomFCC = customStaffArrFCC;
 
-  mandatoryBenefitsFCC = (
-    mandatoryBenefitsVal *
-    (totalWagesFCC - providerSalary)
-  ).toFixed(0);
+  var totalCustomSalaryFCC = 0;
+  var totalCustomStaffFCC = 0;
+
+  for (let i = 0; i < arrCustomFCC.length; i++) {
+    totalCustomSalaryFCC =
+      totalCustomSalaryFCC +
+      arrCustomFCC[i].customStaffNoFCC * arrCustomFCC[i].customStaffSalaryFCC;
+
+    totalCustomStaffFCC =
+      totalCustomStaffFCC + arrCustomFCC[i].customStaffNoFCC;
+  }
+
+  console.log(totalCustomStaffFCC + " -->total custom staff FCC");
+  totalWagesFCC = providerSalary + assistantSalary + totalCustomSalaryFCC;
+  totalFTEmployeeFCC = totalFTEmployeeFCC + totalCustomStaffFCC;
+  console.log(totalWagesFCC + " -->Total wages!");
+  console.log(totalFTEmployeeFCC + " -->Total FT Employees!");
+
+  mandatoryBenefitsFCC =
+    mandatoryBenefitsVal * (totalWagesFCC - providerSalary);
+
+  console.log(mandatoryBenefitsFCC + " ->FCC Mandatory benefits!");
 
   if (parseInt($("#noOfAssistantTeachersFCC").val()) != 0) {
-    assistantTeacherUnitCostFCC = (
-      assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val())
-    ).toFixed(0);
+    assistantTeacherUnitCostFCC =
+      assistantSalary / parseInt($("#noOfAssistantTeachersFCC").val());
 
     sickDaysCostFCC =
       parseInt($("input[name='sickdaysFCC']").val()) *
@@ -1320,14 +1421,16 @@ function calcTotalWagesAndBenefitsFCC() {
 
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
 
+  console.log(totalHealthFCC + " --> Total health insurance!");
   discretionaryBenefits =
     totalSickDaysCostFCC + totalPaidLeaveCostFCC + totalHealthFCC;
-
+  console.log(discretionaryBenefits + " --> Disc Bens FCC!");
   totalWagesAndBenefitsFCC =
     parseInt(totalWagesFCC) +
     parseInt(mandatoryBenefitsFCC) +
     parseInt(discretionaryBenefits);
 
+  console.log(totalWagesAndBenefitsFCC + " -->total wages and bens FCC");
   //CONST VALUES
   np_adminFCC = 3725;
   np_programFCC = 7250;
@@ -1349,10 +1452,14 @@ function calcTotalWagesAndBenefitsFCC() {
     parseInt(totalCleaningCostFCC) +
     parseInt(miscCostFCC);
 
+  console.log(totalOtherExpensesFCC + " -->total other exp");
+
   totalExpensesFCC =
     parseInt(totalWagesAndBenefitsFCC) + parseInt(totalOtherExpensesFCC);
 
+  console.log(totalExpensesFCC + " -->Total exps");
   costPerChildFCC = parseInt(totalExpensesFCC) / parseInt(childTotalFCC);
+  console.log(costPerChildFCC + " -->cost per child FCC");
 }
 
 //FUNCTION TO CALCULATE INFANT COST
@@ -1429,19 +1536,21 @@ function calcFixedCost() {
   fixedCostPercentage = (
     parseInt($("input[name='fixedCost']").val()) / 100
   ).toFixed(2);
-
+  console.log(fixedCostPercentage+" -->fixed per");  
   total_ctc_fixedCost =
     fixedCostPercentage *
     parseInt($("#childCareFacilities").val()) *
     fixedCostCTC;
-
+  
+  console.log(total_ctc_fixedCost+" -->total ctc fixedcost")  
   total_fcc_fixedCost =
     fixedCostPercentage *
     parseInt($("#familyHomeFacilities").val()) *
     fixedCostFCC;
 
+  console.log(total_fcc_fixedCost+" -->total fcc fixedcost")   
   totalFixedCost = total_ctc_fixedCost + total_fcc_fixedCost;
-
+  console.log(totalFixedCost+" -->Total fixed cost");  
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost / 12));
   $("#totalChildCareFixedCost").html(
     accounting.formatMoney(total_ctc_fixedCost / 12)
@@ -1478,7 +1587,8 @@ function calcOpCost() {
     costPerChildFCCMonthly;
 
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
-
+  
+  console.log(totalOpCost+" -->total op cost");
   $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost / 12));
   $("#totalChildCareOperatingCost").html(
     accounting.formatMoney(total_ctc_opCost / 12)
