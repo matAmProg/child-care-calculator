@@ -1538,34 +1538,19 @@ function calcFixedCost() {
   fixedCostPercentage = (
     parseInt($("input[name='fixedCost']").val()) / 100
   ).toFixed(2);
-  console.log(fixedCostPercentage + " -->fixed per");
+
   total_ctc_fixedCost =
     fixedCostPercentage *
     parseInt($("#childCareFacilities").val()) *
     (fixedCostCTC / 12);
-  console.log(
-    fixedCostPercentage +
-      " X " +
-      parseInt($("#childCareFacilities").val()) +
-      " X " +
-      fixedCostCTC
-  );
-  console.log(total_ctc_fixedCost + " -->total ctc fixedcost");
+
   total_fcc_fixedCost =
     fixedCostPercentage *
     parseInt($("#familyHomeFacilities").val()) *
     (fixedCostFCC / 12);
 
-  console.log(
-    fixedCostPercentage +
-      " X " +
-      parseInt($("#familyHomeFacilities").val()) +
-      " X " +
-      fixedCostFCC
-  );
-  console.log(total_fcc_fixedCost + " -->total fcc fixedcost");
   totalFixedCost = total_ctc_fixedCost + total_fcc_fixedCost;
-  console.log(totalFixedCost + " -->Total fixed cost");
+
   $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost));
   $("#totalChildCareFixedCost").html(
     accounting.formatMoney(total_ctc_fixedCost)
@@ -1573,6 +1558,85 @@ function calcFixedCost() {
   $("#totalFamilyHomeFixedCost").html(
     accounting.formatMoney(total_fcc_fixedCost)
   );
+}
+
+//INFANT DIV
+var myElementInfant = document.getElementById("infantMonthlyCost");
+if (window.addEventListener) {
+  // Normal browsers
+  myElementInfant.addEventListener("DOMSubtreeModified", contentChanged, false);
+} else if (window.attachEvent) {
+  // IE
+  myElementInfant.attachEvent("DOMSubtreeModified", contentChanged);
+}
+
+function contentChanged() {
+  // this function will run each time the content of the DIV changes
+  calcOpCost();
+}
+
+//TODDLER DIV
+var myElementToddler = document.getElementById("toddlerMonthlyCost");
+if (window.addEventListener) {
+  // Normal browsers
+  myElementToddler.addEventListener(
+    "DOMSubtreeModified",
+    contentChanged,
+    false
+  );
+} else if (window.attachEvent) {
+  // IE
+  myElementToddler.attachEvent("DOMSubtreeModified", contentChanged);
+}
+
+function contentChanged() {
+  // this function will run each time the content of the DIV changes
+  calcOpCost();
+}
+
+//PRE3 DIV
+var myElementPre3 = document.getElementById("pre3MonthlyCost");
+if (window.addEventListener) {
+  // Normal browsers
+  myElementPre3.addEventListener("DOMSubtreeModified", contentChanged, false);
+} else if (window.attachEvent) {
+  // IE
+  myElementPre3.attachEvent("DOMSubtreeModified", contentChanged);
+}
+
+function contentChanged() {
+  // this function will run each time the content of the DIV changes
+  calcOpCost();
+}
+
+//PRE4 DIV
+var myElementPre4 = document.getElementById("pre4MonthlyCost");
+if (window.addEventListener) {
+  // Normal browsers
+  myElementPre4.addEventListener("DOMSubtreeModified", contentChanged, false);
+} else if (window.attachEvent) {
+  // IE
+  myElementPre4.attachEvent("DOMSubtreeModified", contentChanged);
+}
+
+function contentChanged() {
+  // this function will run each time the content of the DIV changes
+  calcOpCost();
+}
+
+//FCC MONTHLY DIV
+var myElementFCC = document.getElementById("infantMonthlyCostFCC");
+if (window.addEventListener) {
+  // Normal browsers
+  myElementFCC.addEventListener("DOMSubtreeModified", contentChanged, false);
+} else if (window.attachEvent) {
+  // IE
+  myElementFCC.attachEvent("DOMSubtreeModified", contentChanged);
+}
+
+function contentChanged() {
+  // this function will run each time the content of the DIV changes
+  calcOpCost();
 }
 
 //FUNCTION TO CALC OPERATING COST
@@ -1586,29 +1650,29 @@ function calcOpCost() {
   avgCostPerChild =
     (infantMonthly + toddlerMonthly + pre3Monthly + pre4Monthly) / 4;
 
-  console.log(avgCostPerChild+" -->AVG cost per child")  
+  
   opCostPercentage = (
     parseInt($("input[name='operatingCost']").val()) / 100
   ).toFixed(2);
 
   total_ctc_opCost =
     parseInt($("#childCareSlots").val()) * opCostPercentage * avgCostPerChild;
+
   
-  console.log(total_ctc_opCost+" -->Total CTC opcost");  
   costPerChildFCCMonthly = accounting.unformat(
     $("#infantMonthlyCostFCC").html()
   );
 
-  console.log(costPerChildFCCMonthly+" -->cost per child FCC");
+  
   total_fcc_opCost =
     parseInt($("#familyHomeSlots").val()) *
     opCostPercentage *
     costPerChildFCCMonthly;
+
   
-  console.log(total_fcc_opCost+" -->Total fcc opcost")  
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
 
-  console.log(totalOpCost + " -->total op cost");
+  
   $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost));
   $("#totalChildCareOperatingCost").html(
     accounting.formatMoney(total_ctc_opCost)
