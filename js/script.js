@@ -132,9 +132,9 @@ function getRatio() {
   if (ratioSelected == "precovid") {
     $("input[type='checkbox']").prop("checked", true);
     $("input[name='costOfFTEmployee']").val(
-      dataC[stateSelected].health_insurance
+      accounting.formatMoney(dataC[stateSelected].health_insurance).slice(0,-3)
     );
-    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    $("#costOfFTEmployeeFCC").val(accounting.formatMoney(dataF[stateSelected].health_insurance).slice(0,-3));
 
     $("input[name='deepCleaningCost']").val(0);
     $("input[name='sanitationCost']").val(0);
@@ -144,10 +144,10 @@ function getRatio() {
 
   if (ratioSelected == "covid") {
     $("input[type='checkbox']").prop("checked", true);
-    $("input[name='costOfFTEmployee']").val(
-      dataC[stateSelected].health_insurance
+    $("input[name='costOfFTEmployee']").val(accounting.formatMoney(
+      dataC[stateSelected].health_insurance).slice(0,-3)
     );
-    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    $("#costOfFTEmployeeFCC").val(accounting.formatMoney(dataF[stateSelected].health_insurance).slice(0,-3));
   }
   console.log(ratioSelected + " --> Ratio Selected!");
 }
@@ -725,7 +725,7 @@ function populateBenefits() {
   //COST PER FT EMPLOYEE
   if ($("input[type='checkbox']").prop("checked") == true) {
     costPerFTEmployee = dataC[stateSelected].health_insurance;
-    $("input[name='costOfFTEmployee']").val(costPerFTEmployee);
+    $("input[name='costOfFTEmployee']").val(accounting.formatMoney(costPerFTEmployee).slice(0,-3));
   }
 
   //Additional expenses
@@ -745,7 +745,7 @@ function populateBenefits() {
 
   if (ratioSelected == "covid") {
     sanitationCost = costPerClassroom * classTotal;
-    $("#sanitationCost").val(sanitationCost);
+    $("#sanitationCost").val(accounting.formatMoney(sanitationCost).slice(0,-3));
   }
 
   if ($("#miscCost").val() != "") {
@@ -761,15 +761,28 @@ function checkHealth() {
     $("input[name='costOfFTEmployee']").val(0);
   } else {
     $("input[name='costOfFTEmployee']").val(
-      dataC[stateSelected].health_insurance
+      accounting.formatMoney(dataC[stateSelected].health_insurance)
     );
   }
 
   if ($("#checkboxFCC").prop("checked") == false) {
     $("#costOfFTEmployeeFCC").val(0);
   } else {
-    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    $("#costOfFTEmployeeFCC").val(accounting.formatMoney(dataF[stateSelected].health_insurance).slice(0,-3));
   }
+}
+
+//FUNCTION TO FORMAT SYSTEM COST FIELD
+function formatFieldSC(obj){
+
+  var numb = accounting.formatMoney(obj.value).slice(1,-3);
+  var id = obj.id;
+
+  
+  $("#" + id).val(numb);
+  
+
+
 }
 
 //FUNCTION TO FORMAT NUMBER FIELD
@@ -788,7 +801,7 @@ function formatField(obj) {
 function calcTotalPersonnelCost() {
   //total admin staff wage
 
-  costPerFTEmployee = parseInt($("input[name='costOfFTEmployee']").val());
+  costPerFTEmployee = parseInt(accounting.unformat($("input[name='costOfFTEmployee']").val()));
   sickDays = parseInt($("#sickdays").val());
   paidLeave = parseInt($("#paidLeave").val());
 
@@ -885,7 +898,7 @@ function calcTotalPersonnelCost() {
 function calcTotalNonPersonnelCost() {
   //Total additional cleaning
 
-  sanitationCost = parseInt($("#sanitationCost").val());
+  sanitationCost = parseInt(accounting.unformat($("#sanitationCost").val()));
 
   totalAdditionalCleaning =
     (parseInt($("input[name='deepCleaningCost']").val()) *
@@ -1232,7 +1245,7 @@ function populateFCC() {
   }
 
   if ($("#checkboxFCC").prop("checked") == true) {
-    $("#costOfFTEmployeeFCC").val(dataF[stateSelected].health_insurance);
+    $("#costOfFTEmployeeFCC").val(accounting.formatMoney(dataF[stateSelected].health_insurance).slice(0,-3));
   }
 
   if (ratioSelected == "covid") {
@@ -1247,7 +1260,7 @@ function populateFCC() {
 
   if (ratioSelected == "covid") {
     $("input[name='sanitationCostFCC']").val(
-      dataF[stateSelected].covid_sanitation_cost_per_month
+      accounting.formatMoney(dataF[stateSelected].covid_sanitation_cost_per_month).slice(0,-3)
     );
   }
 
@@ -1425,7 +1438,7 @@ function calcTotalWagesAndBenefitsFCC() {
     totalPaidLeaveCostFCC = paidLeaveCostFCC * totalFTEmployeeFCC;
   }
 
-  healthInsuranceFCC = parseInt($("#costOfFTEmployeeFCC").val());
+  healthInsuranceFCC = parseInt(accounting.unformat($("#costOfFTEmployeeFCC").val()));
 
   totalHealthFCC = healthInsuranceFCC * totalFTEmployeeFCC;
 
@@ -1442,7 +1455,7 @@ function calcTotalWagesAndBenefitsFCC() {
   np_programFCC = 7250;
   np_occupancyFCC = 3731;
 
-  costPerClassroom = parseInt($("input[name='sanitationCostFCC']").val());
+  costPerClassroom = parseInt(accounting.unformat($("input[name='sanitationCostFCC']").val()));
   //Additional Cleaning Cost
   totalCleaningCostFCC =
     parseInt(costPerClassroom) +
@@ -1468,12 +1481,12 @@ function calcTotalWagesAndBenefitsFCC() {
 function calcInfantFCC() {
   totalInfantCostFCC = Math.round(costPerChildFCC);
 
-  $("#infantAnnualCostFCC").html(accounting.formatMoney(totalInfantCostFCC));
+  $("#infantAnnualCostFCC").html(accounting.formatMoney(totalInfantCostFCC).slice(0,-3));
   $("#infantMonthlyCostFCC").html(
-    accounting.formatMoney(totalInfantCostFCC / 12)
+    accounting.formatMoney(totalInfantCostFCC / 12).slice(0,-3)
   );
   $("#infantWeeklyCostFCC").html(
-    accounting.formatMoney(totalInfantCostFCC / 52)
+    accounting.formatMoney(totalInfantCostFCC / 52).slice(0,-3)
   );
 }
 
@@ -1481,12 +1494,12 @@ function calcInfantFCC() {
 function calcToddlerFCC() {
   totalToddlerCostFCC = Math.round(costPerChildFCC);
 
-  $("#toddlerAnnualCostFCC").html(accounting.formatMoney(totalToddlerCostFCC));
+  $("#toddlerAnnualCostFCC").html(accounting.formatMoney(totalToddlerCostFCC).slice(0,-3));
   $("#toddlerMonthlyCostFCC").html(
-    accounting.formatMoney(totalToddlerCostFCC / 12)
+    accounting.formatMoney(totalToddlerCostFCC / 12).slice(0,-3)
   );
   $("#toddlerWeeklyCostFCC").html(
-    accounting.formatMoney(totalToddlerCostFCC / 52)
+    accounting.formatMoney(totalToddlerCostFCC / 52).slice(0,-3)
   );
 }
 
@@ -1494,35 +1507,35 @@ function calcToddlerFCC() {
 function calcPre3FCC() {
   totalPre3CostFCC = Math.round(costPerChildFCC);
 
-  $("#pre3AnnualCostFCC").html(accounting.formatMoney(totalPre3CostFCC));
-  $("#pre3MonthlyCostFCC").html(accounting.formatMoney(totalPre3CostFCC / 12));
-  $("#pre3WeeklyCostFCC").html(accounting.formatMoney(totalPre3CostFCC / 52));
+  $("#pre3AnnualCostFCC").html(accounting.formatMoney(totalPre3CostFCC).slice(0,-3));
+  $("#pre3MonthlyCostFCC").html(accounting.formatMoney(totalPre3CostFCC / 12).slice(0,-3));
+  $("#pre3WeeklyCostFCC").html(accounting.formatMoney(totalPre3CostFCC / 52).slice(0,-3));
 }
 
 //FUNCTION TO CALCULATE PRE4 COST
 function calcPre4FCC() {
   totalPre4CostFCC = Math.round(costPerChildFCC);
 
-  $("#pre4AnnualCostFCC").html(accounting.formatMoney(totalPre4CostFCC));
-  $("#pre4MonthlyCostFCC").html(accounting.formatMoney(totalPre4CostFCC / 12));
-  $("#pre4WeeklyCostFCC").html(accounting.formatMoney(totalPre4CostFCC / 52));
+  $("#pre4AnnualCostFCC").html(accounting.formatMoney(totalPre4CostFCC).slice(0,-3));
+  $("#pre4MonthlyCostFCC").html(accounting.formatMoney(totalPre4CostFCC / 12).slice(0,-3));
+  $("#pre4WeeklyCostFCC").html(accounting.formatMoney(totalPre4CostFCC / 52).slice(0,-3));
 }
 
 /**********SYSTEM COSTS**********/
 
 //FUNCTION TO POPULATE SYSTEM FIELDS
 function populateSC() {
-  $("#childCareFacilities").val(dataS[stateSelected].centers_programs);
+  $("#childCareFacilities").val(accounting.formatMoney(dataS[stateSelected].centers_programs).slice(1,-3));
 
-  $("#childCareSlots").val(dataS[stateSelected].centers_slots);
+  $("#childCareSlots").val(accounting.formatMoney(dataS[stateSelected].centers_slots).slice(1,-3));
 
-  $("#familyHomeFacilities").val(dataS[stateSelected].FCC_programs);
+  $("#familyHomeFacilities").val(accounting.formatMoney(dataS[stateSelected].FCC_programs).slice(1,-3));
 
-  $("#familyHomeSlots").val(dataS[stateSelected].FCC_slots);
+  $("#familyHomeSlots").val(accounting.formatMoney(dataS[stateSelected].FCC_slots).slice(1,-3));
 
-  $("input[name='fixedCost']").val(40);
+  $("input[name='fixedCost']").val(20);
 
-  $("input[name='operatingCost']").val(60);
+  $("input[name='operatingCost']").val(40);
 
   calcFixedCost();
   calcOpCost();
@@ -1541,22 +1554,22 @@ function calcFixedCost() {
 
   total_ctc_fixedCost =
     fixedCostPercentage *
-    parseInt($("#childCareFacilities").val()) *
+    parseInt(accounting.unformat($("#childCareFacilities").val())) *
     (fixedCostCTC / 12);
 
   total_fcc_fixedCost =
     fixedCostPercentage *
-    parseInt($("#familyHomeFacilities").val()) *
+    parseInt(accounting.unformat($("#familyHomeFacilities").val())) *
     (fixedCostFCC / 12);
 
   totalFixedCost = total_ctc_fixedCost + total_fcc_fixedCost;
 
-  $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost));
+  $("#totalFixedCosts").html(accounting.formatMoney(totalFixedCost).slice(0,-3));
   $("#totalChildCareFixedCost").html(
-    accounting.formatMoney(total_ctc_fixedCost)
+    accounting.formatMoney(total_ctc_fixedCost).slice(0,-3)
   );
   $("#totalFamilyHomeFixedCost").html(
-    accounting.formatMoney(total_fcc_fixedCost)
+    accounting.formatMoney(total_fcc_fixedCost).slice(0,-3)
   );
 }
 
@@ -1656,7 +1669,7 @@ function calcOpCost() {
   ).toFixed(2);
 
   total_ctc_opCost =
-    parseInt($("#childCareSlots").val()) * opCostPercentage * avgCostPerChild;
+    parseInt(accounting.unformat($("#childCareSlots").val())) * opCostPercentage * avgCostPerChild;
 
   
   costPerChildFCCMonthly = accounting.unformat(
@@ -1665,7 +1678,7 @@ function calcOpCost() {
 
   
   total_fcc_opCost =
-    parseInt($("#familyHomeSlots").val()) *
+    parseInt(accounting.unformat($("#familyHomeSlots").val())) *
     opCostPercentage *
     costPerChildFCCMonthly;
 
@@ -1673,11 +1686,11 @@ function calcOpCost() {
   totalOpCost = parseInt(total_ctc_opCost) + parseInt(total_fcc_opCost);
 
   
-  $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost));
+  $("#totalOperatingCosts").html(accounting.formatMoney(totalOpCost).slice(0,-3));
   $("#totalChildCareOperatingCost").html(
-    accounting.formatMoney(total_ctc_opCost)
+    accounting.formatMoney(total_ctc_opCost).slice(0,-3)
   );
   $("#totalFamilyHomeOperatingCost").html(
-    accounting.formatMoney(total_fcc_opCost)
+    accounting.formatMoney(total_fcc_opCost).slice(0,-3)
   );
 }
