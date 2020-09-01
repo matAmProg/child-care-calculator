@@ -718,7 +718,8 @@
                 <input
                   type="text"
                   name="costOfFTEmployee"
-                  onchange="calcTotalPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                  id="costOfFTEmployee"
+                  onchange="formatField(this);calcTotalPersonnelCost();calcTotalExpense();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                 />
               </div>
             </div>
@@ -794,7 +795,7 @@
                   type="text"
                   name="sanitationCost"
                   id="sanitationCost"
-                  onchange="calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
+                  onchange="formatField(this);calcTotalNonPersonnelCost();calcInfantsCost();calcToddlersCost();calcPre3Cost();calcPre4Cost();"
                 />
                 <span
                   class="helper-text"
@@ -1193,7 +1194,7 @@
                 <input
                   type="text"
                   id="costOfFTEmployeeFCC"
-                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                  onchange="formatField(this);calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                 />
               </div>
             </div>
@@ -1271,7 +1272,7 @@
                   type="text"
                   name="sanitationCostFCC"
                   id="sanitationCostFCC"
-                  onchange="calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
+                  onchange="formatField(this);calcTotalWagesAndBenefitsFCC();calcInfantFCC();calcToddlerFCC();calcPre3FCC();calcPre4FCC();"
                 />
                 <span
                   class="helper-text"
@@ -1407,7 +1408,7 @@
                       type="text"
                       name="childCareFacilities"
                       id="childCareFacilities"
-                      onchange="calcFixedCost();calcOpCost();"
+                      onchange="formatFieldSC(this);calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1417,7 +1418,7 @@
                       type="text"
                       name="childCareSlots"
                       id="childCareSlots"
-                      onchange="calcFixedCost();calcOpCost();"
+                      onchange="formatFieldSC(this);calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1430,7 +1431,7 @@
                       type="text"
                       name="familyHomeFacilities"
                       id="familyHomeFacilities"
-                      onchange="calcFixedCost();calcOpCost();"
+                      onchange="formatFieldSC(this);calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
@@ -1440,7 +1441,7 @@
                       type="text"
                       name="familyHomeSlots"
                       id="familyHomeSlots"
-                      onchange="calcFixedCost();calcOpCost();"
+                      onchange="formatFieldSC(this);calcFixedCost();calcOpCost();"
                     />
                   </div>
                 </td>
