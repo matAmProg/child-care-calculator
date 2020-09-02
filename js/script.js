@@ -1350,6 +1350,18 @@ function populateStaffFCC() {
       $("#wageOfAssistantTeachersFCC").val(
         accounting.formatMoney(wageOfAssistantTeachersFCC)
       );
+    }else{
+
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting
+          .formatMoney(dataF[stateSelected].bls_assistant_teacher_salary)
+          .slice(0, -3)
+      );
+
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(dataF[stateSelected].bls_assistant_teacher_salary/2080)
+      );
+
     }
 
     wageFloaterFCC = dataC[stateSelected].bls_floater_salary / 2080;
@@ -1380,6 +1392,18 @@ function populateStaffFCC() {
       $("#wageOfAssistantTeachersFCC").val(
         accounting.formatMoney(wageOfAssistantTeachersFCC)
       );
+    }else{
+
+      $("#salaryOfAssistantTeachersFCC").val(
+        accounting.formatMoney(dataF[stateSelected].kg_assistant_teacher_salary).slice(0, -3)
+      );
+
+      
+      $("#wageOfAssistantTeachersFCC").val(
+        accounting.formatMoney(dataF[stateSelected].kg_assistant_teacher_salary/2080)
+      );
+
+
     }
 
     wageFloaterFCC = dataC[stateSelected].Kg_floater_salary / 2080;
